@@ -109,7 +109,7 @@ The content of this manual is intended for informational use only, is subject to
 - [FIRMWARE UPDATES](#firmware-updates)
 - [CALIBRATION](#calibration)
 - [TROUBLESHOOTING](#troubleshooting)
-- [Apendix](#apendix)
+- [APPENDIX](#appendix)
   - [A - Patchbay Operation](#a---patchbay-operation)
     - [Navigate and Patch](#navigate-and-patch)
     - [Patch Filter/Follow](#patch-filterfollow)
@@ -254,7 +254,7 @@ The Module View is the main interface for access to Module Controls for all Modu
 
 The Patchbay interface includes two views, “Navigate and Patch” and “Patch Filter/Follow”, that enable quick patching and system patch filtering/overview respectively. The Back Button is used to navigate back to the Module View.
 
-Detailed operation of the patchbay is covered in the [Apendix A](#a---patchbay-operation).
+Detailed operation of the patchbay is covered in [Appendix A](#a---patchbay-operation).
 
 <img src="assets/user_interface.display.patchbay.navigate_and_patch.3.png" width="750" />
 
@@ -1515,7 +1515,7 @@ Output Gain Calibration:
 
 TODO - Flush this out
 
-# Apendix
+# APPENDIX
 
 ## A - Patchbay Operation
 
