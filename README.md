@@ -280,6 +280,7 @@ The Rack setting page is used to swap between active Racks. There are four types
 
 | Notes |
 | - |
+| `Normalize`-ing a Rack removes all patches and re-patches the Rack according to its startup configuration, however, Control values are not reset unless explicitly included in the normalization (i.e., Racks with MX channel linking and pan settings) |
 | The system will check for Control changes every ~20s and perform a Quickave operation (saves to `preset-1.bin`). A quicksave does not capture changes to Modules that store large blocks of data (i.e., sample buffers) or state variables that are not represented by controls (i.e., MC `Reset` state) |
 
 <img src="assets/user_interface.display.navigation_bar.settings.rack.1.png" width="750" />
@@ -464,19 +465,19 @@ The Clock module is a tappable bpm-based clock generator. The Tap Control can be
 
 ## DL - Delay
 
-The Delay module is a tape-style delay with two delay lines and five read heads on each line. The delay lines can be used for stereo delay when run in parallel, or as a longer monophonic delay when patched in series. Each read head has its Output, which enables stereo imaging from a monophonic delay. Each delay buffer holds ~1s of 24-bit 48kHz audio and buffer iterators use floating point Hermite interpolation for rich sample playback at various speeds. Reducing the speed increases delay times significantly and imparts texture. With multiple read heads each having its feedback Control, care needs to be placed on the total amount of feedback to avoid signal saturation. The `Mute`, `RPos`, and `FB` Controls are shared between the two delay lines.
+The Delay module is a tape-style delay with two delay lines and five read heads on each line. The delay lines can be used for stereo delay when run in parallel, or as a longer monophonic delay when patched in series. Each read head has its Output, which enables stereo imaging from a monophonic delay. Each delay buffer holds ~1s of 24-bit 48kHz audio and buffer iterators use floating point Hermite interpolation for rich sample playback at various speeds. Reducing the speed increases delay times significantly and imparts texture. Careful attention to the total feedback amount across all read heads in a delay line is required to avoid signal saturation.
 
 | Control Notes | T | R | |
 | - | - | - | - |
 | In 1-2 | I | A | Delay line inputs |
-| GlbFB 1-2 | I | A | Global feedback for mixing summed or external signals back into the delay lines |
-| GlbFB A | R | A | The amount of global feedback added to both delay lines |
+| FBIn 1-2 | I | A | Global feedback for mixing summed or external signals back into the delay lines, which is useful for cross-feedback patching |
+| GlbFB 1-2 A | R | A | The amount of global feedback added to the delay lines |
+| Speed 1-2 | R | A | The record and playback speed, where a maximum value indicates a sample rate of 48kHz. Decreasing the Speed will slow the sample rate, which degradates sample quality while increasing the length of the sample buffers |
 | Dry | R | A | The amount of dry signal in the Outputs |
 | Wet | R | A | The amount of wet signal in the Outputs |
-| Speed | R | A | The record and playback speed, where a maximum value indicates a sample rate of 48kHz. Decreasing the Speed will slow the sample rate, which degradates sample quality while increasing the length of the sample buffers |
-| RPos 1-5 | R | A | Sets the read position of each read head relative to a fixed write position, which is at position 0. The closer the read head gets to 0 the shorter the delay. The difference between the read and write heads is a floating point distance in samples where 48000.0 samples equals 1 second |
-| FB 1-5 | R | A | The amount of read head signal fed back into the write head. The total feedback amount must be < 100% total to avoid signal saturation |
-| Mute 1-5 | S | U | A performative switch to mute the read heads on the delay lines |
+| Pos 1/2-1-5 | R | A | Sets the read position of each read head relative to a fixed write position, which is at position 0. The closer the read head gets to 0 the shorter the delay. The difference between the read and write heads is a floating point distance in samples where the number of samples divided by the speed equals the length of the delay in seconds |
+| FB 1/2-1-5 | R | A | The amount of read head signal fed back into the write head. The total feedback amount must be < 100% total to avoid signal saturation |
+| Mute 1/2-1-5 | S | U | Mutes the read heads on the delay lines |
 
 | Output Notes | |
 | - | - |
@@ -1242,6 +1243,7 @@ The Filtered Delay rack is a stereo delay effect processor with a pre and post-d
 flowchart TD
   IO-->FL
   IO-->EQ-->DL-->FT-->MX
+  FT-->DL
   IO-->MX
   MX-->IO
   MC
@@ -1250,6 +1252,7 @@ flowchart TD
 | Patch Notes |
 | - |
 | IO Outputs `I 1/2 JK` are patched to both the DL module and the MX (`In 1/6`) module to enable a dry/wet mix |
+| FL module output is cross-patched back into the DL module (`FBIn`) to enable cross-feedback |
 | To create a mono-stereo delay, patch the summed output for the first delay line (`DL1`) into the input for the second delay line (`In 2`). Then patch all of the delay read head Outputs (`DL1/2 1-5`) into the MX module and pan each read head to create a stereo spread. The added benefit to this pattern is a doubled delay time |
 | Stereo output is normalized to IO Controls `O 1/2 JK` |
 
