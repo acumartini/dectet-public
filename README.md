@@ -116,7 +116,7 @@ The content of this manual is intended for informational use only, is subject to
 
 # WELCOME
 
-Welcome to the Arrangement Audio Dectet digital synth/utility macro module. This device features an intuitive user interface and a touchscreen display, giving you access to a variety of virtual modular environments. Recallable complex patching state enables repeatablility, and the display doubles as a playable instrument for both internal synthesis and external control. While shipped as a slim desktop unit designed for portability, the Dectet also operates as a 15Hp Euorack module.
+Welcome to the Arrangement Audio Dectet! The Dectet is a digital synth/utility macro module feautring an intuitive user interface and a touchscreen display, giving you access to a variety of virtual modular environments. Modules within the environments expose all of their controls as patchpoints enabling a high level of customization, and stored presets enable repeatability. The display doubles as a playable instrument for both internal synthesis and external control.  While shipped as a slim desktop unit, the Dectet also operates as a 15Hp Euorack module.
 
 ## Specification
 
