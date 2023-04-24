@@ -426,6 +426,7 @@ A Cartesian sequencer allows a user to create non-linear sequences within a 3-di
 | Set | B | U | Set the current step to the starting step |
 | Reset | B | U | Return the sequence to the starting step |
 | Pulse W | R | U | Sets the length of Gate signals Outputs |
+| Z 1-5 | B | A | Sets the Z plane directly as an alternative to using the `Forward` and `Back` Controls for melodic change |
 | BinScal | R | A | A number between 2048 and 4095 that is used to determine the 12 note scale for quantization. Notes are quantized based on V/Octave (C4=0V) |
 | Root | R | A | Sets the root note for randomized quantization |
 | Spread | R | U | Controls how far away from the root, in notes, that random notes are selected for quantization |
