@@ -160,6 +160,8 @@ The Dectet is designed to fit into a Eurorack case as a 15Hp module and the shro
 
 <img src="assets/installation.eurorack_main_panel.1.png" width="750" />
 
+TODO: add pic with labeled +12v pins
+
 ## Eurorack I/O Expander
 
 The expander connects directly to the main panel PCB via a 6-pin connector (power) and an 8-pin connector (signal/control). This HW is under development with more details coming soon!
@@ -933,11 +935,13 @@ This Step Sequencer can operate as a traditional linear sequencer with 50 indivi
 | BinScal | R | U | A number between 2048 and 4095 that is used to determine the 12-note scale for quantization. Notes are quantized based on V/Octave (C4=0V) |
 | Root | R | U | Root note for quantization |
 | Spread | R | U | Controls how far away from the root, in notes, that random notes are selected for quantization |
-| MagDif | R | U | The amount of grain magnitude variation used for randomization. A maximum value implies a random magnitude from 0 - 100% |
+| MagRng | R | U | The range of magnitude variation used for randomization. A maximum value implies a random magnitude from 0 - 100% |
+| ProbRng | R | U | The amount of probability variation used for randomization. A maximum value implies a random probability from 0 - 100% |
 | Stride 1-5 | R | U | Step increment amount for each sequence pointer. When < 1.0 steps can be repeated for multiple Step triggers, values > 1.0 can potentially skip active Steps |
 | Offset 1-5 | R | U | Step pointer offset within the sequence. Where an offset of 0 implies a step pionter start position at step 1 |
 | Rnd N | B | U | Triggers random quantization of all 50 step based on the Bin Scale, Rnd Root, and Spread Controls |
-| Rnd M | B | U | Triggers randomization of the 10 Mag Controls within a range determined by MagDiff |
+| Rnd M | B | U | Triggers randomization of the all Mag Controls within a range determined by MagRng |
+| Rnd P | B | U | Triggers randomization of the all Prob Controls within a range determined by MagRnd |
 | Depth | R | U | Sets the number of sequence pointers, which enables poly-rhythms and polyphony. Depth limit is 5 and sequence pointers wrap around when length and offset exceed the sequencer length limit (50) |
 | NumPly | R | U | The number of notes available for polyphonic sequencing such that only Outputs 1-N will be used for signal, magnitude, and gate. Steps with a number greater than Num Poly wrap around to an available polyphonic Output |
 | Prob 1-50 | R | A | Step probability. Increasing the value **reduces** the likelihood that a step will trigger |
@@ -1426,7 +1430,7 @@ flowchart TD
 
 ### Step Sequencer - Controller Interface
 
-The Step Sequencer Rack includes a playable controller interface with 50 pads used to control the [SQ](#step-sequencer) Module. Pressing a pad will switch the Step associated with that pad ON/OFF. Pressing and holding a pad plays that note along with the ongoing sequence and also sets the Root Control to the pressed Step’s pitch. The last pressed pad becomes the “active” pad (although there is currently no UI indication for this), which allows you to tune the pitch Control and its sensitivity using the encoder. The Pitch Controls for the pads you manipulate from the Controller Interface must be unpatched for this to work properly. Turning the encoder sets the Mag Control corresponding to the active Step (modulo 10). The magnitude setting is reflected in the intensity of the yellow coloring of the pads while long pressed when they become the active step in the sequence. Pressing and turning the encoder adjusts the pitch of the active Step.
+The Step Sequencer Rack includes a playable controller interface with 50 pads used to control the [SQ](#step-sequencer) Module. Pressing a pad will switch the Step associated with that pad ON/OFF. Pressing and holding a pad plays that note along with the ongoing sequence and also sets the Root Control to the pressed Step’s pitch. The last pressed pad becomes the “active” pad (although there is currently no UI indication for this), which allows you to tune the pitch Control and its sensitivity using the encoder. The Pitch Controls for the pads you manipulate from the Controller Interface must be unpatched for this to work properly. The far left button in the top bar of the interface toggles between the values the `Mag` and `Prb` when pressed. When `Mag` is active (yellow), turning the encoder sets the `Mag` Control corresponding to the active Step. When the `Prb` switch is active (green), turning the encoder sets the `Prob` Control corresponding to the active Step. The magnitude/probability setting is reflected in the intensity of the yellow/green coloring of the active Step. Pressing and turning the encoder adjusts the pitch of the active Step.
 
 <img src="assets/modules.sq.controller_interface.1.png" width="750" />
 
