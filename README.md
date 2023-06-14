@@ -108,7 +108,6 @@ The content of this manual is intended for informational use only, is subject to
     - [XYZ Drone - Controller Interface](#xyz-drone---controller-interface)
   - [XYZ MIDI Synthesizer](#xyz-midi-synthesizer)
     - [XYZ MIDI Synthesize - Controller Interface](#xyz-midi-synthesize---controller-interface)
-    - [XYZ Complex OSC - Controller Interface](#xyz-complex-osc---controller-interface)
 - [FIRMWARE UPDATES](#firmware-updates)
 - [CALIBRATION](#calibration)
 - [TROUBLESHOOTING](#troubleshooting)
@@ -1469,22 +1468,16 @@ flowchart TD
 
 ### XYZ MIDI Synthesize - Controller Interface
 
-See [XYZ Drone - Conrtoller Interface](#xyz-drone---controller-interface)
-
-### XYZ Complex OSC - Controller Interface
-
-XYZ Complex OSC Rack includes a controller interface that enables custom waveform design and loop playability for the [XY](#xy---custom-wavetable-osc-3d-touch-looper) Module. The controller interface consists of 5 large pads, each associated with one of the 5 wavetables. To switch between the pads press the numbered buttons on the top of the controller interface. Additionally, the Rec and Lup buttons are used to enable/disable touch input recording and looping. When recording and looping are disabled, touching the pad will simply set the XYZ position for the current Wavetable channel. This does NOT alter the wavetable and the XYZ outputs will reflect the touch input in real-time. When recording is enabled, pressing a pad will write the current XY position to the Wavetable buffer effectively altering the waveform. You can increase the magnitude of the active Wavetable by turning the encode. Pressing and turning the encoder will adjust the Z dimension of the active Wavetable (normalized to magnitude in the XYZ Rack). When looping is enabled, touch input is recorded into a buffer (~20s in length) and playback is initiated when you stop pressing the controller pad, which also sets the length of the loop. The current Z value is reflected in the intensity of the yellow coloring of the pads while pressed and during loop playback. The purple square reflects the current XY position.
-
-<img src="assets/modules.xy.controller_interface.1.png" width="750" />
+See [XYZ Drone - Controller Interface](#xyz-drone---controller-interface)
 
 # FIRMWARE UPDATES
 
-To perform a firmware update download the desired firmware version update executable/DMG from the [Website](TODO). Plug your computer into the USB-C Device port on the device. With the Dectet running, run the executable/DMG from your computer, which will restart the device and upload the new firmware. The new version can be seen at the top of the Settings page.
+To perform a firmware update download the desired firmware version update zip (windows) or DMG (osx) from the [Website](TODO). Plug your computer into the USB-C Device port on the device. With the Dectet running, unzip and run the `upload.bat` file (windows) or run the DMG (osx) from your computer, which will restart the device and upload the new firmware. The new version can be seen at the top of the Settings page.
 
 | Notes |
 | - |
 | On OSX you will likely need to authorize the DMG in the security settings |
-| On Windows, right click the executable and "Run as Administator" |
+| On Windows, you will need to click several security popups to authorize the upload script to run |
 
 # CALIBRATION
 
