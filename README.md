@@ -118,7 +118,7 @@ The content of this manual is intended for informational use only, is subject to
 
 # WELCOME
 
-Welcome to the Arrangement Audio Dectet! The Dectet is a digital synth/utility macro module feautring an intuitive user interface and a touchscreen display, giving you access to a variety of virtual modular environments. Modules within the environments expose all of their controls as patchpoints enabling a high level of customization, and stored presets enable repeatability. The display doubles as a playable instrument for both internal synthesis and external control.  While shipped as a slim desktop unit, the Dectet also operates as a 15Hp Euorack module.
+Welcome to the Arrangement Audio Dectet! The Dectet is a digital synth/utility macro module featuring an intuitive user interface and a touchscreen display, giving you access to a variety of virtual modular environments. Modules within the environments expose all of their controls as patch points enabling a high level of customization, and stored presets enable repeatability. The display doubles as a playable instrument for both internal synthesis and external control.  While shipped as a slim desktop unit, the Dectet also operates as a 15Hp Euorack module.
 
 ## Specification
 
@@ -206,7 +206,7 @@ A Control is a parameter that is also a patch point. Depending on its type, a Co
 
 ### Input
 
-An Input has no UI elements/interaction other than patch-ability. However, an Input control can be made active so that its value can be set. The position and color of the bar within an Input Control reflects its current value where a green bar at the top of the control represents a maximum value (+5V), a purple bar at the center position represents a 0 value, and a red bar at the bottom of the control represents a minimum value (-5V). The bar ranges from white to black for all other values depending on the current sensitivity setting for the control where black indicates the finest control and white indicates the coarsest control. When the Input Control is active, the encoder can be used to set both the value (turning the encoder) and the sensitivity (pressing and turning the encoder). This functionality is useful for setting a constant Voltage for an Input.
+An Input has no UI elements/interaction other than patch-ability. However, an Input control can be made active so that its value can be set. The position and color of the bar within an Input Control reflect its current value where a green bar at the top of the control represents a maximum value (+5V), a purple bar at the center position represents a 0 value, and a red bar at the bottom of the control represents a minimum value (-5V). The bar ranges from white to black for all other values depending on the current sensitivity setting for the control where black indicates the finest control and white indicates the coarsest control. When the Input Control is active, the encoder can be used to set both the value (turning the encoder) and the sensitivity (pressing and turning the encoder). This functionality is useful for setting a constant Voltage for an Input.
 
 <img src="assets/user_interface.control.input.1.png" width="750" />
 
@@ -258,7 +258,7 @@ The Module View is the main interface for access to Module Controls for all Modu
 
 The Patchbay interface includes two views, “Navigate and Patch” and “Patch Filter/Follow”, that enable quick patching and system patch filtering/overview respectively. The Back Button is used to navigate back to the Module View.
 
-Detailed operation of the patchbay is covered in [Appendix A](#a---patchbay-operation).
+The detailed operation of the Patchbay is covered in [Appendix A](#a---patchbay-operation).
 
 <img src="assets/user_interface.display.patchbay.navigate_and_patch.3.png" width="750" />
 
@@ -297,7 +297,7 @@ To Load a preset select the `LOAD` tab at the bottom of the Settings interface a
 
 ##### Save
 
-To Save (or Delete )a preset select the `SAVE` tab at the bottom of the Settings interface and press one of the 50 presets (divided into groups of 10). A preset button is red when a preset is saved at that location and grey when there is no preset saved. Press a button with no saved preset to captures the current Rack with its patch points, the state of all Module Controls, and other important Module-specific data. Pressing a button that contains a preset will present an Overwrite Confirmation message box, and pressing `Overwrite` will overwrite the preset. To cancel the overwrite, press the `X` to close the message box. To delete a preset, press and hold a button with a saved preset. A a Delete Confirmation message box will appear and pressing the `Delete` button will delete the preset. To cancel the delete, press the `X` to close the message box.
+To Save (or Delete )a preset select the `SAVE` tab at the bottom of the Settings interface and press one of the 50 presets (divided into groups of 10). A preset button is red when a preset is saved at that location and grey when there is no preset saved. Press a button with no saved preset to capture the current Rack with its patch points, the state of all Module Controls, and other important Module-specific data. Pressing a button that contains a preset will present an Overwrite Confirmation message box, and pressing `Overwrite` will overwrite the preset. To cancel the overwrite, press the `X` to close the message box. To delete a preset, press and hold a button with a saved preset. A Delete Confirmation message box will appear and pressing the `Delete` button will delete the preset. To cancel the delete, press the `X` to close the message box.
 
 <img src="assets/user_interface.display.navigation_bar.settings.save.1.png" width="750" />
 
@@ -535,7 +535,7 @@ A 10-channel ADSR Envelope Generator with audio inputs and a built-in VCA. When 
 
 ## EQ - Parametric Band-pass Equalizer
 
-A parametric stereo Band-pass Equalizer with 8-bands and idvidual controls for each channel. Left and Right channel controls can be `Link`ed to allow the left channel controls used for both channels' settings. Adjusting the `Band` controls with the starting configuration of the `FC` and `Q` controls emulates a traditional Band-pass equalizer.
+A parametric stereo Band-pass Equalizer with 8-bands and individual controls for each channel. Left and Right channel controls can be `Link`ed to allow the left channel controls used for both channels' settings. Adjusting the `Band` controls with the starting configuration of the `FC` and `Q` controls emulates a traditional Band-pass equalizer.
 
 | Control Notes | T | R | |
 | - | - | - | - |
@@ -609,7 +609,7 @@ A stereo resonant 4 pole low pass Ladder Filter.
 
 ## GP - Granular Processor
 
-A Granular Processor that uses up to 35 grains to generate a stereo spread from a mono signal. The buffer holds ~1.6s of 24-bit 48kHz audio with variable speed smapling to extend the length of the buffer by down sampling. Grain iterators use floating point Hermite interpolation for rich sample playback at various speeds.
+A Granular Processor that uses up to 35 grains to generate a stereo spread from a mono signal. The buffer holds ~1.6s of 24-bit 48kHz audio with variable speed sampling to extend the length of the buffer by downsampling. Grain iterators use floating point Hermite interpolation for rich sample playback at various speeds.
 
 | Control Notes | T | R | |
 | - | - | - | - |
@@ -984,7 +984,7 @@ This Step Sequencer can operate as a traditional linear sequencer with 50 indivi
 
 A 6-channel In/Out USB Audio interface operating at 16-bit 48kHz. Channels 1/2 show up as Frost Left/Front Right on the PC because of the legacy Dolby USB channel configuration required for Windows machines to recognize the device as a valid Class I Type USB audio interface without the need for a custom device driver. The gain of USB inputs can be controlled by the USB host. Note that `JK` in the Control/Output names below is a `Hexnut` icon in the UI.
 
-IMPORTANT: The computer **must** be plugged into the device port when the device starts (or restarts) for Racks using this module, otherwise, the device will restart to the default Rack. Also, disconnecting and reconnecting to the USB device on the computer can cause the device crash. For best performance, setup the input and output routing on your computer and leave them set for the duration of a session.
+IMPORTANT: The computer **must** be plugged into the device port when the device starts (or restarts) for Racks using this module, otherwise, the device will restart to the default Rack. Also, disconnecting and reconnecting to the USB device on the computer can cause the device to crash. For best performance, set up the input and output routing on your computer and leave them set for the duration of a session.
 
 | Control Notes | T | R | |
 | - | - | - | - |
@@ -1120,7 +1120,7 @@ The Cartesian Sequencer Rack includes a playable controller interface with 5 gro
 
 ## Control Voltage Recorder
 
-The Control Voltage Recorder rack includes a CV Recorder (RC) module with its 5 channels normalized to 5 depth Outputs of the CR module. The Cartesian Sequencer-based controller interface provides a playable interface for each of the 5 channels. The MD module is included to enable MIDI input sequencing. The CK/DV modules can be used to sequence the CR module, and the EV module provides a mechanism to transform looped gated by sequence into envelope CV. The Matrix Mixer module (MM) allows for the creative combination of looping CV.
+The Control Voltage Recorder rack includes a CV Recorder (RC) module with its 5 channels normalized to 5 depth Outputs of the CR module. The Cartesian Sequencer-based controller interface provides a playable interface for each of the 5 channels. The MD module is included to enable MIDI input sequencing. The CK/DV modules can be used to sequence the CR module, and the EV module provides a mechanism to transform looped gated by sequence into envelope CV. The Matrix Mixer module (MM) allows for the creative combination of looping CVs.
 
 ```mermaid
 flowchart TD
@@ -1310,7 +1310,7 @@ flowchart TD
 
 ## Granular Processor
 
-The Granular Processor rack contains the Granular Processor (GP) module wrapped by the EQ (mono) and FL modules to enable detailed granular-inspired sound deign.
+The Granular Processor rack contains the Granular Processor (GP) module wrapped by the EQ (mono) and FL modules to enable detailed granular-inspired sound design.
 
 ```mermaid
 flowchart TD
@@ -1326,7 +1326,7 @@ flowchart TD
 
 ## MIDI Synthesizer
 
-The MIDI Synthesizer rack is a classic 10-voice polysynth with MIDI control, 10 ADSR envelopes, and a panoramic stereo output. This OSC module is feature rich and provides a complex patching environment. The NZ module provides auxiliary input to the OSC and supporting modulation.
+The MIDI Synthesizer rack is a classic 10-voice polysynth with MIDI control, 10 ADSR envelopes, and a panoramic stereo output. This OSC module is feature rich and provides a complex patching environment. The NZ module provides auxiliary input to the OSC and supports modulation.
 
 ```mermaid
 flowchart TD
@@ -1449,7 +1449,7 @@ XYZ Drone Rack includes a controller interface that enables custom waveform desi
 
 ## XYZ MIDI Synthesizer
 
-TheXYZ  MIDI Synthesizer rack is a 5-voice polysynth with MIDI control, 5 ADSR envelopes, and a panoramic stereo output. This XY module is feature rich and provides a complex patching environment. The NZ module provides auxiliary input to XY and supporting modulation.
+The XYZ  MIDI Synthesizer rack is a 5-voice polysynth with MIDI control, 5 ADSR envelopes, and a panoramic stereo output. This XY module is feature rich and provides a complex patching environment. The NZ module provides auxiliary input to XY and supporting modulation.
 
 ```mermaid
 flowchart TD
@@ -1472,7 +1472,7 @@ See [XYZ Drone - Controller Interface](#xyz-drone---controller-interface)
 
 # FIRMWARE UPDATES
 
-To perform a firmware update download the desired firmware version update zip (windows) or DMG (osx) from the [Website](TODO). Plug your computer into the USB-C Device port on the device. With the Dectet running, unzip and run the `upload.bat` file (windows) or run the DMG (osx) from your computer, which will restart the device and upload the new firmware. The new version can be seen at the top of the Settings page.
+To perform a firmware update download the desired firmware version update zip (windows) or DMG (osx) from the [Website](TODO). Plug your computer into the USB-C Device port (closer to the screen) on the device. With the Dectet running, unzip and run the `upload.bat` file (windows) or run the DMG (osx) from your computer, which will restart the device and upload the new firmware. The new version can be seen at the top of the Settings page.
 
 | Notes |
 | - |
@@ -1481,11 +1481,11 @@ To perform a firmware update download the desired firmware version update zip (w
 
 # CALIBRATION
 
+**IMPORTANT**: Switch to standard rotation (jacks below the display) before beginning calibration.
+
 To initiate the Calibration Mode cycle the power while holding down both HW buttons and the encoder switch. Wait 10 minutes to allow the device temperature to stabilize.
 
 The calibration order is Input Offset, Input Gain, Output Offset and Output Gain. Before starting calibration press `Default All` to set all offsets = 0 and gains = 1.
-
-**IMPORTANT**: Switch to standard rotation (jacks below the display) before beginning calibration.
 
 Input Offset Calibration:
 
@@ -1535,7 +1535,7 @@ TODO - Flush this out
 
 ## A - Patchbay Operation
 
-Pressing the patch button of a Control enters the Patchbay view  in "Navigate and Patch" mode with that Control as the active input ready for assignment.
+Pressing the patch button of a Control enters the Patchbay view in "Navigate and Patch" mode with that Control as the active input ready for assignment.
 
 <img src="assets/user_interface.display.patchbay.navigate_and_patch.3.png" width="750" />
 
