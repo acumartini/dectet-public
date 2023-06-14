@@ -66,6 +66,7 @@ The content of this manual is intended for informational use only, is subject to
   - [MC - Macro Controller](#mc---macro-controller)
   - [MD - MIDI Controller](#md---midi-controller)
   - [MM - Matrix Mixer](#mm---matrix-mixer)
+  - [MS - Mid-side Processor](#ms---mid-side-processor)
   - [MX - Mixer](#mx---mixer)
     - [Full Mixer Mode](#full-mixer-mode)
   - [NN - Deep Neural Network](#nn---deep-neural-network)
@@ -84,7 +85,6 @@ The content of this manual is intended for informational use only, is subject to
   - [Audio Interface](#audio-interface)
   - [Cartesian Sequencer](#cartesian-sequencer)
     - [Cartesian Sequencer - Controller Interface](#cartesian-sequencer---controller-interface)
-  - [Clock Divider Quantizer](#clock-divider-quantizer)
   - [Control Voltage Recorder](#control-voltage-recorder)
     - [Control Voltage Recorder - Controller Interface](#control-voltage-recorder---controller-interface)
   - [Deep Neural Network](#deep-neural-network)
@@ -94,9 +94,9 @@ The content of this manual is intended for informational use only, is subject to
   - [Dual Step Sequencer](#dual-step-sequencer)
     - [Dual Step Sequencer - Controller Interface](#dual-step-sequencer---controller-interface)
   - [Filtered Delay](#filtered-delay)
+  - [Filtered FDN](#filtered-fdn)
   - [Filtered Plate Reverb](#filtered-plate-reverb)
   - [Filtered Room Reverb](#filtered-room-reverb)
-  - [Function Generator](#function-generator)
   - [Granular Processor](#granular-processor)
   - [MIDI Synthesizer](#midi-synthesizer)
   - [Mixer Macro Control](#mixer-macro-control)
@@ -104,7 +104,10 @@ The content of this manual is intended for informational use only, is subject to
   - [Spectral Resynthesizer](#spectral-resynthesizer)
   - [Step Sequencer](#step-sequencer)
     - [Step Sequencer - Controller Interface](#step-sequencer---controller-interface)
-  - [XYZ Complex OSC](#xyz-complex-osc)
+  - [XYZ Drone](#xyz-drone)
+    - [XYZ Drone - Controller Interface](#xyz-drone---controller-interface)
+  - [XYZ MIDI Synthesizer](#xyz-midi-synthesizer)
+    - [XYZ MIDI Synthesize - Controller Interface](#xyz-midi-synthesize---controller-interface)
     - [XYZ Complex OSC - Controller Interface](#xyz-complex-osc---controller-interface)
 - [FIRMWARE UPDATES](#firmware-updates)
 - [CALIBRATION](#calibration)
@@ -289,13 +292,13 @@ The Rack setting page is used to swap between active Racks. There are four types
 
 ##### Load
 
-To Load a preset select the `LOAD` tab at the bottom of the Settings interface and press one of the 50 presets (divided into groups of 10). A preset button is yellow when a preset is available and grey when there is no preset saved. Pressing a preset button that contains a preset will reboot the device and load the selected preset with its Rack, patches, and Module/Control state.
+To Load a preset select the `LOAD` tab at the bottom of the Settings interface and press one of the 50 presets (divided into groups of 10). A preset button is green when a preset is available and grey when there is no preset saved. Pressing a preset button that contains a preset will reboot the device and load the selected preset with its Rack, patches, and Module/Control state.
 
 <img src="assets/user_interface.display.navigation_bar.settings.load.1.png" width="750" />
 
 ##### Save
 
-To Save a preset select the `SAVE` tab at the bottom of the Settings interface and press one of the 50 presets (divided into groups of 10). A preset button is yellow when a preset is saved at that location and grey when there is no preset saved. Pressing a button that contains a preset will overwrite the preset. Saving a preset captures the current Rack with its patch points, the state of all Module Controls, and other important Module-specific data.
+To Save (or Delete )a preset select the `SAVE` tab at the bottom of the Settings interface and press one of the 50 presets (divided into groups of 10). A preset button is red when a preset is saved at that location and grey when there is no preset saved. Press a button with no saved preset to captures the current Rack with its patch points, the state of all Module Controls, and other important Module-specific data. Pressing a button that contains a preset will present an Overwrite Confirmation message box, and pressing `Overwrite` will overwrite the preset. To cancel the overwrite, press the `X` to close the message box. To delete a preset, press and hold a button with a saved preset. A a Delete Confirmation message box will appear and pressing the `Delete` button will delete the preset. To cancel the delete, press the `X` to close the message box.
 
 <img src="assets/user_interface.display.navigation_bar.settings.save.1.png" width="750" />
 
@@ -438,7 +441,7 @@ A Cartesian sequencer allows a user to create non-linear sequences within a 3-di
 | Depth | R | U | Set the number of planes, in the Z direction, that are triggered simultaneously to create a polyphonic cartesian sequence. For example, if the current step is at (0, 0, 0) and Depth=2, then the steps (0, 0, 0), (0, 0, 1), and (0, 0, 2) will be triggered. Depth limit is 5 and will wrap around |
 | NumPly | R | U | The number of notes available for polyphonic sequencing such that only Outputs 1-N will be used for signal, magnitude, and gate. Steps with an XY coordinate greater than Num Poly will wrap around to an available polyphonic output |
 | Hold 1-10 | S | A | Step hold switches shared between the 5 Z planes. When ON, the associated XY note is held for the current Z plane |
-| Prob 1-10 | R | A | Step probability shared between the 5 Z planes. Increasing the value reduces the likelihood that a step will trigger |
+| Prob 1-10 | R | A | Step probability shared between the 5 Z planes. Increasing the value increases the likelihood that a step will trigger |
 | Mag 1-10 | R | A | Step magnitudes shared between the 5 Z planes |
 | SigZ1-5 1-10 | R | A | Signal assignments for each of the Z1-5 planes of 10 steps |
 
@@ -491,7 +494,7 @@ The Delay module is a tape-style delay with two delay lines and five read heads 
 
 ## DV - Euclidean Clock Divider
 
-The Euclidean Clock Divider module is a 5-channel clock multiplier and euclidean rhythm generator. Floating point multipliers allow for slight frequency variance.  The rhythms can be probabilistic and chained to create complex evolving gate patterns.
+The Euclidean Clock Divider module is a 5-channel clock multiplier and Euclidean rhythm generator. Floating point multipliers allow for slight frequency variance.  The rhythms can be probabilistic and chained to create complex evolving gate patterns.
 
 | Control Notes | T | R | |
 | - | - | - | - |
@@ -500,7 +503,7 @@ The Euclidean Clock Divider module is a 5-channel clock multiplier and euclidean
 | EStep 1-5 | R | U | Number of steps in the Euclidean sequence |
 | EDiv 1-5 | R | U | Division constant for the Euclidean sequence. Higher constant means more frequent steps |
 | Rot 1-5 | R | U | Rotates the start point of the Euclidean rhythm |
-| Prob 1-5 | R | U | Step probability. Increasing the value reduces the likelihood that a step will trigger |
+| Prob 1-5 | R | U | Step probability. Increasing the value increases the likelihood that a step will trigger |
 | ChainL | R | U | Number of Euclidean rhythms that are chained together. Chain always starts with channel 1 and progresses sequentially |
 
 | Output Notes | |
@@ -514,7 +517,7 @@ The Euclidean Clock Divider module is a 5-channel clock multiplier and euclidean
 
 ## EV - Envelope Generator and VCA
 
-A 10-channel ADSR Envelope Generator with audio inputs and a builtin VCA. When an envelope is retriggered it rises from the current envelope position to preserve continuity. Holding an envelope’s gate open will allow it to proceed to and maintain the sustain phase. The release phase is triggered as soon as an envelope’s gate is closed.
+A 10-channel ADSR Envelope Generator with audio inputs and a built-in VCA. When an envelope is retriggered it rises from the current envelope position to preserve continuity. Holding an envelope’s gate open will allow it to proceed to and maintain the sustain phase. The release phase is triggered as soon as an envelope’s gate is closed.
 
 | Control Notes | T | R | |
 | - | - | - | - |
@@ -533,20 +536,21 @@ A 10-channel ADSR Envelope Generator with audio inputs and a builtin VCA. When a
 
 ## EQ - Parametric Band-pass Equalizer
 
-A parametric stereo Band-pass Equalizer with 8-bands. Adjusting the `Band` controls with the starting configuration of the `FC` and `Q` controls emulates a traditional Band-pass equalizer.
+A parametric stereo Band-pass Equalizer with 8-bands and idvidual controls for each channel. Left and Right channel controls can be `Link`ed to allow the left channel controls used for both channels' settings. Adjusting the `Band` controls with the starting configuration of the `FC` and `Q` controls emulates a traditional Band-pass equalizer.
 
 | Control Notes | T | R | |
 | - | - | - | - |
-| In 1-2| I | A | Incoming stereo signal |
-| Band 1-8 | R | U | Band level |
-| FC 1-8 | R | U | Center frequency for the band |
-| Q 1-8 | R | U | Controls the width of the band around its center frequency (`FC`). Computed as `Q = Fc / BW` |
+| In L/R | I | A | Incoming stereo signal |
+| Band L/R1-8 | R | U | Band level |
+| FC L/R1-8 | R | U | Center frequency for the band |
+| Q L/R1-8 | R | U | Controls the width of the band around its center frequency (`FC`). Computed as `Q = Fc / BW` |
+| Link | S | U | Link the channels such that the left channel controls are used for both channels' setting |
+| Mono | S | U | Disables the right channel. This is used in Racks that have an mono input signal path to save CPU time |
 | Reset | B | U | Reset all `FC` and `Q` controls to their starting position |
 
 | Output Notes | |
 | - | - |
-| Bnd L1-8| Individual bands signal left |
-| Bnd R1-8 | Individual bands signal Right |
+| Bnd L/R1-8| Individual band signals |
 | EQ L | Stereo signal left |
 | EQ R | Stereo signal right |
 
@@ -606,7 +610,7 @@ A stereo resonant 4 pole low pass Ladder Filter.
 
 ## GP - Granular Processor
 
-A Granular Processor that uses up to 40 grains to generate a stereo spread from a mono signal. The buffer holds ~2s of 24-bit 48kHz audio and grain iterators use floating point Hermite interpolation for rich sample playback at various speeds.
+A Granular Processor that uses up to 35 grains to generate a stereo spread from a mono signal. The buffer holds ~1.6s of 24-bit 48kHz audio with variable speed smapling to extend the length of the buffer by down sampling. Grain iterators use floating point Hermite interpolation for rich sample playback at various speeds.
 
 | Control Notes | T | R | |
 | - | - | - | - |
@@ -615,13 +619,15 @@ A Granular Processor that uses up to 40 grains to generate a stereo spread from 
 | Freeze | S | U | Switch to stop writing to the circular buffer |
 | Trigger | B | A | Trigger a grain. The total number of grains is limited to 40 and triggered grains are added to the Density setting when computing grain count |
 | Start | R | U | The starting point from which grains are spawned |
-| Size | R | U | Grain size where the maximum size is 1s and minimum is 5ms |
+| Size | R | U | Grain size where the maximum size is the entire buffer and the minimum is ~20ms |
 | Spray | R | U | The region, relative to the starting point, in which grain can spawn |
 | Density | R | U | Number of grains to be spawned, limited to 48 grains. O grains (Off) effectively stops granular processing |
 | Space | R | U | The amount of grain overlap, where increasing the Space decreases the overlap and a maximum value implies 0 overlap |
 | Spread | R | A | The position of spawned grains in the stereo field, where increasing the Spread created a broader stereo image |
+| V/Oct | I | U | Determines the speed of gain playback. After a grain is created it maintains its Speed setting for the duration of its playback |
+| Speed | R | A | The record speed, where a maximum value indicates a sample rate of 48kHz. Decreasing the Speed will slow the sample rate, which degradates sample quality while increasing the length of the sample buffer |
 | MagDif | R | A | The amount of grain magnitude variation. A maximum value implies a random magnitude from 0 - 100% of the original signal. After a grain is created it maintains its magnitude adjustment for the duration of its playback |
-| Speed | R | U | The speed of gain playback. After a grain is created it maintains its Speed setting for the duration of its playback |
+| RevPrb | R | A | The probability of grain spawning with reverse playback. Increasing the value increases the likelihood of the grain playing in reverse |
 | Attack | R | U | Length of the linear attack window relative to the Morph point |
 | Decay | R | U | Length of the linear decay window relative to the Morph point |
 | Morph | R | U | The center point of the Attack/Decay window enveloping each grain sample iteration |
@@ -671,19 +677,21 @@ A 5-channel LFO with 4 simultaneous wave outputs (sine, triangle, saw, and squar
 
 ## MC - Macro Controller
 
-The Macro Controller has 10 assignable rotary Controls with individual attenuverter and offset Controls. The current state of all macro Controls can be captured and recalled with the `Set` and `Rst` Controls. These Module-local “presets” are persisted/refreshed when saving/loading a preset via the Settings menu.
+The Macro Controller has 10 rotary Controls with Min-Max/Max-Min range mapped outputs. The current state of all macro Controls can be captured and recalled with the `Set` and `Rst` Controls. These Module-local “presets” are persisted/refreshed when saving/loading a preset via the Settings menu.
 
 | Control Notes | T | R | |
 | - | - | - | - |
 | 1-10 | R | A | Assignable macro controls |
-| Attn | R | A | Attenuverter constant |
-| Offst 1-10 | R | A | A DC offset to be applied to the attenuverted macro controls |
+| Min | R | A | Minimum value for mapped CV output |
+| Max 1-10 | R | A | Maximum value for mapped CV output |
 | Set 1-10 | B | A | Stores all macro control values to a recallable preset |
 | Rst | B | A | Recalls all macro control values for a stored preset |
 
 | Output Notes | |
 | - | - |
-| CV 1-10 | Macro CV with attuverter and offset applied |
+| MnMx 1-10 | Macro CV mapped to the Min-Max range. If Min is greater than Max, the mapping is reversed |
+| MxMn 1-10 | Macro CV mapped to the Max-Min range. If Max is less than Min, the mapping is reversed |
+| CV 1-10 | Raw Macro CV signal |
 
 ## MD - MIDI Controller
 
@@ -722,6 +730,20 @@ A dual matrix mixer consisting of two 5x5 mixing matrices. The mixers can be use
 | - | - |
 | Row A/B/C/D/E | Channel mix for Rows |
 | Col A/B/C/D/E | Channel mix for Columns |
+
+## MS - Mid-side Processor
+
+A simple mid-side processing module that split a stereo signal into its mid/side components, outputs them for downstream processing, and recombines the signals.
+
+| Control Notes | T | R | |
+| - | - | - | - |
+| In L/R | I | A | Incoming stereo signal for mid-side processing split |
+| In Mid/Side | I | A | Mid-side signals to recombine into a stero signal |
+
+| Output Notes | |
+| - | - |
+| Mid/Side | Split mid-side processing components |
+| L/R | Recombined stereo signal |
 
 ## MX - Mixer
 
@@ -784,7 +806,7 @@ The 10-channel Noise Generator utility module. At its core, this module is a whi
 | In 1-10 | I | A | Incoming signals for sampling, looping, and slew rate limiting |
 | Trig 1-10 | B | A | Triggers a sample for Input signal and white/pink noise |
 | Rate 1-10 | R | U | The cyclical sample rate with a minimum of 1 ms and a maximum of 1 min |
-| Prob 1-10 | R | A | Sample probability for both triggered and cyclical samples. Increasing the value reduces the likelihood that a sample will occur |
+| Prob 1-10 | R | A | Sample probability for both triggered and cyclical samples. Increasing the value increases the likelihood that a sample will occur |
 | Slew 1-10 | R | A | Adds slew rate limiting to sampled signal changes |
 | Loop 1-10 | R | A | The length of samples to loop up to 255. When set to OFF, samples are collected and there is no looping. When set to a number, sample stops and end of the is the last sample taken before enabling looping |
 | Attn 1-10 | R | A | Attenuverter constant |
@@ -864,23 +886,23 @@ A 5-channel Binary Quantizer. The quantizer uses a root note and 12-bit number t
 
 ## RC - CV Recorder
 
-A tape-style CV Recorder with 10 recording buffers. Each record buffer holds ~7s of 24-bit 1kHz CV, and buffer iterators use floating point Hermite interpolation to reproduce signals smoothly at various speeds. Reducing the speed increases record times significantly. The read and write heads are synchronized to enable the real-time performance of CV signals using the 10-pad Controller Interface. CV is always recording except while Loop is enabled, and loops are bound by the Start and Stop positions.
+A tape-style CV Recorder with 5 recording buffers. Each record buffer holds ~4s of 24-bit 1kHz CV, and buffer iterators use floating point Hermite interpolation to reproduce signals smoothly at various speeds. Reducing the speed increases record times significantly. The read and write heads are synchronized to enable the real-time performance of CV signals using the 5-plane/10-pad Controller Interface. CV is always recording except while Loop is enabled, and loops are bound by the Start and Stop positions.
 
 | Control Notes | T | R | |
 | - | - | - | - |
-| In 1-10 | I | U | Incoming CV. Sampled at Update rate (~1kHz) |
-| Loop 1-10 | S | U | Enable channel playback looping bounded by the Start and Stop |
-| Sync 1-10 | B | U | Sets the playhead to the Start position (Stop if in reverse) |
-| Start 1-10 | R | U | The start position for the playback loop. If Start is less than Stop, playback is in reverse |
-| Stop 1-10 | R | U | The stop position for the playback loop. If Stop is greater than Sart, playback is in reverse |
-| Scan 1-10 | R | U | Playhead offset within the Start/Stop range of the playback loop. Can be used to scan sequentially or jump to and position within the loop |
-| Speed 1-10 | R | U | Speed for recording/playback heads to move through the buffer. Slower speeds essentially downsample the incoming CV while recording, but Hermite interpolation helps to keep playback signals smooth |
-| Hold 1-10 | S | U | Pauses playback while enabled |
+| In 1-5 | I | U | Incoming CV. Sampled at Update rate (~1kHz) |
+| Loop 1-5 | S | U | Enable channel playback looping bounded by the Start and Stop |
 | Clear 1-10 | B | U | Clears the channel record buffer between the Stop and Start positions |
+| Sync 1-5 | B | U | Sets the playhead to the Start position (Stop if in reverse) |
+| Start 1-5 | R | U | The start position for the playback loop. If Start is less than Stop, playback is in reverse |
+| Stop 1-5 | R | U | The stop position for the playback loop. If Stop is greater than Sart, playback is in reverse |
+| Scan 1-5 | R | U | Playhead offset within the Start/Stop range of the playback loop. Can be used to scan sequentially or jump to and position within the loop |
+| Hold 1-5 | S | U | Pauses playback while enabled. Scanning through the recording will still playback |
+| Speed 1-5 | R | U | Speed for recording/playback heads to move through the buffer. Slower speeds essentially downsample the incoming CV while recording, but Hermite interpolation helps to keep playback signals smooth |
 
 | Output Notes | |
 | - | - |
-| CV 1-10 | CV signal playback |
+| CV 1-5 | CV signal playback |
 
 ## RV - Room Reverb
 
@@ -944,7 +966,7 @@ This Step Sequencer can operate as a traditional linear sequencer with 50 indivi
 | Rnd P | B | U | Triggers randomization of the all Prob Controls within a range determined by MagRnd |
 | Depth | R | U | Sets the number of sequence pointers, which enables poly-rhythms and polyphony. Depth limit is 5 and sequence pointers wrap around when length and offset exceed the sequencer length limit (50) |
 | NumPly | R | U | The number of notes available for polyphonic sequencing such that only Outputs 1-N will be used for signal, magnitude, and gate. Steps with a number greater than Num Poly wrap around to an available polyphonic Output |
-| Prob 1-50 | R | A | Step probability. Increasing the value **reduces** the likelihood that a step will trigger |
+| Prob 1-50 | R | A | Step probability. Increasing the value increases the likelihood that a step will trigger |
 | Mag 1-50 | R | A | Step magnitude |
 | Sig 1-50 | R | A | Step signal with indicators based on V/Octave (C4=0V) |
 | 1-50 | S | A | Enables a Step |
@@ -961,9 +983,9 @@ This Step Sequencer can operate as a traditional linear sequencer with 50 indivi
 
 ## UA - USB Audio Interface
 
-A 6-channel In/Out USB Audio interface operating at 16-bit 48kHz. Channels 1/2 show up as Frost Left/Front Right on the PC because of the legacy Dolby USB channel configuration required for Windows machines to recognize the device as a valid Class I Type USB audio interface without the need for a custom device driver. The gain of USB inputs can be controlled by the USB host. Note that `JK` in the Control/Output names below is a `Hexnut` icon in the UI. 
+A 6-channel In/Out USB Audio interface operating at 16-bit 48kHz. Channels 1/2 show up as Frost Left/Front Right on the PC because of the legacy Dolby USB channel configuration required for Windows machines to recognize the device as a valid Class I Type USB audio interface without the need for a custom device driver. The gain of USB inputs can be controlled by the USB host. Note that `JK` in the Control/Output names below is a `Hexnut` icon in the UI.
 
-IMPORTANT: The computer **must** be plugged into the device port when the device starts (or restarts) for Racks using this module, otherwise, the device will restart to the default Rack.
+IMPORTANT: The computer **must** be plugged into the device port when the device starts (or restarts) for Racks using this module, otherwise, the device will restart to the default Rack. Also, disconnecting and reconnecting to the USB device on the computer can cause the device crash. For best performance, setup the input and output routing on your computer and leave them set for the duration of a session.
 
 | Control Notes | T | R | |
 | - | - | - | - |
@@ -1028,8 +1050,9 @@ The current [release](../dectet.release.yml) of the Dectet firmware has the foll
 - SYNTH
   - [Drone](#drone)
   - [MIDI Synthesizer](#midi-synthesizer)
+  - [XYZ Drone](#xyz-drone)
+  - [XYZ MIDI Synthesizer](#xyz-midi-synthesizer)
   - [Spectral Resynthesizer](#spectral-resynthesizer)
-  - [XYZ Complex OSC](#xyz-complex-osc)
 - SEQ
   - [Cartesian Sequencer](#cartesian-sequencer)
   - [Dual Cartesian Sequencer](#dual-cartesian-sequencer)
@@ -1039,13 +1062,12 @@ The current [release](../dectet.release.yml) of the Dectet firmware has the foll
 - FX
   - [Filtered Delay](#filtered-delay)
   - [Filtered Room Reverb](#filtered-room-reverb)
-  - [Granular Processor](#granular-processor)
+  - [Filtered FDN](#filtered-fdn)
   - [Filtered Plate Reverb](#filtered-plate-reverb)
+  - [Granular Processor](#granular-processor)
 - UTIL
   - [Audio Interface](#audio-interface)
-  - [Clock Divider Quantizer](#clock-divider-quantizer)
   - [Deep Neural Network](#deep-neural-network)
-  - [Function Generator](#function-generator)
   - [Mixer Macro Control](#mixer-macro-control)
   - [Parametric Follower](#parametric-follower)
 
@@ -1097,58 +1119,30 @@ The Cartesian Sequencer Rack includes a playable controller interface with 5 gro
 
 <img src="assets/modules.cr.controller_interface.1.png" width="750" />
 
-## Clock Divider Quantizer
-
-The Clock Divider rack is a clock generator and modulation toolkit with 10 channels of euclidean clock division and quantization. The Quantized signals are patched directly to IO along with the gated envelope signal outputs to enable quantization and shaping of an external voice. The NZ and LO modules provide supporting modulation and can be used to create complex loopable polyrhythms. The MM module can be used to create interesting combinations of rhythmic pulses and melodies.
-
-```mermaid
-flowchart TD
-  IO-->FL
-  IO-->EV
-  CK-->DV-->MM
-  NZ-->QT-->MM
-  QT-->EV-->IO
-  QT-->IO
-  LO
-  MC
-```
-
-| Patch Notes |
-| - |
-| The normalized patch only connects the CK module to the two DV modules |
-| To generate complex quantized and loopable polyrhythms consider patching the euclidean outputs to the `Trig` Control of the NZ module and pass the S&H outputs into the QT module. Then patch the V/Oct signals into sound sources and use the NZ modules `Loop` Control to lock in sequences |
-
 ## Control Voltage Recorder
 
-The Control Voltage Recorder rack includes a CV Recorder (CR) module with 8 of its 10 record channels normalized to record 4-voice polyphonic MIDI V/Octave and magnitude signals.
+The Control Voltage Recorder rack includes a CV Recorder (RC) module with its 5 channels normalized to 5 depth Outputs of the CR module. The Cartesian Sequencer-based controller interface provides a playable interface for each of the 5 channels. The MD module is included to enable MIDI input sequencing. The CK/DV modules can be used to sequence the CR module, and the EV module provides a mechanism to transform looped gated by sequence into envelope CV. The Matrix Mixer module (MM) allows for the creative combination of looping CV.
 
 ```mermaid
 flowchart TD
   IO-->FL
-  MD-->RC-->IO
-  NZ
-  LO
-  FL
+  CR-->RC-->IO
+  MD
+  CK
+  DV
+  EV
+  MM
   MC
 ```
 
 | Patch Notes |
 | - |
-| MDI module Outputs 1-4 and 10-14 are patched to the RC In Controls 1-4 and 6-9 to capture 4 voices of V/Octave and magnitude signals. The MDI module is set to 4-voice polyphony |
-| The MIDI normalization is provided as a quick way to start generated CV loops with an external MIDI controller. Consider denormalizing and recording external CV |
-| RC module’s Outputs `CV 1-8` are patched to IO’s `O 1-8 JK` Controls |
+| CR Z V/Oct Outputs are normalized to the RC Inputs `In 1-5` |
+| RC module Outputs `CV 1-5` are patched to IO’s `O 1-5 JK` Controls |
 
 ### Control Voltage Recorder - Controller Interface
 
-The CV Recorder Rack includes a playable controller interface with 5 groups of 10 pads used to control the [RC](#rc---cv-recorder). Each group is mapped to two CV Recorder channels, one to capture pitch and another to capture magnitude. The groups are mapped CV Recorder In Controls as follows:
-
-- Group 1 => In 1 Pitch, In 6 Magnitude
-- Group 2 => In 2 Pitch, In 7 Magnitude
-- Group 3 => In 3 Pitch, In 8 Magnitude
-- Group 4 => In 4 Pitch, In 9 Magnitude
-- Group 5 => In 5 Pitch, In 10 Magnitude
-
-The current recording group is selected by pressing the 1-5 buttons on the bar above the pads. Additionally, the Rec, Play, and Snc can be used to trigger the respective channels’ Record, Play, and Sync Control to capture/playback both pitch and magnitude simultaneously. Turning the encoder sets the magnitude sent to the Recorder channel. The magnitude setting is reflected in the intensity of the yellow coloring of the pads when pressed and when they are the active Controller pad. Pressing and turning the encoder adjusts the pitch of the active Controller’s corresponding CV Recorder input channel. The `In` Controls for the group you manipulate from the Controller Interface must be unpatched for this to work properly.
+The Control Voltage Recorder Rack includes a playable controller interface with 5 groups of 10 pads used to control the [CQ](#cq---cartesian-sequencer) Module. Each group is mapped to the XY coordinates of a Z plane and the current Z plane is selected by pressing the 1-5 buttons on the bar above the pads. Pressing a pad triggers the Hold and Set Controls and freezes playback at the touched step. When released, sequence playback resumes starting at the touched step. Turning the encoder sets the Mag Control for the corresponding XY coordinate. The magnitude setting is reflected in the intensity of the yellow coloring of the pads when pressed, when they become the active step in the sequence, or when they are the active Controller pad. Pressing and turning the encoder will adjust the pitch of the active Controller pad’s corresponding Pitch Control and pressing and turning the encoder will set its sensitivity. The Pitch Controls for the pads you manipulate from the Controller Interface must be unpatched for this to work properly.
 
 <img src="assets/modules.rc.controller_interface.1.png" width="750" />
 
@@ -1247,10 +1241,28 @@ The Filtered Delay rack is a stereo delay effect processor with a pre and post-d
 ```mermaid
 flowchart TD
   IO-->FL
-  IO-->EQ-->DL-->FT-->MX
+  IO-->EQ-->MS-->DL-->FT-->MS-->MX-->IO
   FT-->DL
   IO-->MX
-  MX-->IO
+  MC
+```
+
+| Patch Notes |
+| - |
+| IO Outputs `I 1/2 JK` are patched to both the DL module and the MX (`In 1/6`) module to enable a dry/wet mix |
+| FL module output is cross-patched back into the DL module (`FBIn`) to enable cross-feedback |
+| To create a mono-stereo delay, patch the summed output for the first delay line (`DL1`) into the input for the second delay line (`In 2`). Then patch all of the delay read head Outputs (`DL1/2 1-5`) into the MX module and pan each read head to create a stereo spread. The added benefit to this pattern is a doubled delay time |
+| Stereo output is normalized to IO Controls `O 1/2 JK` |
+
+## Filtered FDN
+
+The Filtered Feedback Delay Network (FDN) rack is a stereo FDN effect processor with a pre and post-delay filter. The Equalizer module acts as a prefilter to isolate the desired content, and the Filter module helps to clean up high-end artifacts as a post-processor. The resulting stereo delay flows through the Mix module where it can be mixed with the original signal for a dry/wet control.
+
+```mermaid
+flowchart TD
+  IO-->EQ-->MS-->FD-->FT-->MS-->MX-->IO
+  FT-->FD
+  IO-->MX
   MC
 ```
 
@@ -1268,16 +1280,15 @@ The Filtered Plate Reverb rack is a stereo plate reverb effect processor with a 
 ```mermaid
 flowchart TD
   IO-->FL
-  IO-->EQ-->PL-->FT-->MX
+  IO-->EQ-->MS-->PV-->FT-->MS-->MX-->IO
   IO-->MX
-  MX-->IO
   NZ
   MC
 ```
 
 | Patch Notes |
 | - |
-| IO Outputs `I 1/2 JK` are patched to both the PL module and the MX (`In 1/6`) module to enable a dry/wet mix |
+| IO Outputs `I 1/2 JK` are patched to both the PV module (via EQ and MS) and the MX (`In 1/6`) module to enable a dry/wet mix |
 | Stereo output is normalized to IO Controls `O 1/2 JK` |
 
 ## Filtered Room Reverb
@@ -1287,45 +1298,25 @@ The Filtered Room Reverb rack is a stereo reverb effect processor with a pre and
 ```mermaid
 flowchart TD
   IO-->FL
-  IO-->EQ-->RV-->FT-->MX
+  IO-->EQ-->MS-->RV-->FT-->MS-->MX-->IO
   IO-->MX
-  MX-->IO
   NZ
   MC
 ```
 
 | Patch Notes |
 | - |
-| IO Outputs `I 1/2 JK` are patched to both the RV module and the MX (`In 1/6`) module to enable a dry/wet mix |
+| IO Outputs `I 1/2 JK` are patched to both the RV module (via EQ and MS) and the MX (`In 1/6`) module to enable a dry/wet mix |
 | Stereo output is normalized to IO Controls `O 1/2 JK` |
-
-## Function Generator
-
-The Function Generator rack is a slope generation utility module. The 5-channel Function Generator module and 10-channel Envelope module are slope generators. The NZ and AT modules provide supporting modulation and the MM module is available for signal combination.
-
-```mermaid
-flowchart TD
-  IO-->FL
-  FN-->IO
-  EV
-  NZ
-  AT
-  MM
-  MC
-```
-
-| Patch Notes |
-| - |
-| The FN modules 5 function Outputs (`Func 1-5`) are normalized to IO Out Controls (`I 1-5 JK`) as a starting point for patch building |
 
 ## Granular Processor
 
-The Granular Processor rack only contains the Granular Processor module as it consumes nearly all system resources when density is maximized.
+The Granular Processor rack contains the Granular Processor (GP) module wrapped by the EQ (mono) and FL modules to enable detailed granular-inspired sound deign.
 
 ```mermaid
 flowchart TD
   IO-->FL
-  IO-->GP-->IO
+  IO-->EQ-->GP-->FL-->IO
   MC
 ```
 
@@ -1336,7 +1327,7 @@ flowchart TD
 
 ## MIDI Synthesizer
 
-The MIDI Synthesizer rack is a classic 10-voice polysynth with MIDI control, 10 ADSR envelopes, and a panoramic stereo output. Additionally, the NZ module provides auxiliary input to the OSC. This OSC module is feature rich and provides a complex patching environment. The NZ module also provides supporting modulation.
+The MIDI Synthesizer rack is a classic 10-voice polysynth with MIDI control, 10 ADSR envelopes, and a panoramic stereo output. This OSC module is feature rich and provides a complex patching environment. The NZ module provides auxiliary input to the OSC and supporting modulation.
 
 ```mermaid
 flowchart TD
@@ -1349,10 +1340,8 @@ flowchart TD
 
 | Patch Notes |
 | - |
-| All 10 MD `V/Oct`, `Gate`, and `Mag` Ouputs are patched into the OS, EV, and AT modules respectively. Additionally, the MIDI Pitch Bend output is normalized to each OSC’s `FM` Control to enable the flywheel control behavior |
+| All 10 MD `V/Oct`, `Gate`, and `Mag` Ouputs are patched into the OS and EV modules. Additionally, the MIDI Pitch Bend output is normalized to each OSC’s `FM` Control to enable the flywheel control behavior |
 | White noise output (`White`) is patched to the OS `AuxIn` |
-| The ATN module is adjusts the level of each OS going into the VA based on the incoming MIDI magnitude CV |
-| EV is gated by incoming MD gates and is normalized to modulate the VA |
 | Stereo output is normalized to the IO `O 1/2 JK` Controls |
 
 ## Mixer Macro Control
@@ -1434,9 +1423,34 @@ The Step Sequencer Rack includes a playable controller interface with 50 pads us
 
 <img src="assets/modules.sq.controller_interface.1.png" width="750" />
 
-## XYZ Complex OSC
+## XYZ Drone
 
-The XYZ Complex OSC rack is a utility for custom wavetable synthesis. Unique and dynamic voices can be designed and then played via a MIDI controller with 5 voice polyphony, ADSR envelopes, and a panned stereo spread output. Additionally, the NZ module provides auxiliary input to the XYZ channels. The XYZ module is designed to self-patch as a feature-rich complex oscillator. The NZ and LO modules provide supporting modulation.
+The XYZ Drone rack pairs the XYZ Complex OSC module with the NZ and LO modulation sources to take full advantage of OSC’s complex patch environment. The CQ module provides quantized sequencing for composition and the XY module-based controller interface provides looped modulation performance.
+
+```mermaid
+flowchart TD
+  IO-->FL
+  CQ-->NZ-->XY-->MX
+  CQ-->MX-->IO
+  LO-->XY-->XY
+  LO-->MX
+  MC
+```
+
+| Patch Notes |
+| - |
+| CQ is patched through NZ into the OSS module to slew limit V/Oct changes during note transitions, and is patched into MX to control XY gain. LO and NZ provide undulating modulation for XY `Phaz` and `FM` Controls. Additionally, LO is modulating MX `Pan` |
+| XY output is normalized to the MX for gain/pan control and the stereo output of MX is normalized to IO Controls `O 1-2 JK` |
+
+### XYZ Drone - Controller Interface
+
+XYZ Drone Rack includes a controller interface that enables custom waveform design and loop playability for the [XY](#xy---custom-wavetable-osc-3d-touch-looper) Module. The controller interface consists of 5 large pads, each associated with one of the 5 wavetables. To switch between the pads press the numbered buttons on the top of the controller interface. Additionally, the Rec and Lup buttons are used to enable/disable touch input recording and looping. When recording and looping are disabled, touching the pad will simply set the XYZ position for the current Wavetable channel. This does NOT alter the wavetable and the XYZ outputs will reflect the touch input in real-time. When recording is enabled, pressing a pad will write the current XY position to the Wavetable buffer effectively altering the waveform. You can increase the magnitude of the active Wavetable by turning the encode. Pressing and turning the encoder will adjust the Z dimension of the active Wavetable (normalized to magnitude in the XYZ Rack). When looping is enabled, touch input is recorded into a buffer (~20s in length) and playback is initiated when you stop pressing the controller pad, which also sets the length of the loop. The current Z value is reflected in the intensity of the yellow coloring of the pads while pressed and during loop playback. The purple square reflects the current XY position.
+
+<img src="assets/modules.xy.controller_interface.1.png" width="750" />
+
+## XYZ MIDI Synthesizer
+
+TheXYZ  MIDI Synthesizer rack is a 5-voice polysynth with MIDI control, 5 ADSR envelopes, and a panoramic stereo output. This XY module is feature rich and provides a complex patching environment. The NZ module provides auxiliary input to XY and supporting modulation.
 
 ```mermaid
 flowchart TD
@@ -1444,17 +1458,18 @@ flowchart TD
   MD-->XY-->EV
   MD-->EV-->MX-->IO
   NZ-->XY
-  LO
   MC
 ```
 
 | Patch Notes |
 | - |
-| The normalization is MIDI-based for consistency with the other Syth Racks, but the XY module works well as a self-patched complex drone. Consider patching the XY `Z` Control into `Mag` to enable magnitude modulation from the Controller interface and patch the XY signals directly to MX `In` |
-| 5 channels of MIDI `V/Oct`, `Mag`, and `Gate` are patched the XY, AT, and EV modules respectively. Additionally, the MIDI `PitchB` Output is normalized to each XY’s `FM` Control to enable flywheel control behavior |
-| White noise output (`White`) is patched to each XY’s `AuxIn` |
-| EV is gated by incoming MD gates and is normalized to shape XY signals |
+| 5 of the MD `V/Oct`, `Gate`, and `Mag` Ouputs are patched into the XY and EV modules. Additionally, the MIDI Pitch Bend output is normalized to each XY oscillator's `FM` Control to enable the flywheel control behavior |
+| White noise output (`White`) is patched to the OS `AuxIn` |
 | Stereo output is normalized to the IO `O 1/2 JK` Controls |
+
+### XYZ MIDI Synthesize - Controller Interface
+
+See [XYZ Drone - Conrtoller Interface](#xyz-drone---controller-interface)
 
 ### XYZ Complex OSC - Controller Interface
 
