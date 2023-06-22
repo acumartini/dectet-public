@@ -1,12 +1,12 @@
-<img src="assets/arrangement-audio.jpg" width="750" />
+<img src="assets/martini-modular-logo.jpg" width="750" />
 
-# Dectet - User Manual
+# dectet - User Manual
 
 This manual is a release-specific document. Search for the [release](https://github.com/acumartini/dectet-public/releases) version that matches what you have running on your device, which includes a link to the User Manual for that firmware version.
 
 ## Disclaimer
 
-The content of this manual is intended for informational use only, is subject to change without notice, and should not be construed as a commitment by Arrangement Audio LLC. Arrangement Audio LLC assumes no responsibility or liability for any errors or inaccuracies that may appear in this document.
+The content of this manual is intended for informational use only, is subject to change without notice, and should not be construed as a commitment by Martini Modular LLC. Martini Modular LLC assumes no responsibility or liability for any errors or inaccuracies that may appear in this document.
 
 ---
 
@@ -118,7 +118,7 @@ The content of this manual is intended for informational use only, is subject to
 
 # WELCOME
 
-Welcome to the Arrangement Audio Dectet! The Dectet is a digital synth/utility macro module featuring an intuitive user interface and a touchscreen display, giving you access to a variety of virtual modular environments. Modules within the environments expose all of their controls as patch points enabling a high level of customization, and stored presets enable repeatability. The display doubles as a playable instrument for both internal synthesis and external control.  While shipped as a slim desktop unit, the Dectet also operates as a 15Hp Euorack module.
+Welcome to the Martini Modular dectet! The dectet is a digital synth/utility macro module featuring an intuitive user interface and a touchscreen display, giving you access to a variety of virtual modular environments. Modules within the environments expose all of their controls as patch points enabling a high level of customization, and stored presets enable repeatability. The display doubles as a playable instrument for both internal synthesis and external control.  While shipped as a slim desktop unit, the dectet also operates as a 15Hp Euorack module.
 
 ## Specification
 
@@ -144,7 +144,7 @@ This manual covers installation requirements for desktop operation and the Euror
 
 ## Desktop Operation
 
-The Dectet ships as a desktop unit powered by the provided DC wall adapter power supply (TODO: V and A rating).
+The dectet ships as a desktop unit powered by the provided DC wall adapter power supply (TODO: V and A rating).
 
 TODO: pic
 
@@ -154,7 +154,7 @@ TODO: pic
 
 ## Eurorack Module
 
-The Dectet is designed to fit into a Eurorack case as a 15Hp module and the shrouded 10-pin connector on the PCB accepts a cable from a standard Eurorack power bus.
+The dectet is designed to fit into a Eurorack case as a 15Hp module and the shrouded 10-pin connector on the PCB accepts a cable from a standard Eurorack power bus.
 
 | Notes |
 | - |
@@ -170,11 +170,11 @@ The expander connects directly to the main panel PCB via a 6-pin connector (powe
 
 # USER INTERFACE
 
-The user interface is built around sets of virtual modules (racks), their controls, and internally/externally patching controls and module outputs. To help clarify the discussion around UI design and functionality we define a set of overloaded terms scoped to the Dectet worldview in the following subsections.
+The user interface is built around sets of virtual modules (racks), their controls, and internally/externally patching controls and module outputs. To help clarify the discussion around UI design and functionality we define a set of overloaded terms scoped to the dectet worldview in the following subsections.
 
 ## Front Panel
 
-The Dectet front panel consists of two parts, the main panel and the I/O expander. The main panel contains all of the primary User Interface components and I/0, while the expander (coming soon!) contains only additional I/O.
+The dectet front panel consists of two parts, the main panel and the I/O expander. The main panel contains all of the primary User Interface components and I/0, while the expander (coming soon!) contains only additional I/O.
 
 <img src="assets/user_interface.front_panel.1.png" width="750" />
 
@@ -246,7 +246,7 @@ An Output is a virtual signal produced by a Module. Modules can have up to 50 ou
 
 ## Display
 
-The primary element of the Dectet user interface is the capacitive touchscreen display. The Display is used to navigate/set/patch Module Controls, switch between Racks, load/save presets, manage UX options, and assign MIDI CC mappings. Some Racks have a custom controller interface that enables performance. The Display also provides real-time feedback for Control modulation. The following subsections cover the primary UI elements/views in detail.
+The primary element of the dectet user interface is the capacitive touchscreen display. The Display is used to navigate/set/patch Module Controls, switch between Racks, load/save presets, manage UX options, and assign MIDI CC mappings. Some Racks have a custom controller interface that enables performance. The Display also provides real-time feedback for Control modulation. The following subsections cover the primary UI elements/views in detail.
 
 ### Module View
 
@@ -336,7 +336,7 @@ The Control pagination indicators are small buttons that double at pagination bo
 | Notes |
 | - |
 | Display performance can be affected by CPU load. Some Modules affect display performance more than others, but the Racks are designed such that under maximum Module load the interface is still usable |
-| Presets are stored on the SD card (inserted into the card reader exposed on the front panel) as text files. You can share preset files with other Dectet devices, but presets are not guaranteed to be backwards compatible |
+| Presets are stored on the SD card (inserted into the card reader exposed on the front panel) as text files. You can share preset files with other dectet devices, but presets are not guaranteed to be backwards compatible |
 | MIDI mapping of CC signals to Controls is not intended for programmatic modulation, i.e. CV simulation over CC. The intended use case is to enable playability through an external MIDI interface with faders and knobs. Having many CC mappings modulate simultaneously will impact Display performance |
 
 ## Encoder
@@ -352,7 +352,7 @@ The optical encoder is the primary means of granular control over Module Control
 
 ## Buttons
 
-The two HW buttons on the Dectet are dedicated to navigation. While in the [Module view](#module-view), the buttons are used to scroll through the current Module's Control pages. While in the [Patchbay Interface](#patchbay-interface), the buttons are used to scroll the current Module's Output/Control pages and also through the filtered patch list. When not in the Module View or Patchbay view, the left button will trigger the UI's back button (if present) to return to the previous view.
+The two HW buttons on the dectet are dedicated to navigation. While in the [Module view](#module-view), the buttons are used to scroll through the current Module's Control pages. While in the [Patchbay Interface](#patchbay-interface), the buttons are used to scroll the current Module's Output/Control pages and also through the filtered patch list. When not in the Module View or Patchbay view, the left button will trigger the UI's back button (if present) to return to the previous view.
 
 | Notes | |
 | - | - |
@@ -362,7 +362,7 @@ The two HW buttons on the Dectet are dedicated to navigation. While in the [Modu
 
 ## Inputs and Outputs
 
-All HW Inputs and Outputs are ground-referenced (internally balanced) and DC coupled. Signals are processed at a 24-bit 48kHz resolution. The Dectet comes calibrated with each channel’s DC offset and voltage gain (IN/OUT) stored internally. However, if the analog components drift out of calibration please consult the [Calibration](#calibration) routine. All channels are designed for a +-5V signal range but are buffered to safely handle larger voltages (with added distortion).
+All HW Inputs and Outputs are ground-referenced (internally balanced) and DC coupled. Signals are processed at a 24-bit 48kHz resolution. The dectet comes calibrated with each channel’s DC offset and voltage gain (IN/OUT) stored internally. However, if the analog components drift out of calibration please consult the [Calibration](#calibration) routine. All channels are designed for a +-5V signal range but are buffered to safely handle larger voltages (with added distortion).
 
 | Notes |
 | - |
@@ -1044,7 +1044,7 @@ This module includes 5 Custom Wavetables that are manipulated using 3D controlle
 
 Racks are a collection of modules with a normalized patch. Each rack is designed for a specific purpose and the modules within a rack reflect its overall sound design goals. However, some modules are included in a Rack simply to provide supporting functionality or modulation. All Racks include the IO module as a core requirement for the analog interface. Also, the [FL](#fl---envelope-follower) and [MC](#mc---macro-controller) modules are included in all of the Racks (except Drone where FL is missing due to CPU constraints) as core utilities. Flowcharts for each Rack are included to help visualize the normalized patch.
 
-The current [release](../dectet.release.yml) of the Dectet firmware has the following Rack organization:
+The current [release](../dectet.release.yml) of the dectet firmware has the following Rack organization:
 
 - SYNTH
   - [Drone](#drone)
@@ -1472,7 +1472,7 @@ See [XYZ Drone - Controller Interface](#xyz-drone---controller-interface)
 
 # FIRMWARE UPDATES
 
-To perform a firmware update download the desired firmware version update zip (windows) or DMG (osx) from the [Website](TODO). Plug your computer into the USB-C Device port (closer to the screen) on the device. With the Dectet running, unzip and run the `upload.bat` file (windows) or run the DMG (osx) from your computer, which will restart the device and upload the new firmware. The new version can be seen at the top of the Settings page.
+To perform a firmware update download the desired firmware version update zip (windows) or DMG (osx) from the [Website](TODO). Plug your computer into the USB-C Device port (closer to the screen) on the device. With the dectet running, unzip and run the `upload.bat` file (windows) or run the DMG (osx) from your computer, which will restart the device and upload the new firmware. The new version can be seen at the top of the Settings page.
 
 | Notes |
 | - |
