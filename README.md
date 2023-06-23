@@ -683,6 +683,8 @@ The Macro Controller has 10 rotary Controls with Min-Max/Max-Min range mapped ou
 | 1-10 | R | A | Assignable macro controls |
 | Min | R | A | Minimum value for mapped CV output |
 | Max 1-10 | R | A | Maximum value for mapped CV output |
+| PB 1-5 | B | A | Assignable macro buttons |
+| SW 1-5 | B | A | Assignable macro switches |
 | Set 1-10 | B | A | Stores all macro control values to a recallable preset |
 | Rst | B | A | Recalls all macro control values for a stored preset |
 
@@ -691,6 +693,8 @@ The Macro Controller has 10 rotary Controls with Min-Max/Max-Min range mapped ou
 | MnMx 1-10 | Macro CV mapped to the Min-Max range. If Min is greater than Max, the mapping is reversed |
 | MxMn 1-10 | Macro CV mapped to the Max-Min range. If Max is less than Min, the mapping is reversed |
 | CV 1-10 | Raw Macro CV signal |
+| PB 1-5 | Macro button signal |
+| SW 1-5 | Macro switch signal |
 
 ## MD - MIDI Controller
 
