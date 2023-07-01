@@ -59,7 +59,7 @@ The content of this manual is intended for informational use only, is subject to
   - [EQ - Parametric Band-pass Equalizer](#eq---parametric-band-pass-equalizer)
   - [FL - Envelope Follower](#fl---envelope-follower)
   - [FN - Function Generator](#fn---function-generator)
-  - [FT - Ladder Filter](#ft---ladder-filter)
+  - [FT - Multi-mode Filter](#ft---multi-mode-filter)
   - [GP - Granular Processor](#gp---granular-processor)
   - [IO - Input/Output](#io---inputoutput)
   - [LO - Low-Frequency Oscillator](#lo---low-frequency-oscillator)
@@ -480,9 +480,11 @@ The Delay module is a tape-style delay with two delay lines and five read heads 
 | Speed 1-2 | R | A | The record and playback speed, where a maximum value indicates a sample rate of 48kHz. Decreasing the Speed will slow the sample rate, which degradates sample quality while increasing the length of the sample buffers |
 | Dry | R | A | The amount of dry signal in the Outputs |
 | Wet | R | A | The amount of wet signal in the Outputs |
-| Pos 1/2-1-5 | R | A | Sets the read position of each read head relative to a fixed write position, which is at position 0. The closer the read head gets to 0 the shorter the delay. The difference between the read and write heads is a floating point distance in samples where the number of samples divided by the speed equals the length of the delay in seconds |
-| FB 1/2-1-5 | R | A | The amount of read head signal fed back into the write head. The total feedback amount must be < 100% total to avoid signal saturation |
-| Mute 1/2-1-5 | S | U | Mutes the read heads on the delay lines |
+| Siz 1/2-1-5 | R | A | Sets the read position of each delay line read head relative to the Offset. The larger the size, the longer the delay is for the read head |
+| Ofst 1/2-1-5 | R | A | Sets the write position for each delay line read head relative to the current sample index (effectively write position 0) |
+| FB 1/2-1-5 | R | A | The amount of read head signal fed back into the delay line at the write posiion. At 0 the read head will contribute no sounds to the delay line and accumulated output. The total feedback amount for all read heads on a delay line must be < 100% total to avoid signal saturation |
+| SizRt | R | A | Slew rate for Size control changes |
+| OfstRt | R | A | Slew rate for Offset control changes |
 
 | Output Notes | |
 | - | - |
@@ -535,7 +537,7 @@ A 10-channel ADSR Envelope Generator with audio inputs and a built-in VCA. When 
 
 ## EQ - Parametric Band-pass Equalizer
 
-A parametric stereo Band-pass Equalizer with 8-bands and individual controls for each channel. Left and Right channel controls can be `Link`ed to allow the left channel controls used for both channels' settings. Adjusting the `Band` controls with the starting configuration of the `FC` and `Q` controls emulates a traditional Band-pass equalizer.
+A parametric stereo Band-pass Equalizer with 8 bands and individual controls for each channel. Left and Right channel controls can be `Link`ed to allow the left channel controls used for both channels' settings. Adjusting the `Band` controls with the starting configuration of the `FC` and `Q` controls emulates a traditional Band-pass equalizer.
 
 | Control Notes | T | R | |
 | - | - | - | - |
@@ -590,22 +592,20 @@ A 5-channel Function Generator with shapeable exponential rise and fall. Cycling
 | FallS 1-5 | Fall start gate |
 | Func 1-5 | Function. Multiplied by the In Control signal when patched |
 
-## FT - Ladder Filter
+## FT - Multi-mode Filter
 
-A stereo resonant 4 pole low pass Ladder Filter.
+A stereo multi-mode filter with 8 modes; MOOGY (Moog-inspired 4-pole ladder low-pass filter), resonant high-pass filter, low shelf filter, high shelf filter, bandwidth-limited notch/band-pass/peak-equalizing filter, and an all-pass filter. The all-pass filters provide an opportunity for phase modulation effects.
 
 | Control Notes | T | R | |
 | - | - | - | - |
 | In 1-2 | I | A | Incoming stereo signal |
-| CTO 1-2 | R | U | Cutoff frequency with a maximum value of 20000 Hz |
-| CTO Slu | R | U | Amount of slew rate limiting applied to cutoff frequency changes |
-| Res 1-2 | R | U | Resonance |
-| Oct 1-2 | R | U | Adjusts the cutoff frequency by Octave intervals |
-| Mod | R | U | Acts as a global cutoff control by adjusting the amount of the Octave Controls are applied to the slewed filter Cutoff Frequency |
+| FC0 1-2 | R | U | Filter center frequency for all modes |
+| Res/BW 1-2 | R | U | Switches between a resonance and bandwidth control based on the current mode |
+| Mode 1-2 | R | U | Switches between modes |
 
 | Output Notes | |
 | - | - |
-| Sig L-R | Fitered stereo signal  |
+| Sig 1-2 | Fitered signal |
 
 ## GP - Granular Processor
 
