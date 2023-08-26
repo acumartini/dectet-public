@@ -480,30 +480,45 @@ flowchart TD
   subgraph CQ
     subgraph CQ_IN[IN]
       direction LR
-        CQ_IN_Down[Down]
-        CQ_IN_Up[Up]
-        CQ_IN_Right[Right]
-        CQ_IN_Left[Left]
-        CQ_IN_Forwrd[Forwrd]
-        CQ_IN_Back[Back]
-        CQ_IN_Hold[Hold]
-        CQ_IN_Pause[Pause]
-        CQ_IN_Set[Set]
-        CQ_IN_Reset[Reset]
-        CQ_IN_PulseW[Pulse W]
-        CQ_IN_Z[Z 1-5]
-        CQ_IN_BinScal[BinScal]
-        CQ_IN_Root[Root]
-        CQ_IN_Spread[Spread]
-        CQ_IN_MagDif[MagDif]
-        CQ_IN_RndN[Rnd N]
-        CQ_IN_RndM[Rnd M]
-        CQ_IN_Depth[Depth]
-        CQ_IN_NumPly[NumPly]
-        CQ_IN_Hold[Hold 1-10]
-        CQ_IN_Prob[Prob 1-10]
-        CQ_IN_Mag[Mag 1-10]
-        CQ_IN_SigZ[SigZ1-5 1-10]
+        subgraph CQ_IN_Navigation[Navigation]
+          direction LR
+            CQ_IN_Down[Down]
+            CQ_IN_Up[Up]
+            CQ_IN_Right[Right]
+            CQ_IN_Left[Left]
+            CQ_IN_Forwrd[Forwrd]
+            CQ_IN_Back[Back]
+        end
+        subgraph CQ_IN_SeqControl[Sequence]
+          direction LR
+            CQ_IN_Hold[Hold]
+            CQ_IN_Pause[Pause]
+            CQ_IN_Set[Set]
+            CQ_IN_Reset[Reset]
+            CQ_IN_Z[Z 1-5]
+            CQ_IN_Prob[Prob 1-10]
+        end
+        subgraph CQ_IN_Quantization[Quantization]
+          direction LR
+            CQ_IN_BinScal[BinScal]
+            CQ_IN_Root[Root]
+            CQ_IN_Spread[Spread]
+            CQ_IN_RndN[Rnd N]
+            CQ_IN_SigZ[SigZ1-5 1-10]
+        end
+        subgraph CQ_IN_Dynamics[Dynamics]
+          direction LR
+            CQ_IN_MagDif[MagDif]
+            CQ_IN_RndM[Rnd M]
+            CQ_IN_Mag[Mag 1-10]
+        end
+        subgraph CQ_IN_GateControl[Gate/Polyphony]
+          direction LR
+            CQ_IN_PulseW[Pulse W]
+            CQ_IN_HoldGate[Hold 1-10]
+            CQ_IN_Depth[Depth]
+            CQ_IN_NumPly[NumPly]
+        end
     end
     subgraph CQ_OUT[OUT]
       direction LR
@@ -604,13 +619,19 @@ flowchart TD
   subgraph DV
     subgraph DV_IN[IN]
       direction LR
-        DV_IN_Clock[Clock 1-5]
-        DV_IN_Mult[Mult 1-5]
-        DV_IN_EStep[EStep 1-5]
-        DV_IN_EDiv[EDiv 1-5]
-        DV_IN_Rot[Rot 1-5]
-        DV_IN_Prob[Prob 1-5]
-        DV_IN_ChainL[ChainL]
+        subgraph CQ_IN_Rate[Rate]
+          direction LR
+            DV_IN_Clock[Clock 1-5]
+            DV_IN_Mult[Mult 1-5]
+        end
+        subgraph CQ_IN_Rhythm[Rhythm]
+          direction LR
+            DV_IN_EStep[EStep 1-5]
+            DV_IN_EDiv[EDiv 1-5]
+            DV_IN_Rot[Rot 1-5]
+            DV_IN_Prob[Prob 1-5]
+            DV_IN_ChainL[ChainL]
+        end
     end
     subgraph DV_OUT[OUT]
       direction LR
@@ -650,10 +671,13 @@ flowchart TD
       direction LR
         EV_IN_In[In 1-10]
         EV_IN_Trig[Trig 1-10]
-        EV_IN_A[A 1-10]
-        EV_IN_D[D 1-10]
-        EV_IN_S[S 1-10]
-        EV_IN_R[R 1-10]
+        subgraph CQ_IN_Shape[Shape]
+          direction LR
+            EV_IN_A[A 1-10]
+            EV_IN_D[D 1-10]
+            EV_IN_S[S 1-10]
+            EV_IN_R[R 1-10]
+        end
     end
     subgraph EV_OUT[OUT]
       direction LR
@@ -841,13 +865,22 @@ flowchart TD
   subgraph LO
     subgraph LO_IN[IN]
       direction LR
-        LO_IN_Freq[Freq 1-5]
-        LO_IN_Clock[Clock 1-5]
-        LO_IN_Phaz[Phaz 1-5]
-        LO_IN_Attn[Attn 1-5]
-        LO_IN_Offst[Offst 1-5]
-        LO_IN_Sync[Sync 1-5]
-        LO_IN_SyncTrg[SyncTrg]
+        subgraph LO_IN_Rate[Rate]
+          direction LR
+            LO_IN_Freq[Freq 1-5]
+            LO_IN_Clock[Clock 1-5]
+        end
+        subgraph LO_IN_Position[Position]
+          direction LR
+            LO_IN_Attn[Attn 1-5]
+            LO_IN_Offst[Offst 1-5]
+        end
+        subgraph LO_IN_Alignment[Alignment]
+          direction LR
+            LO_IN_Phaz[Phaz 1-5]
+            LO_IN_Sync[Sync 1-5]
+            LO_IN_SyncTrg[SyncTrg]
+        end
     end
     subgraph LO_OUT[OUT]
       direction LR
@@ -1082,20 +1115,35 @@ flowchart TD
   subgraph OS
     subgraph OS_IN[IN]
       direction LR
-        OS_IN_Freq[Freq 1-10]
-        OS_IN_Voct[V/Oct 1-10]
+        subgraph OS_IN_Tune[Tune]
+          direction LR
+            OS_IN_Freq[Freq 1-10]
+            OS_IN_Voct[V/Oct 1-10]
+        end
+        subgraph OS_IN_Shape[Shape]
+          direction LR
+            OS_IN_Wave[Wave 1-10]
+            OS_IN_BLEP[BLEP]
+        end
+        subgraph OS_IN_Modulation[Modulation]
+          direction LR
+            OS_IN_FM[FM 1-10]
+            OS_IN_FMD[FM D 1-10]
+            OS_IN_AM[AM 1-10]
+            OS_IN_AMP[AM % 1-10]
+        end
+        subgraph OS_IN_Alignment[Alignment]
+          direction LR
+            OS_IN_Phaz[Phaz 1-10]
+            OS_IN_Sync[Sync 1-10]
+            OS_IN_SyncTrg[SyncTrg]
+        end
         OS_IN_Mag[Mag 1-10]
-        OS_IN_Wave[Wave 1-10]
-        OS_IN_Phaz[Phaz 1-10]
-        OS_IN_FM[FM 1-10]
-        OS_IN_FMD[FM D 1-10]
-        OS_IN_AM[AM 1-10]
-        OS_IN_AMP[AM % 1-10]
-        OS_IN_Sync[Sync 1-10]
-        OS_IN_SyncTrg[SyncTrg]
-        OS_IN_AuxIn[AuxIn]
-        OS_IN_AuxLev[AuxLev]
-        OS_IN_BLEP[BLEP]
+        subgraph OS_IN_AuxMix[External]
+          direction LR
+            OS_IN_AuxIn[AuxIn]
+            OS_IN_AuxLev[AuxLev]
+        end
     end
     subgraph OS_OUT[OUT]
       direction LR
@@ -1363,7 +1411,7 @@ Quickstart:
 
 ```mermaid
 flowchart LR
-  subgraph IO
+  subgraph IO[<a href='#io\-\-\-inputoutput'>IO</a>]
     subgraph IO_IN[IN]
       direction LR
         IO_IN_O[O 1-8]
