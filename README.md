@@ -1412,7 +1412,7 @@ Quickstart:
 
 ```mermaid
 flowchart LR
-  subgraph IO[<a href='./README.md##io-inputoutput'>IO</a>]
+  subgraph IO[<a href='https://github.com/acumartini/dectet-public/tree/main#io-inputoutput'>IO</a>]
     subgraph IO_IN[IN]
       direction LR
         IO_IN_O[O 1-8]
@@ -1422,19 +1422,19 @@ flowchart LR
         IO_OUT_I[I 1-6]
     end
   end
-  subgraph FL[<a href='./USER_MANUAL.md##fl-envelope-follower'>FL</a>]
+  subgraph FL[<a href='https://github.com/acumartini/dectet-public/tree/main#fl-envelope-follower'>FL</a>]
     subgraph FL_IN[IN]
       direction LR
         FL_IN_In[In 1-2]
     end
   end
-  subgraph CK[<a href='./USER_MANUAL.md##ck-clock'>CK</a>]
+  subgraph CK[<a href='https://github.com/acumartini/dectet-public/tree/main#ck-clock'>CK</a>]
     subgraph CK_OUT[OUT]
       direction LR
         CK_OUT_Gate[Gate]
     end
   end
-  subgraph DV[<a href='./USER_MANUAL.md##dv-euclidean-clock-divider'>DV</a>]
+  subgraph DV[<a href='https://github.com/acumartini/dectet-public/tree/main#dv-euclidean-clock-divider'>DV</a>]
     subgraph DV_IN[IN]
       direction LR
         DV_IN_Clock[Clock 1-5]
@@ -1444,7 +1444,7 @@ flowchart LR
         DV_OUT_EucR[EucR 1-5]
     end
   end
-  subgraph CQ[<a href='./USER_MANUAL.md##cq-cartesian-sequencer'>CQ</a>]
+  subgraph CQ[<a href='https://github.com/acumartini/dectet-public/tree/main#cq-cartesian-sequencer'>CQ</a>]
     subgraph CQ_IN[IN]
       direction LR
         CQ_IN_Down[Down]
@@ -1458,7 +1458,7 @@ flowchart LR
         CQ_OUT_Gate[Gate 1-10]
     end
   end
-  subgraph OS[<a href='./USER_MANUAL.md##os-oscillator'>OS</a>]
+  subgraph OS[<a href='https://github.com/acumartini/dectet-public/tree/main#os-oscillator'>OS</a>]
     subgraph OS_IN[IN]
       direction LR
         OS_IN_Voct[V/Oct 1-10]
@@ -1469,7 +1469,7 @@ flowchart LR
         OS_OUT_OSC[OSC 1-10]
     end
   end
-  subgraph EV[<a href='./USER_MANUAL.md##ev-envelope-generator--vca'>EV</a>]
+  subgraph EV[<a href='https://github.com/acumartini/dectet-public/tree/main#ev-envelope-generator--vca'>EV</a>]
     subgraph EV_IN[IN]
       direction LR
         EV_IN_In[In 1-10]
@@ -1480,7 +1480,7 @@ flowchart LR
         EV_OUT_EnvS[EnvS 1-10]
     end
   end
-  subgraph MX[<a href='./USER_MANUAL.md##mx-mixer'>MX</a>]
+  subgraph MX[<a href='https://github.com/acumartini/dectet-public/tree/main#mx-mixer'>MX</a>]
     subgraph MX_IN[IN]
       direction LR
         MX_IN_In[In 1-10]
@@ -1563,7 +1563,7 @@ Quickstart:
 
 ```mermaid
 flowchart LR
-  subgraph IO[<a href='./USER_MANUAL.md##io--inputoutput'>IO</a>]
+  subgraph IO[<a href='https://github.com/acumartini/dectet-public/tree/main#io--inputoutput'>IO</a>]
     subgraph IO_IN[IN]
       direction LR
         IO_IN_O[O 1-8]
@@ -1573,20 +1573,20 @@ flowchart LR
         IO_OUT_I[I 1/2]
     end
   end
-  subgraph FL[<a href='./USER_MANUAL.md##fl-envelope-follower'>FL</a>]
+  subgraph FL[<a href='https://github.com/acumartini/dectet-public/tree/main#fl-envelope-follower'>FL</a>]
     subgraph FL_IN[IN]
       direction LR
         FL_IN_In[In 1-2]
     end
   end
-  subgraph LO[<a href='./USER_MANUAL.md##lo-low-frequency-oscillator'>LO</a>]
+  subgraph LO[<a href='https://github.com/acumartini/dectet-public/tree/main#lo-low-frequency-oscillator'>LO</a>]
     subgraph LO_OUT[OUT]
       direction LR
         LO_OUT_Sin[Sin 1-5]
         LO_OUT_Squr[Squr 1-5]
     end
   end
-  subgraph NN[<a href='./USER_MANUAL.md##nn-deep-neural-network'>NN</a>]
+  subgraph NN[<a href='https://github.com/acumartini/dectet-public/tree/main#nn-deep-neural-network'>NN</a>]
     subgraph NN_IN[IN]
       direction LR
         NN_IN_Feat[Feat 1-5]
@@ -1597,7 +1597,7 @@ flowchart LR
         NN_OUT_Pred[Pred 1-5]
     end
   end
-  subgraph AT[<a href='./USER_MANUAL.md##at-attenuate'>AT</a>]
+  subgraph AT[<a href='https://github.com/acumartini/dectet-public/tree/main#at-attenuate'>AT</a>]
     subgraph AT_IN[IN]
       direction LR
         AT_IN_In[In 1-10]
@@ -1657,7 +1657,7 @@ Quickstart:
 
 ```mermaid
 flowchart LR
-  subgraph IO[<a href='./USER_MANUAL.md##io-inputoutput'>IO</a>]
+  subgraph IO[<a href='https://github.com/acumartini/dectet-public/tree/main#io-inputoutput'>IO</a>]
     subgraph IO_IN[IN]
       direction LR
         IO_IN_O1[O 1/2/3]
@@ -1668,19 +1668,19 @@ flowchart LR
         IO_OUT_I[I 1/2]
     end
   end
-  subgraph FL[<a href='./USER_MANUAL.md##fl-envelope-follower'>FL</a>]
+  subgraph FL[<a href='https://github.com/acumartini/dectet-public/tree/main#fl-envelope-follower'>FL</a>]
     subgraph FL_IN[IN]
       direction LR
         FL_IN_In[In 1/2]
     end
   end
-  subgraph CK[<a href='./USER_MANUAL.md##ck-clock'>CK</a>]
+  subgraph CK[<a href='https://github.com/acumartini/dectet-public/tree/main#ck-clock'>CK</a>]
     subgraph CK_OUT[OUT]
       direction LR
         CK_OUT_Gate[Gate]
     end
   end
-  subgraph DV[<a href='./USER_MANUAL.md##dv-euclidean-clock-divider'>DV</a>]
+  subgraph DV[<a href='https://github.com/acumartini/dectet-public/tree/main#dv-euclidean-clock-divider'>DV</a>]
     subgraph DV_IN[IN]
       direction LR
         DV_IN_Clock[Clock 1-5]
@@ -1691,7 +1691,7 @@ flowchart LR
         DV_OUT_EucR2[EucR 3/4/5]
     end
   end
-  subgraph CQ1[<a href='./USER_MANUAL.md##cq-cartesian-sequencer'>CQ1</a>]
+  subgraph CQ1[<a href='https://github.com/acumartini/dectet-public/tree/main#cq-cartesian-sequencer'>CQ1</a>]
     subgraph CQ1_IN[IN]
       direction LR
         CQ1_IN_Down[Down]
@@ -1705,7 +1705,7 @@ flowchart LR
         CQ1_OUT_Gate[GlbG]
     end
   end
-  subgraph CQ2[<a href='./USER_MANUAL.md##cq-cartesian-sequencer'>CQ2</a>]
+  subgraph CQ2[<a href='https://github.com/acumartini/dectet-public/tree/main#cq-cartesian-sequencer'>CQ2</a>]
     subgraph CQ2_IN[IN]
       direction LR
         CQ2_IN_Down[Down]
@@ -1719,7 +1719,7 @@ flowchart LR
         CQ2_OUT_Gate[GlbG]
     end
   end
-  subgraph EV[<a href='./USER_MANUAL.md##ev-envelope-generator--vca'>EV</a>]
+  subgraph EV[<a href='https://github.com/acumartini/dectet-public/tree/main#ev-envelope-generator--vca'>EV</a>]
     subgraph EV_IN[IN]
       direction LR
         EV_IN_Trig[Trig 1-5]
@@ -1775,7 +1775,7 @@ Quickstart:
 
 ```mermaid
 flowchart LR
-  subgraph IO[<a href='./USER_MANUAL.md##io-inputoutput'>IO</a>]
+  subgraph IO[<a href='https://github.com/acumartini/dectet-public/tree/main#io-inputoutput'>IO</a>]
     subgraph IO_IN[IN]
       direction LR
         IO_IN_O1[O 1/2/3/4]
@@ -1786,19 +1786,19 @@ flowchart LR
         IO_OUT_I[I 1/2]
     end
   end
-  subgraph FL[<a href='./USER_MANUAL.md##fl-envelope-follower'>FL</a>]
+  subgraph FL[<a href='https://github.com/acumartini/dectet-public/tree/main#fl-envelope-follower'>FL</a>]
     subgraph FL_IN[IN]
       direction LR
         FL_IN_In[In 1/2]
     end
   end
-  subgraph CK[<a href='./USER_MANUAL.md##ck-clock'>CK</a>]
+  subgraph CK[<a href='https://github.com/acumartini/dectet-public/tree/main#ck-clock'>CK</a>]
     subgraph CK_OUT[OUT]
       direction LR
         CK_OUT_Gate[Gate]
     end
   end
-  subgraph DV[<a href='./USER_MANUAL.md##dv-euclidean-clock-divider'>DV</a>]
+  subgraph DV[<a href='https://github.com/acumartini/dectet-public/tree/main#dv-euclidean-clock-divider'>DV</a>]
     subgraph DV_IN[IN]
       direction LR
         DV_IN_Clock[Clock 1-5]
@@ -1809,7 +1809,7 @@ flowchart LR
         DV_OUT_EucR2[EucR 2]
     end
   end
-  subgraph SQ1[<a href='./USER_MANUAL.md##sq-binary-step-sequencer'>SQ1</a>]
+  subgraph SQ1[<a href='https://github.com/acumartini/dectet-public/tree/main#sq-binary-step-sequencer'>SQ1</a>]
     subgraph SQ1_IN[IN]
       direction LR
         SQ1_IN_Step[Step]
@@ -1822,7 +1822,7 @@ flowchart LR
         SQ1_OUT_D2V0[D2 V/O]
     end
   end
-  subgraph SQ2[<a href='./USER_MANUAL.md##sq-binary-step-sequencer'>SQ2</a>]
+  subgraph SQ2[<a href='https://github.com/acumartini/dectet-public/tree/main#sq-binary-step-sequencer'>SQ2</a>]
     subgraph SQ2_IN[IN]
       direction LR
         SQ2_IN_Step[Step]
@@ -1835,7 +1835,7 @@ flowchart LR
         SQ2_OUT_D2V0[D2 V/O]
     end
   end
-  subgraph EV[<a href='./USER_MANUAL.md##ev-envelope-generator--vca'>EV</a>]
+  subgraph EV[<a href='https://github.com/acumartini/dectet-public/tree/main#ev-envelope-generator--vca'>EV</a>]
     subgraph EV_IN[IN]
       direction LR
         EV_IN_Trig[Trig 1/2]
@@ -2050,7 +2050,7 @@ Quickstart:
 
 ```mermaid
 flowchart LR
-  subgraph IO[<a href='./USER_MANUAL.md#io-inputoutput'>IO</a>]
+  subgraph IO[<a href='./USER_MANUAL.mdio-inputoutput'>IO</a>]
     subgraph IO_IN[IN]
       direction LR
         IO_IN_O[O 1-8]
@@ -2060,19 +2060,19 @@ flowchart LR
         IO_OUT_I[I 1-6]
     end
   end
-  subgraph FL[<a href='./USER_MANUAL.md##fl-envelope-follower'>FL</a>]
+  subgraph FL[<a href='https://github.com/acumartini/dectet-public/tree/main#fl-envelope-follower'>FL</a>]
     subgraph FL_IN[IN]
       direction LR
         FL_IN_In[In 1-2]
     end
   end
-  subgraph CK[<a href='./USER_MANUAL.md##ck-clock'>CK</a>]
+  subgraph CK[<a href='https://github.com/acumartini/dectet-public/tree/main#ck-clock'>CK</a>]
     subgraph CK_OUT[OUT]
       direction LR
         CK_OUT_Gate[Gate]
     end
   end
-  subgraph SQ[<a href='./USER_MANUAL.md##sq-binary-step-sequencer'>SQ</a>]
+  subgraph SQ[<a href='https://github.com/acumartini/dectet-public/tree/main#sq-binary-step-sequencer'>SQ</a>]
     subgraph SQ_IN[IN]
       direction LR
         SQ_IN_Step[Step]
@@ -2084,7 +2084,7 @@ flowchart LR
         SQ_OUT_Gate[Gate 1-10]
     end
   end
-  subgraph OS[<a href='./USER_MANUAL.md##os-oscillator'>OS</a>]
+  subgraph OS[<a href='https://github.com/acumartini/dectet-public/tree/main#os-oscillator'>OS</a>]
     subgraph OS_IN[IN]
       direction LR
         OS_IN_Voct[V/Oct 1-10]
@@ -2095,7 +2095,7 @@ flowchart LR
         OS_OUT_OSC[OSC 1-10]
     end
   end
-  subgraph EV[<a href='./USER_MANUAL.md##ev-envelope-generator--vca'>EV</a>]
+  subgraph EV[<a href='https://github.com/acumartini/dectet-public/tree/main#ev-envelope-generator--vca'>EV</a>]
     subgraph EV_IN[IN]
       direction LR
         EV_IN_In[In 1-10]
@@ -2106,7 +2106,7 @@ flowchart LR
         EV_OUT_EnvS[EnvS 1-10]
     end
   end
-  subgraph MX[<a href='./USER_MANUAL.md##mx-mixer'>MX</a>]
+  subgraph MX[<a href='https://github.com/acumartini/dectet-public/tree/main#mx-mixer'>MX</a>]
     subgraph MX_IN[IN]
       direction LR
         MX_IN_In[In 1-10]
