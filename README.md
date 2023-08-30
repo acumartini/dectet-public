@@ -1412,7 +1412,7 @@ Quickstart:
 
 ```mermaid
 flowchart LR
-  subgraph IO[<a href='#io-inputoutput'>IO</a>]
+  subgraph IO[<a href='./USER_MANUAL.md#io-inputoutput'>IO</a>]
     subgraph IO_IN[IN]
       direction LR
         IO_IN_O[O 1-8]
@@ -1422,19 +1422,19 @@ flowchart LR
         IO_OUT_I[I 1-6]
     end
   end
-  subgraph FL[<a href='#fl-envelope-follower'>FL</a>]
+  subgraph FL[<a href='./USER_MANUAL.md#fl-envelope-follower'>FL</a>]
     subgraph FL_IN[IN]
       direction LR
         FL_IN_In[In 1-2]
     end
   end
-  subgraph CK[<a href='#ck-clock'>CK</a>]
+  subgraph CK[<a href='./USER_MANUAL.md#ck-clock'>CK</a>]
     subgraph CK_OUT[OUT]
       direction LR
         CK_OUT_Gate[Gate]
     end
   end
-  subgraph DV[<a href='#dv-euclidean-clock-divider'>DV</a>]
+  subgraph DV[<a href='./USER_MANUAL.md#dv-euclidean-clock-divider'>DV</a>]
     subgraph DV_IN[IN]
       direction LR
         DV_IN_Clock[Clock 1-5]
@@ -1444,7 +1444,7 @@ flowchart LR
         DV_OUT_EucR[EucR 1-5]
     end
   end
-  subgraph CQ[<a href='#cq-cartesian-sequencer'>CQ</a>]
+  subgraph CQ[<a href='./USER_MANUAL.md#cq-cartesian-sequencer'>CQ</a>]
     subgraph CQ_IN[IN]
       direction LR
         CQ_IN_Down[Down]
@@ -1458,7 +1458,7 @@ flowchart LR
         CQ_OUT_Gate[Gate 1-10]
     end
   end
-  subgraph OS[<a href='#os-oscillator'>OS</a>]
+  subgraph OS[<a href='./USER_MANUAL.md#os-oscillator'>OS</a>]
     subgraph OS_IN[IN]
       direction LR
         OS_IN_Voct[V/Oct 1-10]
@@ -1469,7 +1469,7 @@ flowchart LR
         OS_OUT_OSC[OSC 1-10]
     end
   end
-  subgraph EV[<a href='#ev-envelope-generator--vca'>EV</a>]
+  subgraph EV[<a href='./USER_MANUAL.md#ev-envelope-generator--vca'>EV</a>]
     subgraph EV_IN[IN]
       direction LR
         EV_IN_In[In 1-10]
@@ -1480,7 +1480,7 @@ flowchart LR
         EV_OUT_EnvS[EnvS 1-10]
     end
   end
-  subgraph MX[<a href='#mx-mixer'>MX</a>]
+  subgraph MX[<a href='./USER_MANUAL.md#mx-mixer'>MX</a>]
     subgraph MX_IN[IN]
       direction LR
         MX_IN_In[In 1-10]
@@ -1513,13 +1513,6 @@ IO-->EXT_OUT_Jack
 style EXT_In_Jack fill:#000
 style EXT_OUT_Jack fill:#fff
 ```
-
-| Patch Notes |
-| - |
-| To externally clock the rack consider patching the CK Tap Control, or individually patch the DV modules’ Clock 1/2/3 Controls |
-| The DV modules euclidean Outputs 1/2/3 are patched to the Cartesian Sequencer’s Down/Right/Forward Controls |
-| EV is gated by incoming CQ gates and is normalized to shape OS signals |
-| Stereo output is normalized to IO Controls `O 1-2 JK` |
 
 ### Cartesian Sequencer - Controller Interface
 
@@ -1570,7 +1563,7 @@ Quickstart:
 
 ```mermaid
 flowchart LR
-  subgraph IO[<a href='#io--inputoutput'>IO</a>]
+  subgraph IO[<a href='./USER_MANUAL.md#io--inputoutput'>IO</a>]
     subgraph IO_IN[IN]
       direction LR
         IO_IN_O[O 1-8]
@@ -1580,20 +1573,20 @@ flowchart LR
         IO_OUT_I[I 1/2]
     end
   end
-  subgraph FL[<a href='#fl-envelope-follower'>FL</a>]
+  subgraph FL[<a href='./USER_MANUAL.md#fl-envelope-follower'>FL</a>]
     subgraph FL_IN[IN]
       direction LR
         FL_IN_In[In 1-2]
     end
   end
-  subgraph LO[<a href='#lo-low-frequency-oscillator'>LO</a>]
+  subgraph LO[<a href='./USER_MANUAL.md#lo-low-frequency-oscillator'>LO</a>]
     subgraph LO_OUT[OUT]
       direction LR
         LO_OUT_Sin[Sin 1-5]
         LO_OUT_Squr[Squr 1-5]
     end
   end
-  subgraph NN[<a href='#nn-deep-neural-network'>NN</a>]
+  subgraph NN[<a href='./USER_MANUAL.md#nn-deep-neural-network'>NN</a>]
     subgraph NN_IN[IN]
       direction LR
         NN_IN_Feat[Feat 1-5]
@@ -1604,7 +1597,7 @@ flowchart LR
         NN_OUT_Pred[Pred 1-5]
     end
   end
-  subgraph AT[<a href='#at-attenuate'>AT</a>]
+  subgraph AT[<a href='./USER_MANUAL.md#at-attenuate'>AT</a>]
     subgraph AT_IN[IN]
       direction LR
         AT_IN_In[In 1-10]
@@ -1631,12 +1624,6 @@ style EXT_In_Jack fill:#000
 style EXT_OUT_Jack fill:#fff
 ```
 
-| Patch Notes |
-| - |
-| The LO sine outputs are patched to the NN Feat Controls and the LO gate outputs are patched to the NN Train Controls. Setting varied LFO rates and enabling the Train Control will learn relationships between the frequencies and their corresponding gates. Adjusting the LO rates can create polyrhythms, but keep in mind that signals may need attenuation and offset applied to properly trigger modules downstream |
-| Consider patching the LFOs to modulate each other to strongly correlate relationships between LFOs in the model |
-| NN outputs 1-5 are normalized to the IO `O 1-5 JK` Controls |
-
 ## Drone
 
 The Drone rack pairs the OS module with the NZ and LO modulation sources to take full advantage of OSC’s complex patch environment. The CQ module provides a controller interface for playability and quantized sequencing for composition.
@@ -1658,11 +1645,19 @@ flowchart TD
 
 ## Dual Cartesian Sequencer
 
-The Dual Cartesian Sequencer rack contains clock generator/modulation utilities and two Cartesian Sequencer modules for driving external sound sources. The controller interface is not included in this Rack to avoid confusion over which sequencer is being modified. The NZ and LO modules provide supporting modulation.
+The Dual Cartesian Sequencer rack contains clock generator/modulation utilities and two Cartesian Sequencer modules for driving external sound sources. The NZ module provides supporting modulation and the EV module enables envelope output as apposed, or in addition, to gates.
+
+Quickstart:
+- patch the external outputs 1/2/3 (CQ1 GlbV/O, GlbMag and GlbG) and 5/6/7 (CQ2 GlbV/O, GlbMag and GlbG) to your modular rig as desired. Pairing a Voice module controled by the V/Oct and Mag with a Drum module contoled by the Gate and the mult'd Mag can be interesting. There is always the traditional voice with a VCA controled by a gate triggered envelope, however, when lacking an external envelope module the EV `EnvS` Outputs (CQ1/2 GlbG normalized to channels 1/2 respectively) can be used to shape your voice through a VCA
+- adjust the DV `Mult` Controls and/or adjust the `EStep` and `EDiv` Controls to create polyrhythms until you are happy with the rythmic patterns
+- to create space for faster rythms, adjust the CQ `Pulse W` and `Prob` Controls (and/or the DV `Prob` Controls)
+- to enable melodic variation adjust the `Root` and `BinScal` Controls and press the `Rnd N` Control until you are happy with the melody. See the [Cartesian Sequencer Rack](#cartesian-sequencer) Quickstart for details on how to create intentional chord changes
+- use the `Rnd M` Control (or adjust `Mag` Controls manually) to enable dynamic variation
+- consider patching depth specific outputs to the two remaining external outputs to enable periodic modulation as the sequences run through the Z planes
 
 ```mermaid
 flowchart LR
-  subgraph IO[<a href='#io-inputoutput'>IO</a>]
+  subgraph IO[<a href='./USER_MANUAL.md#io-inputoutput'>IO</a>]
     subgraph IO_IN[IN]
       direction LR
         IO_IN_O1[O 1/2/3]
@@ -1673,19 +1668,19 @@ flowchart LR
         IO_OUT_I[I 1/2]
     end
   end
-  subgraph FL[<a href='#fl-envelope-follower'>FL</a>]
+  subgraph FL[<a href='./USER_MANUAL.md#fl-envelope-follower'>FL</a>]
     subgraph FL_IN[IN]
       direction LR
         FL_IN_In[In 1/2]
     end
   end
-  subgraph CK[<a href='#ck-clock'>CK</a>]
+  subgraph CK[<a href='./USER_MANUAL.md#ck-clock'>CK</a>]
     subgraph CK_OUT[OUT]
       direction LR
         CK_OUT_Gate[Gate]
     end
   end
-  subgraph DV[<a href='#dv-euclidean-clock-divider'>DV</a>]
+  subgraph DV[<a href='./USER_MANUAL.md#dv-euclidean-clock-divider'>DV</a>]
     subgraph DV_IN[IN]
       direction LR
         DV_IN_Clock[Clock 1-5]
@@ -1693,10 +1688,10 @@ flowchart LR
     subgraph DV_OUT[OUT]
       direction LR
         DV_OUT_EucR1[EucR 1/2/3]
-        DV_OUT_EucR2[EucR 5/6/7]
+        DV_OUT_EucR2[EucR 3/4/5]
     end
   end
-  subgraph CQ1[<a href='#cq-cartesian-sequencer'>CQ1</a>]
+  subgraph CQ1[<a href='./USER_MANUAL.md#cq-cartesian-sequencer'>CQ1</a>]
     subgraph CQ1_IN[IN]
       direction LR
         CQ1_IN_Down[Down]
@@ -1710,7 +1705,7 @@ flowchart LR
         CQ1_OUT_Gate[GlbG]
     end
   end
-  subgraph CQ2[<a href='#cq-cartesian-sequencer'>CQ2</a>]
+  subgraph CQ2[<a href='./USER_MANUAL.md#cq-cartesian-sequencer'>CQ2</a>]
     subgraph CQ2_IN[IN]
       direction LR
         CQ2_IN_Down[Down]
@@ -1722,6 +1717,12 @@ flowchart LR
         CQ2_OUT_VOct[GlbV/O]
         CQ2_OUT_Mag[GlbMag]
         CQ2_OUT_Gate[GlbG]
+    end
+  end
+  subgraph EV[<a href='./USER_MANUAL.md#ev-envelope-generator--vca'>EV</a>]
+    subgraph EV_IN[IN]
+      direction LR
+        EV_IN_Trig[Trig 1-5]
     end
   end
   subgraph EXT_IN[EXT IN]
@@ -1741,6 +1742,8 @@ DV_OUT_EucR1-->CQ1_IN_Right
 DV_OUT_EucR2-->CQ2_IN_Right
 DV_OUT_EucR1-->CQ1_IN_Forwrd
 DV_OUT_EucR2-->CQ2_IN_Forwrd
+DV_OUT_EucR1-->EV_IN_Trig
+DV_OUT_EucR2-->EV_IN_Trig
 CQ1_OUT_VOct-->IO_IN_O1
 CQ1_OUT_Mag-->IO_IN_O1
 CQ1_OUT_Gate-->IO_IN_O1
@@ -1754,24 +1757,25 @@ style EXT_OUT_Jack1 fill:#fff
 style EXT_OUT_Jack2 fill:#fff
 ```
 
-| Patch Notes |
-| - |
-| The Controller Interface is mapped to the first CRT module |
-| The DV module is patched into the first CQ using Euclidean Outputs `EucR 1/2/3` and into the second CQ using Euclidean Outputs `EucR 3/4/5` |
-| Both SQ modules patch their global `GlbVO`, `GlbMag`, and `GlbG` outputs into the IO Controls `O 1-6 JK` |
-| Consider using one of the sequencers' `GlbVO` output to modulate the frequency of a LFO gate that is patched into the Ck `Tap` Control. It is possible to create interesting swing-like step patterns with this technique |
-
 ### Dual Cartesian Sequencer - Controller Interface
 
 The same controller interface for the [Cartesian Sequencer](#cartesian-sequencer) Rack is available here. As there are two CQ Modules in scope, the last one visited while in Module view is the one controlled by the interface.
 
 ## Dual Step Sequencer
 
-The Dual Binary Step Sequencer rack contains clock generator/modulation utilities and two Binary Step Sequencer modules for driving external sound sources. The controller interface is not included in this Rack to avoid confusion over which sequencer is being modified. The NZ and LO modules provide supporting modulation.
+The Dual Binary Step Sequencer rack contains clock generator/modulation utilities and two Binary Step Sequencer modules for driving external sound sources. The NZ module provides supporting modulation and the EV module enables envelope output as apposed, or in addition, to gates.
+
+Quickstart:
+- patch the external outputs 1/2/3 (SQ1 V/Oct, Mag and Gate) and 5/6/7 (SQ2 V/Oct, Mag and Gate) to your modular rig as desired. Pairing a Voice module controled by the V/Oct and Mag with a Drum module contoled by the Gate and the mult'd Mag can be interesting. There is always the traditional voice with a VCA controled by a gate triggered envelope, however, when lacking an external envelope module the EV `EnvS` Outputs (SQ1/2 Gates normalized to channels 1/2 respectively) can be used to shape your voice through a VCA
+- adjust the DV `Mult` Controls and/or adjust the `EStep` and `EDiv` Controls of DV channels 1/2 to create polyrhythms until you are happy with the rythmic patterns
+- to create space for faster rythms, adjust the SQ `Pulse W` and `Prob` Controls (and/or the DV `Prob` Controls)
+- to enable melodic variation adjust the `Root` and `BinScal` Controls and press the `Rnd N` Control until you are happy with the melody
+- use the `Rnd M` Control (or adjust `Mag` Controls manually) to enable dynamic variation
+- both SQ modules are normalized to a depth of 2 and the `D2 V/O` Output is patched to external outputs 4/8. Consider adding step triggers to steps that the depth 2 sequence pointer is covering (normalized with an offset of 25) and patching the various D2 outputs to add more voices and/or sequenced modulation
 
 ```mermaid
 flowchart LR
-  subgraph IO[<a href='#io-inputoutput'>IO</a>]
+  subgraph IO[<a href='./USER_MANUAL.md#io-inputoutput'>IO</a>]
     subgraph IO_IN[IN]
       direction LR
         IO_IN_O1[O 1/2/3/4]
@@ -1782,19 +1786,19 @@ flowchart LR
         IO_OUT_I[I 1/2]
     end
   end
-  subgraph FL[<a href='#fl-envelope-follower'>FL</a>]
+  subgraph FL[<a href='./USER_MANUAL.md#fl-envelope-follower'>FL</a>]
     subgraph FL_IN[IN]
       direction LR
         FL_IN_In[In 1/2]
     end
   end
-  subgraph CK[<a href='#ck-clock'>CK</a>]
+  subgraph CK[<a href='./USER_MANUAL.md#ck-clock'>CK</a>]
     subgraph CK_OUT[OUT]
       direction LR
         CK_OUT_Gate[Gate]
     end
   end
-  subgraph DV[<a href='#dv-euclidean-clock-divider'>DV</a>]
+  subgraph DV[<a href='./USER_MANUAL.md#dv-euclidean-clock-divider'>DV</a>]
     subgraph DV_IN[IN]
       direction LR
         DV_IN_Clock[Clock 1-5]
@@ -1805,7 +1809,7 @@ flowchart LR
         DV_OUT_EucR2[EucR 2]
     end
   end
-  subgraph SQ1[<a href='#sq-binary-step-sequencer'>SQ1</a>]
+  subgraph SQ1[<a href='./USER_MANUAL.md#sq-binary-step-sequencer'>SQ1</a>]
     subgraph SQ1_IN[IN]
       direction LR
         SQ1_IN_Step[Step]
@@ -1818,7 +1822,7 @@ flowchart LR
         SQ1_OUT_D2V0[D2 V/O]
     end
   end
-  subgraph SQ2[<a href='#sq-binary-step-sequencer'>SQ2</a>]
+  subgraph SQ2[<a href='./USER_MANUAL.md#sq-binary-step-sequencer'>SQ2</a>]
     subgraph SQ2_IN[IN]
       direction LR
         SQ2_IN_Step[Step]
@@ -1829,6 +1833,12 @@ flowchart LR
         SQ2_OUT_D1Mag[D1 Mag]
         SQ2_OUT_D1G[D1 G]
         SQ2_OUT_D2V0[D2 V/O]
+    end
+  end
+  subgraph EV[<a href='./USER_MANUAL.md#ev-envelope-generator--vca'>EV</a>]
+    subgraph EV_IN[IN]
+      direction LR
+        EV_IN_Trig[Trig 1/2]
     end
   end
   subgraph EXT_IN[EXT IN]
@@ -1843,7 +1853,9 @@ flowchart LR
 EXT_In_Jack-->IO_OUT_I-->FL_IN_In
 CK_OUT_Gate-->DV_IN_Clock
 DV_OUT_EucR1-->SQ1_IN_Step
+DV_OUT_EucR1-->EV_IN_Trig
 DV_OUT_EucR2-->SQ2_IN_Step
+DV_OUT_EucR2-->EV_IN_Trig
 SQ1_OUT_D1V0-->IO_IN_O1
 SQ1_OUT_D1Mag-->IO_IN_O1
 SQ1_OUT_D1G-->IO_IN_O1
@@ -1858,13 +1870,6 @@ style EXT_In_Jack fill:#000
 style EXT_OUT_Jack1 fill:#fff
 style EXT_OUT_Jack2 fill:#fff
 ```
-
-| Patch Notes |
-| - |
-| The Controller Interface is mapped to the first SQ module |
-| The DV module is patched into the first SQ using Euclidean Output `EucR 1` and into the second SQ using Euclidean Output `EucR 2` |
-| Both SQ modules patch their global `GlbVO`, `GlbMag`, and `GlbG` outputs into the IO Controls `O 1-6 JK` |
-| Consider using one of the sequencers' `GlbVO` output to modulate the frequency of a LFO gate that is patched into the CK `Tap` Control. While the LO `Freq` Input is not technically a V/Oct Control, It is still possible to create interesting swing-like step patterns with this technique |
 
 ### Dual Step Sequencer - Controller Interface
 
@@ -2037,9 +2042,15 @@ flowchart TD
 
 The Binary Step Sequencer with OSC rack combines a clock, binary step sequencer, and 10 OSCs with ADSR envelopes to produce complex and evolving polyphony. The NZ module provides supporting modulation.
 
+Quickstart:
+- adjust the DV `Mult` Controls and/or adjust the `EStep` and `EDiv` Controls to create polyrhythms until you are happy with the rythmic pattern
+- increase some of the EV `R` Controls to allow the voices to overlap and create polyphony
+- to create space for faster rythms, adjust the CQ `Pulse W` and `Prob` Controls
+- to enable melidic changes, disconnect the CQ `Forwd` Control and press `Z 1` to navigate to the first Z plane. Then adjust the `Root` and `BinScal` Controls and press the `Rnd N` Control until you are happy with the melody. Repeat this process for `Z 2/3/4/5`. Now reconnect the `Forwd` Control and adjust DV `Muolt 3` until you are happy with the speed of tranition between the chords defined by each Z plane melody
+
 ```mermaid
 flowchart LR
-  subgraph IO[<a href='#io-inputoutput'>IO</a>]
+  subgraph IO[<a href='./USER_MANUAL.md#io-inputoutput'>IO</a>]
     subgraph IO_IN[IN]
       direction LR
         IO_IN_O[O 1-8]
@@ -2049,19 +2060,19 @@ flowchart LR
         IO_OUT_I[I 1-6]
     end
   end
-  subgraph FL[<a href='#fl-envelope-follower'>FL</a>]
+  subgraph FL[<a href='./USER_MANUAL.md#fl-envelope-follower'>FL</a>]
     subgraph FL_IN[IN]
       direction LR
         FL_IN_In[In 1-2]
     end
   end
-  subgraph CK[<a href='#ck-clock'>CK</a>]
+  subgraph CK[<a href='./USER_MANUAL.md#ck-clock'>CK</a>]
     subgraph CK_OUT[OUT]
       direction LR
         CK_OUT_Gate[Gate]
     end
   end
-  subgraph SQ[<a href='#sq-binary-step-sequencer'>SQ</a>]
+  subgraph SQ[<a href='./USER_MANUAL.md#sq-binary-step-sequencer'>SQ</a>]
     subgraph SQ_IN[IN]
       direction LR
         SQ_IN_Step[Step]
@@ -2073,7 +2084,7 @@ flowchart LR
         SQ_OUT_Gate[Gate 1-10]
     end
   end
-  subgraph OS[<a href='#os-oscillator'>OS</a>]
+  subgraph OS[<a href='./USER_MANUAL.md#os-oscillator'>OS</a>]
     subgraph OS_IN[IN]
       direction LR
         OS_IN_Voct[V/Oct 1-10]
@@ -2084,7 +2095,7 @@ flowchart LR
         OS_OUT_OSC[OSC 1-10]
     end
   end
-  subgraph EV[<a href='#ev-envelope-generator--vca'>EV</a>]
+  subgraph EV[<a href='./USER_MANUAL.md#ev-envelope-generator--vca'>EV</a>]
     subgraph EV_IN[IN]
       direction LR
         EV_IN_In[In 1-10]
@@ -2095,7 +2106,7 @@ flowchart LR
         EV_OUT_EnvS[EnvS 1-10]
     end
   end
-  subgraph MX[<a href='#mx-mixer'>MX</a>]
+  subgraph MX[<a href='./USER_MANUAL.md#mx-mixer'>MX</a>]
     subgraph MX_IN[IN]
       direction LR
         MX_IN_In[In 1-10]
@@ -2126,17 +2137,10 @@ style EXT_In_Jack fill:#000
 style EXT_OUT_Jack fill:#fff
 ```
 
-| Patch Notes |
-| - |
-| To externally clock the rack consider patching the CK `Tap` Control, or patch the SQ module’s `Step` Control directly |
-| EV is gated by incoming SQ gates and is normalized to shape OS signals |
-| Stereo output is normalized to the IO `O 1/2 JK` Controls |
-
 ### Step Sequencer - Controller Interface
 
 The Step Sequencer Rack includes a playable controller interface with 50 pads used to control the [SQ](#step-sequencer) Module. Pressing a pad will switch the Step associated with that pad ON/OFF. Pressing and holding a pad plays that note along with the ongoing sequence and also sets the Root Control to the pressed Step’s pitch. The last pressed pad becomes the “active” pad (although there is currently no UI indication for this), which allows you to tune the pitch Control and its sensitivity using the encoder. The Pitch Controls for the pads you manipulate from the Controller Interface must be unpatched for this to work properly. The far left button in the top bar of the interface toggles between the values the `Mag` and `Prb` when pressed. When `Mag` is active (yellow), turning the encoder sets the `Mag` Control corresponding to the active Step. When the `Prb` switch is active (green), turning the encoder sets the `Prob` Control corresponding to the active Step. The magnitude/probability setting is reflected in the intensity of the yellow/green coloring of the active Step. Pressing and turning the encoder adjusts the pitch of the active Step.
 
-TODO: update image
 <img src="assets/modules.sq.controller_interface.1.png" width="750" />
 
 ## XYZ Drone
