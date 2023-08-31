@@ -2043,10 +2043,14 @@ flowchart TD
 The Binary Step Sequencer with OSC rack combines a clock, binary step sequencer, and 10 OSCs with ADSR envelopes to produce complex and evolving polyphony. The NZ module provides supporting modulation.
 
 Quickstart:
-- adjust the DV `Mult` Controls and/or adjust the `EStep` and `EDiv` Controls to create polyrhythms until you are happy with the rythmic pattern
+- adjust the CK `BPM` Control to get find a tempo you are like
 - increase some of the EV `R` Controls to allow the voices to overlap and create polyphony
-- to create space for faster rythms, adjust the CQ `Pulse W` and `Prob` Controls
-- to enable melidic changes, disconnect the CQ `Forwd` Control and press `Z 1` to navigate to the first Z plane. Then adjust the `Root` and `BinScal` Controls and press the `Rnd N` Control until you are happy with the melody. Repeat this process for `Z 2/3/4/5`. Now reconnect the `Forwd` Control and adjust DV `Muolt 3` until you are happy with the speed of tranition between the chords defined by each Z plane melody
+- navigate to the controller interface and add additional steps somewhat randomly (and sparingly) to allow the 5 depth pointers trigger multple notes per step creating a chordal melody
+- play with the SQ `Length` control until the looping melody settles into a pattern
+- to create space for faster rythms, adjust the SQ `Pulse W` and `Prob` Controls
+- to enable melidic changes, adjust the `Root` and `BinScal` Controls and press the `Rnd N` Control until you are happy with the melody
+- use the `Rnd M` Control to enable dynaic variation
+- reduce the `Depth` control to uncover more sparse variation on the core chordal melody
 
 ```mermaid
 flowchart LR
@@ -2139,7 +2143,7 @@ style EXT_OUT_Jack fill:#fff
 
 ### Step Sequencer - Controller Interface
 
-The Step Sequencer Rack includes a playable controller interface with 50 pads used to control the [SQ](#step-sequencer) Module. Pressing a pad will switch the Step associated with that pad ON/OFF. Pressing and holding a pad plays that note along with the ongoing sequence and also sets the Root Control to the pressed Step’s pitch. The last pressed pad becomes the “active” pad (although there is currently no UI indication for this), which allows you to tune the pitch Control and its sensitivity using the encoder. The Pitch Controls for the pads you manipulate from the Controller Interface must be unpatched for this to work properly. The far left button in the top bar of the interface toggles between the values the `Mag` and `Prb` when pressed. When `Mag` is active (yellow), turning the encoder sets the `Mag` Control corresponding to the active Step. When the `Prb` switch is active (green), turning the encoder sets the `Prob` Control corresponding to the active Step. The magnitude/probability setting is reflected in the intensity of the yellow/green coloring of the active Step. Pressing and turning the encoder adjusts the pitch of the active Step.
+The Step Sequencer Rack includes a playable controller interface with 50 pads used to control the [SQ](#step-sequencer) Module. Pressing a pad will switch the Step associated with that pad ON/OFF. Pressing and holding a pad plays that note along with the ongoing sequence and also sets the Root Control to the pressed Step’s pitch. The last pressed pad becomes the “active” pad, which allows you to tune the `Sig` Control by pressing and turing the encoder. The `Sig` Control for the pads you manipulate from the Controller Interface must be unpatched for this to work properly. The far left button in the top bar of the interface toggles between the values the `Mag` and `Prb` when pressed. When `Mag` is active (yellow), turning the encoder sets the `Mag` Control corresponding to the active Step. When the `Prb` switch is active (green), turning the encoder sets the `Prob` Control corresponding to the active Step. The magnitude/probability setting is reflected in the intensity of the yellow/green coloring of the active Step.
 
 <img src="assets/modules.sq.controller_interface.1.png" width="750" />
 
