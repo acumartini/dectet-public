@@ -1295,7 +1295,7 @@ The outputs are designed to control both the internal 10-voice OSC and external 
 
 A 6-channel In/Out USB Audio interface operating at 16-bit 48kHz. Channels 1/2 show up as Frost Left/Front Right on the PC because of the legacy Dolby USB channel configuration required for Windows machines to recognize the device as a valid Class I Type USB audio interface without the need for a custom device driver. The gain of USB inputs can be controlled by the USB host. Note that `JK` in the Control/Output names below is a `Hexnut` icon in the UI.
 
-IMPORTANT: The computer **must** be plugged into the device port when the device starts (or restarts) for Racks using this module, otherwise, the device will restart to the default Rack. Also, disconnecting and reconnecting to the USB device on the computer can cause the device to crash. For best performance, set up the input and output routing on your computer and leave them set for the duration of a session.
+IMPORTANT: The computer **must** be plugged into the USB-C device port when the device starts (or restarts) for Racks using this module, otherwise, the device will fail to boot and will reboot to the default Rack. Also, disconnecting and reconnecting to the USB device on the computer can cause the device to crash. Once recognized by your computer, it is recommended to set the input/output routing and leave them set for the duration of a session.
 
 | Control Notes | T | R | |
 | - | - | - | - |
