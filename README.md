@@ -1290,7 +1290,7 @@ Depth triggers are outputed to the x + d
 | Gate 1-10 | Step Gate |
 | D1-5 V/O | Sequence pointer step V/Octave (C4=0V)  |
 | D1-5 Mag | Sequence pointer step magnitude |
-| D1-5 6 | Sequence pointer step gate |
+| D1-5 G | Sequence pointer step gate |
 | D1-5 SG | Sequence pointer start gate triggered when the starting step is reached |
 
 ## UA: USB Audio Interface
