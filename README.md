@@ -1289,7 +1289,7 @@ The outputs are designed to control both the internal 10-voice OSC and external 
 | D1-5 V/O | Sequence pointer step V/Octave (C4=0V)  |
 | D1-5 Mag | Sequence pointer step magnitude |
 | D1-5 G | Sequence pointer step gate |
-| D1-5 SG | Sequence pointer start gate triggered when the starting step is reached |
+| D1-5 SG | Sequence pointer start gate triggered when the starting step is reached. Starting step state is maintained for each sequence pointer |
 
 ## UA: USB Audio Interface
 
