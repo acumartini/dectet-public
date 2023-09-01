@@ -1253,8 +1253,6 @@ This Step Sequencer can operate as a traditional linear sequencer with 50 indivi
 
 The outputs are designed to control both the internal 10-voice OSC and external systems. The 10 `V/Oct`, `Mag`, and `Gate` Outputs are mapped (round-robin) to the 50 steps with respect to the `NumPly` polyphony setting (output_index = x % NumPly). Depth pointers are mapped to outputs relative to the first depth pointer output index (depth_d_output_index = (x + d) % NumPly). The `D1-5 V/O`, `D1-5 Mag`, and `D1-5 G` Outputs track steps as they are triggered by each sequencer pointer such that only sequence pointers less than or equal to the `Depth` setting produce output.
 
-Depth triggers are outputed to the x + d  
-
 | Control Notes | T | R | |
 | - | - | - | - |
 | Step | B | A | Trigger a step forward/backward of the Stride amount depending on the Reverse Control |
