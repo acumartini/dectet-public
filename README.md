@@ -496,7 +496,6 @@ flowchart TD
             CQ_IN_Set[Set]
             CQ_IN_Reset[Reset]
             CQ_IN_Z[Z 1-5]
-            CQ_IN_Prob[Prob 1-10]
         end
         subgraph CQ_IN_Quantization[Quantization]
           direction LR
@@ -518,6 +517,7 @@ flowchart TD
             CQ_IN_HoldGate[Hold 1-10]
             CQ_IN_Depth[Depth]
             CQ_IN_NumPly[NumPly]
+            CQ_IN_Prob[Prob 1-10]
         end
     end
     subgraph CQ_OUT[OUT]
@@ -1249,7 +1249,7 @@ The Spectral Analysis module performs windowed 4096-point FFT analysis on an inc
 
 ## SQ: Binary Step Sequencer
 
-This Step Sequencer can operate as a traditional linear sequencer with 50 individually assignable steps. Additionally, a 32-bit binary pattern (`BinPtrn`) can be overlaid on top of the sequence to add fills and accents. There are also several auxiliary step Controls (`Pause`, `Set`, `Reset`, and `Reverse`) to add interest and enable repeatable patterns. Steps can be made probabilistic by decreasing the `Prob` Control, and adjusting `Stride` can create unexpected patterns due to step aliasing. Each step has a dedicated magnitude. Finally, there is a quantizer built into this module to facilitate melodic sequence generation. The quantizer is binary and uses a root note and 12-bit number to determine the scale, where all scales are possible within the 12-bit binary range. Quantized signals are based on V/Octave standards (C4=0V). Gating the `Rnd N` Control will quantize all 50 step `Sig` Control to notes. Poly-rhythms and polyphony are enabled by the `Depth` Control, which sets the number of concurrent step pointers (maximum of 5). Each step point has a `Stride` and `Offset` control allowing them to move independently over differernt sections of the sequence and at different rates within a shared loop `Length`.
+This Step Sequencer can operate as a traditional linear sequencer with 50 individually assignable steps. Additionally, a 32-bit binary pattern (`BinPtrn`) can be overlaid on top of the sequence to add fills and accents. There are also several auxiliary step Controls (`Pause`, `Set`, `Reset`, and `Reverse`) to add interest and enable repeatable patterns. Steps can be made probabilistic (introduces a chance to trigger or not trigger where lower probibility means less chance to trigger) by decreasing the `Prob` Control, and adjusting `Stride` can create unexpected patterns due to step aliasing. Each step has a dedicated magnitude. Both step probabilities and magnitudes can be randomized using the `Rnd P/M` Controls. Finally, there is a quantizer built into this module to facilitate melodic sequence generation. The quantizer is binary and uses a root note and 12-bit number to determine the scale, where all scales are possible within the 12-bit binary range. Quantized signals are based on V/Octave standards (C4=0V). Gating the `Rnd N` Control will quantize all 50 step `Sig` Control to notes. Poly-rhythms and polyphony are enabled by the `Depth` Control, which sets the number of concurrent step pointers (maximum of 5). Each step point has a `Stride` and `Offset` control allowing them to move independently over differernt sections of the sequence and at different rates within a shared loop `Length`.
 
 The outputs are designed to control both the internal 10-voice OSC and external systems. The 10 `V/Oct`, `Mag`, and `Gate` Outputs are mapped (round-robin) to the 50 steps with respect to the `NumPly` polyphony setting (output_index = x % NumPly). Depth pointers are mapped to outputs relative to the first depth pointer output index (depth_d_output_index = (x + d) % NumPly). The `D1-5 V/O`, `D1-5 Mag`, and `D1-5 G` Outputs track steps as they are triggered by each sequencer pointer such that only sequence pointers less than or equal to the `Depth` setting produce output.
 
@@ -1290,6 +1290,62 @@ The outputs are designed to control both the internal 10-voice OSC and external 
 | D1-5 Mag | Sequence pointer step magnitude |
 | D1-5 G | Sequence pointer step gate |
 | D1-5 SG | Sequence pointer start gate triggered when the starting step is reached. Starting step state is maintained for each sequence pointer |
+
+```mermaid
+flowchart TD
+  subgraph SQ
+    subgraph SQ_IN[IN]
+      direction LR
+        subgraph SQ_IN_Navigation[Navigation]
+          direction LR
+            SQ_IN_Step[Step]
+        end
+        subgraph SQ_IN_SeqControl[Sequence]
+          direction LR
+            SQ_IN_Pause[Pause]
+            SQ_IN_Set[Set]
+            SQ_IN_Reset[Reset]
+            SQ_IN_Length[Length]
+            SQ_IN_BinPtrn[BinPtrn]
+            SQ_IN_BinRot[BinRot]
+            SQ_IN_StepBtn[1-50]
+        end
+        subgraph SQ_IN_Quantization[Quantization]
+          direction LR
+            SQ_IN_BinScal[BinScal]
+            SQ_IN_Root[Root]
+            SQ_IN_Spread[Spread]
+            SQ_IN_RndN[Rnd N]
+            SQ_IN_SigZ[Sig 1-50]
+        end
+        subgraph SQ_IN_Dynamics[Dynamics]
+          direction LR
+            SQ_IN_MagRng[MagRng]
+            SQ_IN_RndM[Rnd M]
+            SQ_IN_Mag[Mag 1-50]
+        end
+        subgraph SQ_IN_GateControl[Gate/Polyphony]
+          direction LR
+            SQ_IN_PulseW[Pulse W]
+            SQ_IN_Depth[Depth]
+            SQ_IN_NumPly[NumPly]
+            SQ_IN_ProbRng[ProbRng]
+            SQ_IN_RndP[Rnd P]
+            SQ_IN_Prob[Prob 1-50]
+        end
+    end
+    subgraph SQ_OUT[OUT]
+      direction LR
+        SQ_OUT_VOct[V/Oct 1-10]
+        SQ_OUT_Mag[Mag 1-10]
+        SQ_OUT_Gate[Gate 1-10]
+        SQ_OUT_D[D1-5 V/O]
+        SQ_OUT_D[D1-5 Mag]
+        SQ_OUT_D[D1-5 G]
+        SQ_OUT_D[D1-5 SG]
+    end
+  end
+```
 
 ## UA: USB Audio Interface
 
