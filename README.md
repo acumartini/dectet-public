@@ -58,6 +58,7 @@ The content of this manual is intended for informational use only, is subject to
   - [EV: Envelope Generator / VCA](#ev-envelope-generator--vca)
   - [EQ: Parametric Band-pass Equalizer](#eq-parametric-band-pass-equalizer)
   - [FL: Envelope Follower](#fl-envelope-follower)
+    - [Envelope Follower Full Mode](#envelope-follower-full-mode)
   - [FN: Function Generator](#fn-function-generator)
   - [FT: Multi-mode Filter](#ft-multi-mode-filter)
   - [GP: Granular Processor](#gp-granular-processor)
@@ -413,6 +414,9 @@ The Attenuate module is a 10-channel attenuverter with offset. As an attenuverte
 | - | - |
 | A/0 1-10 | Attenuverter signal with offset |
 
+Racks:
+- [Deep Neural Network](#deep-neural-network)
+
 ```mermaid
 flowchart TD
   subgraph AT
@@ -474,6 +478,10 @@ The outputs are designed to control both the internal 10-voice OSC and external 
 | Mag Z1-5 | Step magnitude for a step triggered on a specific Z plane |
 | G Z1-5 | Step gate for a step triggered on a specific Z plane |
 | V/O Z1-5 | Step signal for a step triggered on a specific Z plane |
+
+Racks:
+- [Cartesian Sequencer](#cartesian-sequencer)
+- [Dual Cartesian Sequencer](#dual-cartesian-sequencer)
 
 ```mermaid
 flowchart TD
@@ -550,6 +558,12 @@ The Clock module is a tappable bpm-based clock generator. The Tap Control can be
 | - | - |
 | Gate | Clock gate with a pulse width of 1.5ms |
 
+Racks:
+- [Cartesian Sequencer](#cartesian-sequencer)
+- [Dual Cartesian Sequencer](#dual-cartesian-sequencer)
+- [Dual Step Sequencer](#dual-step-sequencer)
+- [Step Sequencer](#step-sequencer)
+
 ```mermaid
 flowchart TD
   subgraph CK
@@ -614,6 +628,11 @@ The Euclidean Clock Divider module is a 5-channel clock multiplier and Euclidean
 | EndCR | End of one section of the Euclidean chain rhythm |
 | EndC | End of the entire Euclidean chain rhythm |
 
+Racks:
+- [Cartesian Sequencer](#cartesian-sequencer)
+- [Dual Cartesian Sequencer](#dual-cartesian-sequencer)
+- [Dual Step Sequencer](#dual-step-sequencer)
+
 ```mermaid
 flowchart TD
   subgraph DV
@@ -664,6 +683,14 @@ A 10-channel ADSR Envelope Generator with audio inputs and a built-in VCA. When 
 | EndR 1-10 | End of release gate signal |
 | Sig 1-10 | Incoming signal modulated by the envelope |
 
+Racks:
+- [Cartesian Sequencer](#cartesian-sequencer)
+- [Dual Cartesian Sequencer](#dual-cartesian-sequencer)
+- [Dual Step Sequencer](#dual-step-sequencer)
+- [MIDI Synthesizer](#midi-synthesizer)
+- [Step Sequencer](#step-sequencer)
+- [XYZ MIDI Synthesizer](#xyz-midi-synthesizer)
+
 ```mermaid
 flowchart TD
   subgraph EV
@@ -710,7 +737,7 @@ A parametric stereo Band-pass Equalizer with 8 bands and individual controls for
 
 ## FL: Envelope Follower
 
-A 2-channel envelope follower to enable loose synchronization via threshold-controlled peak detection envelopes with gate outputs. This module also has a “full” mode with 10 channels, which is used for the [Parametric Follower](#parametric-follower) Rack.
+A 2-channel envelope follower to enable loose synchronization via threshold-controlled peak detection envelopes with gate outputs.
 
 | Control Notes | T | R | |
 | - | - | - | - |
@@ -723,6 +750,24 @@ A 2-channel envelope follower to enable loose synchronization via threshold-cont
 | - | - |
 | Env 1-2 | Filtered stereo signal |
 | Gate 1-2 | Gate signal representing the time the envolope detector is above the threshold |
+
+Racks:
+- [Audio Interface](#audio-interface)
+- [Cartesian Sequencer](#cartesian-sequencer)
+- [Control Voltage Recorder](#control-voltage-recorder)
+- [Deep Neural Network](#deep-neural-network)
+- [Dual Cartesian Sequencer](#dual-cartesian-sequencer)
+- [Dual Step Sequencer](#dual-step-sequencer)
+- [Spectral Resynthesizer](#spectral-resynthesizer)
+- [Step Sequencer](#step-sequencer)
+- [Filtered Delay](#filtered-delay)
+- [Filtered Room Reverb](#filtered-room-reverb)
+- [Filtered Plate Reverb](#filtered-plate-reverb)
+- [Granular Processor](#granular-processor)
+- [MIDI Synthesizer](#midi-synthesizer)
+- [Mixer Macro Control](#mixer-macro-control)
+- [XYZ Drone](#xyz-drone)
+- [XYZ MIDI Synthesizer](#xyz-midi-synthesizer)
 
 ```mermaid
 flowchart TD
@@ -740,6 +785,12 @@ flowchart TD
     end
   end
 ```
+
+### Envelope Follower Full Mode
+
+This module also has a “full” mode with 10 channels, which is used for the [Parametric Follower](#parametric-follower) Rack.
+
+- [Parametric Follower](#parametric-follower)
 
 ## FN: Function Generator
 
@@ -823,6 +874,9 @@ The Input/Output module is present in every Rack and is the home for controlling
 | I 1-6 (7-12) JK | Incoming signal tranformed to floating point and read for processing |
 | IE 7-12 JK | Incoming signal from the expander tranformed to floating point and read for processing |
 
+Racks:
+- All
+
 ```mermaid
 flowchart TD
   subgraph IO
@@ -860,6 +914,13 @@ A 5-channel LFO with 4 simultaneous wave outputs (sine, triangle, saw, and squar
 | Saw 1-5 | Saw output with attnuverter and offset applied  |
 | Squr 1-5 | Square output with attnuverter and offset applied  |
 
+Racks:
+- [Drone](#drone)
+- [Mixer Macro Control](#mixer-macro-control)
+- [Parametric Follower](#parametric-follower)
+- [XYZ Drone](#xyz-drone)
+- [XYZ MIDI Synthesizer](#xyz-midi-synthesizer)
+
 ```mermaid
 flowchart TD
   subgraph LO
@@ -891,7 +952,6 @@ flowchart TD
     end
   end
 ```
-
 
 ## MC: Macro Controller
 
@@ -987,6 +1047,18 @@ A 10-channel Mixer with panning, gain control, mutes, and stereo linking or cros
 | Chan 1-10 | Channel signal post mute Control |
 | Mix L-R | Stereo mix |
 
+Racks:
+- [Audio Interface](#audio-interface)
+- [Cartesian Sequencer](#cartesian-sequencer)
+- [Drone](#drone)
+- [Filtered Delay](#filtered-delay)
+- [Filtered FDN](#filtered-fdn)
+- [MIDI Synthesizer](#midi-synthesizer)
+- [Spectral Resynthesizer](#spectral-resynthesizer)
+- [Step Sequencer](#step-sequencer)
+- [XYZ Drone](#xyz-drone)
+- [XYZ MIDI Synthesizer](#xyz-midi-synthesizer)
+
 ```mermaid
 flowchart TD
   subgraph MX
@@ -1027,6 +1099,9 @@ This module also has a “full” mode with 3 true-stereo sends, which is used f
 | Mix L-R | Stereo mix |
 | Snd A/B/C-L/R | Stereo send signals for processing |
 
+Racks:
+- [Mixer Macro Control](#mixer-macro-control)
+
 ## NN: Deep Neural Network
 
 The Deep Neural Network module enables audio rate (24-bit 48kHz) training/prediction for 5 inputs/outputs. In the spirit of modular synthesis, the weights learned by the hidden layer perceptrons are exposed both as Controls and module Outputs. Admittedly, the 10 hidden layer weights makes for a very small NN, but interesting relationships between the incoming features and the training data (expected output) can still be learned with careful attention to signal levels (which should be relatively balanced across the feature set) and corelations. When the `Train` Control is enabled the `Feature` data is passed through the nearalnet and compared against the `Train 1-5` data inputs to compute a error. The error is backpropagated through the nearualnet to adjust the weights of the nearalnet hidden layers. The amount of error backprogated through the network is proportional to the learning rate (`Alpha`) such that a higher learning rate will result is more dramatic changes to the nearnet weights. A low learning rate is generally desirable because the model leanred more loosely fits the relationships between the feature data and in the training data and thus can be applied more generally to new feature data that does not resemble the feature data used for training.
@@ -1044,6 +1119,9 @@ While training is enabled the outputs predictions Outputs are still live and wil
 | - | - |
 | Weight 1-10 | Hidden layer weights |
 | Pred 1-5 | Predictions |
+
+Racks:
+- [Deep Neural Network](#deep-neural-network)
 
 ```mermaid
 flowchart TD
@@ -1110,6 +1188,13 @@ The Oscillator module includes 10 V/Octave controlled voices with through-0 Phas
 | Output Notes | |
 | - | - |
 | OSC 1-10 | OSC voice |
+
+Racks:
+- [Cartesian Sequencer](#cartesian-sequencer)
+- [Drone](#drone)
+- [MIDI Synthesizer](#midi-synthesizer)
+- [Spectral Resynthesizer](#spectral-resynthesizer)
+- [Step Sequencer](#step-sequencer)
 
 ```mermaid
 flowchart TD
@@ -1290,6 +1375,10 @@ The outputs are designed to control both the internal 10-voice OSC and external 
 | D1-5 Mag | Sequence pointer step magnitude |
 | D1-5 G | Sequence pointer step gate |
 | D1-5 SG | Sequence pointer start gate triggered when the starting step is reached. Starting step state is maintained for each sequence pointer |
+
+Racks:
+- [Step Sequencer](#step-sequencer)
+- [Dual Step Sequencer](#dual-step-sequencer)
 
 ```mermaid
 flowchart TD
