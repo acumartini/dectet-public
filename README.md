@@ -1530,7 +1530,7 @@ The current [release](../dectet.release.yml) of the dectet firmware has the foll
 
 The Audio Interface Rack combines the UA Module with CK, FL (full mode), MM, and MX (full mode) to create a fully featured USB Audio Interface for PC virtual CV/modular integration or multi-tracking.
 
-IMPORTANT: The computer **must** be plugged into the device port when the device starts (or restarts) this Rack, otherwise, the device will restart to the default Rack.
+**IMPORTANT**: The computer **must** be plugged into the device port when the device starts (or restarts) this Rack, otherwise, the device will restart to the default Rack.
 
 ```mermaid
 flowchart TD
