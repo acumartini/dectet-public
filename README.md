@@ -2,7 +2,7 @@
 
 # dectet - User Manual
 
-This manual is a release-specific document. Search for the [release](https://github.com/acumartini/dectet-public/releases) version that matches what you have running on your device, which includes a link to the User Manual for that firmware version.
+This manual is a release-specific document. Search for the [release tag](https://github.com/acumartini/dectet-public/tags) version that matches what you have running on your device, which has a link (in the upper left after clicking on a release tag below the Releases/Tags toggle) to the User Manual for that firmware version.
 
 ## Disclaimer
 
