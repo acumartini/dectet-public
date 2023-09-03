@@ -1031,7 +1031,7 @@ A simple mid-side processing module that split a stereo signal into its mid/side
 
 ## MX: Mixer
 
-A 10-channel Mixer with panning, gain control, mutes, and stereo linking or crossfade control. When channels are stereo linked the crossfade control and all controls for the linked stereo channel are disabled. When not stereo-linked crossfading is enabled between the paired channels.
+A 10-channel Mixer with panning, gain control, mutes, and stereo linking or crossfade control. When channels are stereo linked the crossfade control and all controls for the linked stereo channel are disabled. When not stereo-linked crossfading is enabled between the paired channels. The `Aux *` stereo input Controls enables adding an exteral signal to the final stereo mix.
 
 Racks:
 - [Audio Interface](#audio-interface)
@@ -1052,6 +1052,8 @@ Racks:
 | Mute 1-10 | S | U | Channel mute |
 | Link 1-5/6-10 | S | U | Link two channels as a stereo pair. When linked, all Controls for the secondary channel are disabled |
 | XF 1-5/6-10 | R | A | Crossfade between two channels. Only available when unlinked |
+| Aux L/R | I | A | Aux stereo input to be added to the final mix |
+| AuxLv L/R | R | A | Aux stereo input level |
 | MstrVol | R | U | Level for L/R output |
 
 | Output Notes | |
@@ -1068,6 +1070,9 @@ flowchart TD
         MX_IN_Gain[Gain 1-10]
         MX_IN_Mute[Mute 1-10]
         MX_IN_Link[Link 1-5/6-10]
+        MX_IN_XF[XF 1-5/6-10]
+        MX_IN_Aux[Aux L/R]
+        MX_IN_AuxLv[AuxLv L/R]
         MX_IN_XF[XF 1-5/6-10]
         MX_IN_MstrVol[MstrVol]
     end
@@ -1353,6 +1358,7 @@ Racks:
 | Length | R | U | Total length (in Steps) of the sequence |
 | BinPtrn | R | U | A 32-bit binary pattern, which overlays (round-robin) the 50 step sequence. The binary overlay is OR'd with the set sequence to gate steps |
 | BinRot | R | U | Rotates the starting point of the binary pattern |
+| BinCmp | R | U | Sets the binary comparitor mode (OR, AND, XOR, XNOR) for the binary pattern overlay |
 | BinScal | R | U | A number between 2048 and 4095 that is used to determine the 12-note scale for quantization. Notes are quantized based on V/Octave (C4=0V) |
 | Root | R | U | Root note for quantization |
 | Spread | R | U | Controls how far away from the root, in notes, that random notes are selected for quantization |
