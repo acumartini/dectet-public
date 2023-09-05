@@ -73,10 +73,8 @@ The content of this manual is intended for informational use only, is subject to
   - [NN: Deep Neural Network](#nn-deep-neural-network)
   - [NZ: Noise Generator / Sample and Hold / Random Looper / Slew Rate Limiter](#nz-noise-generator--sample-and-hold--random-looper--slew-rate-limiter)
   - [OS: Oscillator](#os-oscillator)
-  - [PV: Plate Reverb](#pv-plate-reverb)
   - [QT: Binary Quantizer](#qt-binary-quantizer)
   - [RC: CV Recorder](#rc-cv-recorder)
-  - [RV: Room Reverb](#rv-room-reverb)
   - [SA: Spectral Analysis](#sa-spectral-analysis)
   - [SQ: Binary Step Sequencer](#sq-binary-step-sequencer)
   - [UA: USB Audio Interface](#ua-usb-audio-interface)
@@ -96,8 +94,6 @@ The content of this manual is intended for informational use only, is subject to
     - [Dual Step Sequencer - Controller Interface](#dual-step-sequencer---controller-interface)
   - [Filtered Delay](#filtered-delay)
   - [Filtered FDN](#filtered-fdn)
-  - [Filtered Plate Reverb](#filtered-plate-reverb)
-  - [Filtered Room Reverb](#filtered-room-reverb)
   - [Granular Processor](#granular-processor)
   - [MIDI Synthesizer](#midi-synthesizer)
   - [Mixer Macro Control](#mixer-macro-control)
@@ -749,8 +745,6 @@ Racks:
 - [Spectral Resynthesizer](#spectral-resynthesizer)
 - [Step Sequencer](#step-sequencer)
 - [Filtered Delay](#filtered-delay)
-- [Filtered Room Reverb](#filtered-room-reverb)
-- [Filtered Plate Reverb](#filtered-plate-reverb)
 - [Granular Processor](#granular-processor)
 - [MIDI Synthesizer](#midi-synthesizer)
 - [Mixer Macro Control](#mixer-macro-control)
@@ -1243,27 +1237,6 @@ flowchart TD
   end
 ```
 
-## PV: Plate Reverb
-
-A stereo plate-style reverb module.
-
-| Control Notes | T | R | |
-| - | - | - | - |
-| In 1-2 | I | A | Incoming stereo signal |
-| Size | R | U | Virtual plate size |
-| Diffu | R | U | Together with `Size`, controls the length/intensity of the reverb tail |
-| HiDmp | R | U | Dampens the high frequency reverb tail |
-| LoDmp | R | U | Dampens the low frequency reverb tail |
-| Spread | R | U | Amount of stereo spread |
-| Dry | R | U | Amount of the original signal |
-| Wet | R | U | Amount of the processed signal |
-| Freeze | S | U | Mutes the input while preserving the reverb tail |
-| Width | R | U | Widens the stereo field |
-
-| Output Notes | |
-| - | - |
-| RVB L-R | Stereo mix of the Dry/Wet signals |
-
 ## QT: Binary Quantizer
 
 A 5-channel Binary Quantizer. The quantizer uses a root note and 12-bit number to determine the scale, where all scales are possible within the 12-bit binary range (with some repeated scales). Quantized signals are based on V/Octave standards (C4=0V).
@@ -1301,24 +1274,6 @@ A tape-style CV Recorder with 5 recording buffers. Each record buffer holds ~4s 
 | - | - |
 | CV 1-5 | CV signal playback |
 
-## RV: Room Reverb
-
-A stereo room-style reverb module.
-
-| Control Notes | T | R | |
-| - | - | - | - |
-| In 1-2 | I | A | Incoming stereo signal |
-| Size | R | U | Virtual room size |
-| Damp | R | U | Dampens the reverb tail |
-| Spread | R | U | Amount of stereo spread |
-| Dry | R | U | Amount of the original signal |
-| Wet | R | U | Amount of the processed signal |
-| Freeze | S | U | Mutes the input while preserving the reverb tail |
-
-| Output Notes | |
-| - | - |
-| RVB L-R | Stereo mix of the Dry/Wet signals |
-
 ## SA: Spectral Analysis
 
 The Spectral Analysis module performs windowed 4096-point FFT analysis on an incoming signal to generate up to 10 voices of Frequency and Magnitude data. The precision of the FFT can be increased at the cost of the speed of Output updates. At the fastest setting updates occur ~10ms, and at the most precise setting updates occur ~40ms. Signal levels going into the module must be strong to ensure a good FFT analysis result. We have found that at least a 1.5Vpp signal after applying IO Module Gain is a minimum to achieve a stable `V/Oct` output.
@@ -1339,9 +1294,9 @@ The Spectral Analysis module performs windowed 4096-point FFT analysis on an inc
 
 ## SQ: Binary Step Sequencer
 
-This Step Sequencer can operate as a traditional linear sequencer with 50 individually assignable steps. Additionally, a 32-bit binary pattern (`BinPtrn`) can be overlaid on top of the sequence to add fills and accents. There are also several auxiliary step Controls (`Pause`, `Set`, `Reset`, and `Reverse`) to add interest and enable repeatable patterns. Steps can be made probabilistic (introduces a chance to trigger or not trigger where lower probibility means less chance to trigger) by decreasing the `Prob` Control, and adjusting `Stride` can create unexpected patterns due to step aliasing. Each step has a dedicated magnitude. Both step probabilities and magnitudes can be randomized using the `Rnd P/M` Controls. Finally, there is a quantizer built into this module to facilitate melodic sequence generation. The quantizer is binary and uses a root note and 12-bit number to determine the scale, where all scales are possible within the 12-bit binary range. Quantized signals are based on V/Octave standards (C4=0V). Gating the `Rnd N` Control will quantize all 50 step `Sig` Control to notes. Poly-rhythms and polyphony are enabled by the `Depth` Control, which sets the number of concurrent step pointers (maximum of 5). Each step point has a `Stride` and `Offset` control allowing them to move independently over differernt sections of the sequence and at different rates within a shared loop `Length`.
+This Step Sequencer can operate as a traditional linear sequencer with 50 individually assignable steps. Additionally, a 32-bit binary pattern (`BinPtrn`) can be overlaid on top of the sequence to add fills and accents. There are also several auxiliary step Controls (`Pause`, `Set`, `Reset`, and `Reverse`) to add interest and enable repeatable patterns. Steps can be made probabilistic (introduces a chance to trigger or not trigger where lower probability means less chance to trigger) by decreasing the `Prob` Control, and adjusting `Stride` can create unexpected patterns due to step aliasing. Each step has a dedicated magnitude. Both step probabilities and magnitudes can be randomized using the `Rnd P/M` Controls. Finally, there is a quantizer built into this module to facilitate melodic sequence generation. The quantizer is binary and uses a root note and 12-bit number to determine the scale, where all scales are possible within the 12-bit binary range. Quantized signals are based on V/Octave standards (C4=0V). Gating the `Rnd N` Control will quantize all 50 step `Sig` Control to notes. Poly-rhythms and polyphony are enabled by the `Depth` Control, which sets the number of concurrent step pointers (maximum of 5). Each step point has a `Stride` and `Offset` control allowing them to move independently over different sections of the sequence and at different rates within a shared loop `Length`. The `NumPly` Control limits the number of polyphonic notes available for sequencing.
 
-The outputs are designed to control both the internal 10-voice OSC and external systems. The 10 `V/Oct`, `Mag`, and `Gate` Outputs are mapped (round-robin) to the 50 steps with respect to the `NumPly` polyphony setting (output_index = x % NumPly). Depth pointers are mapped to outputs relative to the first depth pointer output index (depth_d_output_index = (x + d) % NumPly). The `D1-5 V/O`, `D1-5 Mag`, and `D1-5 G` Outputs track steps as they are triggered by each sequencer pointer such that only sequence pointers less than or equal to the `Depth` setting produce output.
+The outputs are designed to control both the internal 10-voice OSC and external systems. The 10 `V/Oct`, `Mag`, and `Gate` Outputs are mapped (round-robin) to the 50 steps concerning the `NumPly` polyphony setting (output_index = x % NumPly). Depth pointers are mapped to outputs relative to the first depth pointer output index (depth_d_output_index = (x + d) % NumPly). The `D1-5 V/O`, `D1-5 Mag`, and `D1-5 G` Outputs track steps as they are triggered by each sequencer pointer such that only sequence pointers less than or equal to the `Depth` setting produce output. Finally, `D1-5 SG` is a sequence pointer start gate that is triggered when the starting step is reached. Starting step state is maintained for each sequence pointer.
 
 Racks:
 - [Step Sequencer](#step-sequencer)
@@ -1522,9 +1477,7 @@ The current [release](../dectet.release.yml) of the dectet firmware has the foll
   - [Control Voltage Recorder](#control-voltage-recorder)
 - FX
   - [Filtered Delay](#filtered-delay)
-  - [Filtered Room Reverb](#filtered-room-reverb)
   - [Filtered FDN](#filtered-fdn)
-  - [Filtered Plate Reverb](#filtered-plate-reverb)
   - [Granular Processor](#granular-processor)
 - UTIL
   - [Audio Interface](#audio-interface)
@@ -1555,13 +1508,13 @@ flowchart TD
 
 ## Cartesian Sequencer
 
-The Cartesian Sequencer with OSC rack combines a clock, euclidean clock divider, cartesian sequencer, and 10 OSCs with individual ADSR envelopes to produce complex and evolving polyphony. The NZ module provides supporting modulation.
+The Cartesian Sequencer with OSC rack combines a clock, Euclidean clock divider, cartesian sequencer, and 10 OSCs with individual ADSR envelopes to produce complex and evolving polyphony. The NZ module provides supporting modulation.
 
 Quickstart:
-- adjust the DV `Mult` Controls and/or adjust the `EStep` and `EDiv` Controls to create polyrhythms until you are happy with the rythmic pattern
-- increase some of the EV `R` Controls to allow the voices to overlap and create polyphony
-- to create space for faster rythms, adjust the CQ `Pulse W` and `Prob` Controls
-- to enable melidic changes, disconnect the CQ `Forwd` Control and press `Z 1` to navigate to the first Z plane. Then adjust the `Root` and `BinScal` Controls and press the `Rnd N` Control until you are happy with the melody. Repeat this process for `Z 2/3/4/5`. Now reconnect the `Forwd` Control and adjust DV `Muolt 3` until you are happy with the speed of tranition between the chords defined by each Z plane melody
+- Adjust the DV `Mult` Controls and/or adjust the `EStep` and `EDiv` Controls to create polyrhythms until you are happy with the rhythmic pattern
+- Increase some of the EV `R` Controls to allow the voices to overlap and create polyphony
+- To create space for faster rhythms, adjust the CQ `Pulse W` and `Prob` Controls
+- To enable melodic changes, disconnect the CQ `Forwd` Control and press `Z 1` to navigate to the first Z plane. Then adjust the `Root` and `BinScal` Controls and press the `Rnd N` Control until you are happy with the melody. Repeat this process for `Z 2/3/4/5`. Now reconnect the `Forwd` Control and adjust DV `Muolt 3` until you are happy with the speed of transition between the chords defined by each Z plane melody
 
 ```mermaid
 flowchart LR
@@ -1705,14 +1658,14 @@ The Control Voltage Recorder Rack includes a playable controller interface with 
 The Deep Neural Network rack is a utility for exploring real-time inference. Because the NN module is CPU intensive, there is limited room for supporting modules. However, the LO module is available to generate feature and training data without the need for external input. The AT module enables tuning prediction signals for level-dependent inputs (i.e., triggers/gates).
 
 Quickstart:
-- in NN, switch the `Train` Control ON
-- after a short time, switch the `Train` Control OFF
-- switch to AT and observe that the `In` Controls have rapidly changing signals
-- switch to LO and reduce all 5 `Freq` Controls to less than 2.0Hz
-- switch back to AT and observe that the `In` Controls are not modulating at something more rythimic in nature. The IO `O` Controls will mimic this modulation
+- In the NN module, switch the `Train` Control ON
+- After a short time, switch the `Train` Control OFF
+- Switch to AT and observe that the `In` Controls have rapidly changing signals
+- Switch to LO and reduce all 5 `Freq` Controls to less than 2.0Hz
+- Switch back to AT and observe that the `In` Controls are not modulating at something more rhythmic in nature. The IO `O` Controls will mimic this modulation
 - Connect the HW output jacks to trigger/modulate other modules within your system
-- adjust the AT `Attn` and `Offst` Controls until you are happy with the trigger/modulation levels. For example, most gates will require signals greater than 2.5V to trigger and the `Offst` Controls can be used get signals into an appropriate range
-- play with the LO `Freq` Controls until you are happy with the trigger/modualtion patterns
+- Adjust the AT `Attn` and `Offst` Controls until you are happy with the trigger/modulation levels. For example, most gates will require signals greater than 2.5V to trigger and the `Offst` Controls can be used to get signals into an appropriate range
+- Play with the LO `Freq` Controls until you are happy with the trigger/modulation patterns
 
 ```mermaid
 flowchart LR
@@ -1798,15 +1751,15 @@ flowchart TD
 
 ## Dual Cartesian Sequencer
 
-The Dual Cartesian Sequencer rack contains clock generator/modulation utilities and two Cartesian Sequencer modules for driving external sound sources. The NZ module provides supporting modulation and the EV module enables envelope output as apposed, or in addition, to gates.
+The Dual Cartesian Sequencer rack contains clock generator/modulation utilities and two Cartesian Sequencer modules for driving external sound sources. The NZ module provides supporting modulation and the EV module enables envelope output as opposed, or in addition, to gates.
 
 Quickstart:
-- patch the external outputs 1/2/3 (CQ1 GlbV/O, GlbMag and GlbG) and 5/6/7 (CQ2 GlbV/O, GlbMag and GlbG) to your modular rig as desired. Pairing a Voice module controled by the V/Oct and Mag with a Drum module contoled by the Gate and the mult'd Mag can be interesting. There is always the traditional voice with a VCA controled by a gate triggered envelope, however, when lacking an external envelope module the EV `EnvS` Outputs (CQ1/2 GlbG normalized to channels 1/2 respectively) can be used to shape your voice through a VCA
-- adjust the DV `Mult` Controls and/or adjust the `EStep` and `EDiv` Controls to create polyrhythms until you are happy with the rythmic patterns
-- to create space for faster rythms, adjust the CQ `Pulse W` and `Prob` Controls (and/or the DV `Prob` Controls)
-- to enable melodic variation adjust the `Root` and `BinScal` Controls and press the `Rnd N` Control until you are happy with the melody. See the [Cartesian Sequencer Rack](#cartesian-sequencer) Quickstart for details on how to create intentional chord changes
-- use the `Rnd M` Control (or adjust `Mag` Controls manually) to enable dynamic variation
-- consider patching depth specific outputs to the two remaining external outputs to enable periodic modulation as the sequences run through the Z planes
+- Patch the external outputs 1/2/3 (CQ1 GlbV/O, GlbMag and GlbG) and 5/6/7 (CQ2 GlbV/O, GlbMag and GlbG) to your modular rig as desired. Pairing a Voice module controlled by the V/Oct and Mag with a Drum module controlled by the Gate and the multiplied Mag can be interesting. There is always the traditional voice with a VCA controlled by a gate-triggered envelope, however, when lacking an external envelope module the EV `EnvS` Outputs (CQ1/2 GlbG normalized to channels 1/2 respectively) can be used to shape your voice through a VCA
+- Adjust the DV `Mult` Controls and/or adjust the `EStep` and `EDiv` Controls to create polyrhythms until you are happy with the rhythmic patterns
+- To create space for faster rhythms, adjust the CQ `Pulse W` and `Prob` Controls (and/or the DV `Prob` Controls)
+- To enable melodic variation adjust the `Root` and `BinScal` Controls and press the `Rnd N` Control until you are happy with the melody. See the [Cartesian Sequencer Rack](#cartesian-sequencer) Quickstart for details on how to create intentional chord changes
+- Use the `Rnd M` Control (or adjust `Mag` Controls manually) to enable dynamic variation
+Consider patching depth-specific outputs to the two remaining external outputs to enable periodic modulation as the sequences run through the Z planes
 
 ```mermaid
 flowchart LR
@@ -1916,15 +1869,15 @@ The same controller interface for the [Cartesian Sequencer](#cartesian-sequencer
 
 ## Dual Step Sequencer
 
-The Dual Binary Step Sequencer rack contains clock generator/modulation utilities and two Binary Step Sequencer modules for driving external sound sources. The NZ module provides supporting modulation and the EV module enables envelope output as apposed, or in addition, to gates.
+The Dual Binary Step Sequencer rack contains clock generator/modulation utilities and two Binary Step Sequencer modules for driving external sound sources. The NZ module provides supporting modulation and the EV module enables envelope output as opposed, or in addition, to gates.
 
 Quickstart:
-- patch the external outputs 1/2/3 (SQ1 V/Oct, Mag and Gate) and 5/6/7 (SQ2 V/Oct, Mag and Gate) to your modular rig as desired. Pairing a Voice module controled by the V/Oct and Mag with a Drum module contoled by the Gate and the mult'd Mag can be interesting. There is always the traditional voice with a VCA controled by a gate triggered envelope, however, when lacking an external envelope module the EV `EnvS` Outputs (SQ1/2 Gates normalized to channels 1/2 respectively) can be used to shape your voice through a VCA
-- adjust the DV `Mult` Controls and/or adjust the `EStep` and `EDiv` Controls of DV channels 1/2 to create polyrhythms until you are happy with the rythmic patterns
-- to create space for faster rythms, adjust the SQ `Pulse W` and `Prob` Controls (and/or the DV `Prob` Controls)
-- to enable melodic variation adjust the `Root` and `BinScal` Controls and press the `Rnd N` Control until you are happy with the melody
-- use the `Rnd M` Control (or adjust `Mag` Controls manually) to enable dynamic variation
-- both SQ modules are normalized to a depth of 2 and the `D2 V/O` Output is patched to external outputs 4/8. Consider adding step triggers to steps that the depth 2 sequence pointer is covering (normalized with an offset of 25) and patching the various D2 outputs to add more voices and/or sequenced modulation
+- Patch the external outputs 1/2/3 (SQ1 V/Oct, Mag and Gate) and 5/6/7 (SQ2 V/Oct, Mag and Gate) to your modular rig as desired. Pairing a Voice module controlled by the V/Oct and Mag with a Drum module controlled by the Gate and the multiplied Mag can be interesting. There is always the traditional voice with a VCA controlled by a gate-triggered envelope, however, when lacking an external envelope module the EV `EnvS` Outputs (SQ1/2 Gates normalized to channels 1/2 respectively) can be used to shape your voice through a VCA
+- Adjust the DV `Mult` Controls and/or adjust the `EStep` and `EDiv` Controls of DV channels 1/2 to create polyrhythms until you are happy with the rhythmic patterns
+- To create space for faster rhythms, adjust the SQ `Pulse W` and `Prob` Controls (and/or the DV `Prob` Controls)
+- To enable melodic variation adjust the `Root` and `BinScal` Controls and press the `Rnd N` Control until you are happy with the melody
+- Use the `Rnd M` Control (or adjust `Mag` Controls manually) to enable dynamic variation
+- Both SQ modules are normalized to a depth of 2 and the `D2 V/O` Output is patched to external outputs 4/8. Consider adding step triggers to steps that the depth 2 sequence pointer is covering (normalized with an offset of 25) and patching the various D2 outputs to add more voices and/or sequenced modulation
 
 ```mermaid
 flowchart LR
@@ -2067,42 +2020,6 @@ flowchart TD
 | To create a mono-stereo delay, patch the summed output for the first delay line (`DL1`) into the input for the second delay line (`In 2`). Then patch all of the delay read head Outputs (`DL1/2 1-5`) into the MX module and pan each read head to create a stereo spread. The added benefit to this pattern is a doubled delay time |
 | Stereo output is normalized to IO Controls `O 1/2 JK` |
 
-## Filtered Plate Reverb
-
-The Filtered Plate Reverb rack is a stereo plate reverb effect processor with a pre and post-delay filter. The Equalizer module acts as a prefilter to isolate the desired content, and the Filter module helps to clean up high-end artifacts as a post-processor. The resulting stereo delay flows through the Mix module where it can be mixed with the original signal. The NZ module provides supporting modulation.
-
-```mermaid
-flowchart TD
-  IO-->FL
-  IO-->EQ-->MS-->PV-->FT-->MS-->MX-->IO
-  IO-->MX
-  NZ
-  MC
-```
-
-| Patch Notes |
-| - |
-| IO Outputs `I 1/2 JK` are patched to both the PV module (via EQ and MS) and the MX (`In 1/6`) module to enable a dry/wet mix |
-| Stereo output is normalized to IO Controls `O 1/2 JK` |
-
-## Filtered Room Reverb
-
-The Filtered Room Reverb rack is a stereo reverb effect processor with a pre and post-delay filter. The Equalizer module acts as a prefilter to isolate the desired content, and the Filter module helps to clean up high-end artifacts as a post-processor. The resulting stereo delay flows through the Mix module where it can be mixed with the original signal. The LO and NZ modules provide supporting modulation.
-
-```mermaid
-flowchart TD
-  IO-->FL
-  IO-->EQ-->MS-->RV-->FT-->MS-->MX-->IO
-  IO-->MX
-  NZ
-  MC
-```
-
-| Patch Notes |
-| - |
-| IO Outputs `I 1/2 JK` are patched to both the RV module (via EQ and MS) and the MX (`In 1/6`) module to enable a dry/wet mix |
-| Stereo output is normalized to IO Controls `O 1/2 JK` |
-
 ## Granular Processor
 
 The Granular Processor rack contains the Granular Processor (GP) module wrapped by the EQ (mono) and FL modules to enable detailed granular-inspired sound design.
@@ -2121,7 +2038,7 @@ flowchart TD
 
 ## MIDI Synthesizer
 
-The MIDI Synthesizer rack is a classic 10-voice polysynth with MIDI control, 10 ADSR envelopes, and a panoramic stereo output. This OSC module is feature rich and provides a complex patching environment. The resonant stereo filter helps to shape and add character to the synthesizer. The NZ module provides auxiliary input to the OSC and supports modulation.
+The MIDI Synthesizer rack is a classic 10-voice polysynth with MIDI control, 10 ADSR envelopes, and a panoramic stereo output. This OSC module is feature-rich and provides a complex patching environment. The resonant stereo filter helps to shape and add character to the synthesizer. The NZ module provides auxiliary input to the OSC and supports modulation.
 
 ```mermaid
 flowchart TD
@@ -2196,13 +2113,13 @@ flowchart TD
 The Binary Step Sequencer with OSC rack combines a clock, binary step sequencer, and 10 OSCs with ADSR envelopes to produce complex and evolving polyphony. The NZ module provides supporting modulation.
 
 Quickstart:
-- adjust the CK `BPM` Control to get find a tempo you are like
-- increase some of the EV `R` Controls to allow the voices to overlap and create polyphony
-- navigate to the controller interface and add additional steps somewhat randomly (and sparingly) to allow the 5 depth pointers trigger multple notes per step creating a chordal melody
-- play with the SQ `Length` control until the looping melody settles into a pattern
-- to create space for faster rythms, adjust the SQ `Pulse W` and `Prob` Controls
-- to enable melidic changes, adjust the `Root` and `BinScal` Controls and press the `Rnd N` Control until you are happy with the melody
-- use the `Rnd M` Control to enable dynaic variation
+- Adjust the CK `BPM` Control to find a tempo you are like
+- Increase some of the EV `R` Controls to allow the voices to overlap and create polyphony
+- Navigate to the controller interface and add additional steps somewhat randomly (and sparingly) to allow the 5 depth pointers to trigger multple notes per step creating a chordal melody
+- Play with the SQ `Length` control until the looping melody settles into a pattern
+- To create space for faster rhythms, adjust the SQ `Pulse W` and `Prob` Controls
+- To enable melodic changes, adjust the `Root` and `BinScal` Controls and press the `Rnd N` Control until you are happy with the melody
+- Use the `Rnd M` Control to enable dynamic variation
 - reduce the `Depth` control to uncover more sparse variation on the core chordal melody
 
 ```mermaid
@@ -2296,7 +2213,7 @@ style EXT_OUT_Jack fill:#fff
 
 ### Step Sequencer - Controller Interface
 
-The Step Sequencer Rack includes a playable controller interface with 50 pads used to control the [SQ](#step-sequencer) Module. Pressing a pad will switch the Step associated with that pad ON/OFF. Pressing and holding a pad plays that note along with the ongoing sequence and also sets the Root Control to the pressed Step’s pitch. The last pressed pad becomes the “active” pad, which allows you to tune the `Sig` Control by pressing and turing the encoder. The `Sig` Control for the pads you manipulate from the Controller Interface must be unpatched for this to work properly. The far left button in the top bar of the interface toggles between the values the `Mag` and `Prb` when pressed. When `Mag` is active (yellow), turning the encoder sets the `Mag` Control corresponding to the active Step. When the `Prb` switch is active (green), turning the encoder sets the `Prob` Control corresponding to the active Step. The magnitude/probability setting is reflected in the intensity of the yellow/green coloring of the active Step.
+The Step Sequencer Rack includes a playable controller interface with 50 pads used to control the [SQ](#step-sequencer) Module. Pressing a pad will switch the Step associated with that pad ON/OFF. Pressing and holding a pad plays that note along with the ongoing sequence and also sets the Root Control to the pressed Step’s pitch. The last pressed pad becomes the “active” pad, which allows you to tune the `Sig` Control by pressing and turning the encoder. The `Sig` Control for the pads you manipulate from the Controller Interface must be unpatched for this to work properly. The far left button in the top bar of the interface toggles between the values the `Mag` and `Prb` when pressed. When `Mag` is active (yellow), turning the encoder sets the `Mag` Control corresponding to the active Step. When the `Prb` switch is active (green), turning the encoder sets the `Prob` Control corresponding to the active Step. The magnitude/probability setting is reflected in the intensity of the yellow/green coloring of the active Step.
 
 <img src="assets/modules.sq.controller_interface.1.png" width="750" />
 
@@ -2350,7 +2267,7 @@ See [XYZ Drone - Controller Interface](#xyz-drone---controller-interface)
 
 # FIRMWARE UPDATES
 
-To perform a firmware update download the desired firmware version update zip (windows) or DMG (osx) from the [Website](TODO). Plug your computer into the USB-C Device port (closer to the screen) on the device. With the dectet running, unzip and run the `upload.bat` file (windows) or run the DMG (osx) from your computer, which will restart the device and upload the new firmware. The new version can be seen at the top of the Settings page.
+To perform a firmware update download the desired firmware version update zip (Windows) or DMG (OSX) from the [Website](TODO). Plug your computer into the USB-C Device port (closer to the screen) on the device. With the dectet running, unzip and run the `upload.bat` file (windows) or run the DMG (osx) from your computer, which will restart the device and upload the new firmware. The new version can be seen at the top of the Settings page.
 
 | Notes |
 | - |
@@ -2372,7 +2289,7 @@ Input Offset Calibration:
 - Press 1 then `Calibrate`
 - Press 2 then `Calibrate`
 - Repeat until all Input offsets are calibrated
-- Note: the leftmost label at the top of the calibration page should read close to 0.0v after `Calibrate` is pressed for each input
+- Note: The leftmost label at the top of the calibration page should read close to 0.0v after `Calibrate` is pressed for each input
 
 Input Gain Calibration:
 
@@ -2382,7 +2299,7 @@ Input Gain Calibration:
 - Cable `O 1 JK` to `I 1 JK` and press `1` then `Calibrate`
 - Cable `O 1 JK` to `I 2 JK` and press `2` then `Calibrate`
 - Repeat until all Input gains are calibrated
-- Note: the leftmost label at the top of the calibration page should read close to 1.0v after `Calibrate` is pressed for each input
+- Note: The leftmost label at the top of the calibration page should read close to 1.0v after `Calibrate` is pressed for each input
 
 Output Offset Calibration:
 
@@ -2390,8 +2307,8 @@ Output Offset Calibration:
 - Cable `O 1 JK` to `I 1 JK` and press `1` then `Calibrate`
 - Cable `O 2 JK` to `I 1 JK` and press `2` then `Calibrate`
 - Repeat until all Output offsets are calibrated
-- Note: pressing `1` resets `O 1 JK` voltage to 0.0V, which is important for proper calibration of that output.
-- Note: the leftmost label at the top of the calibration page should read close to 0.0v after `Calibrate` is pressed for each output.
+- Note: Pressing `1` resets `O 1 JK` voltage to 0.0V, which is important for proper calibration of that output.
+- Note: The leftmost label at the top of the calibration page should read close to 0.0v after `Calibrate` is pressed for each output.
 
 Output Gain Calibration:
 
@@ -2399,7 +2316,7 @@ Output Gain Calibration:
 - Cable `O 1 JK` to `I 1 JK` and press `1` then `Calibrate`
 - Cable `O 2 JK` to `I 1 JK` and press `2` then `Calibrate`
 - Repeat until all Output gains are calibrated
-- Note: the leftmost label at the top of the calibration page should read close to 0.0v after `Calibrate` is pressed for each output
+- Note: The leftmost label at the top of the calibration page should read close to 0.0v after `Calibrate` is pressed for each output
 
 | Notes |
 | - |
