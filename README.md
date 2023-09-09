@@ -826,6 +826,8 @@ A stereo multi-mode filter with 8 modes; MOOGY (Moog-inspired 4-pole ladder low-
 
 A Granular Processor that uses up to 36 grains to generate a stereo spread from a mono signal. The buffer holds ~1.6s of 24-bit 48kHz audio with variable speed sampling to extend the length of the buffer by downsampling. Grain iterators use floating point Hermite interpolation for rich sample playback at various speeds. The `V/Oct 1-3` Controls enable polyphonic granulation (with `NumPly` > 1). The center frequency of the `V/Oct` Control is determined by the incoming signal at its natural playback speed.
 
+The stereo output is a mix of the grain randomly panned throughout the stereo field. The dynamics of the stereo mix are controlled by `MagDif` and the `Spread` Control determines how wide the stereo field is.
+
 Racks:
 - [Granular Processor](#granular-processor)
 
