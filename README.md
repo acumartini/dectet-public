@@ -824,7 +824,7 @@ A stereo multi-mode filter with 8 modes; MOOGY (Moog-inspired 4-pole ladder low-
 
 ## GP: Granular Processor
 
-A Granular Processor that uses up to 35 grains to generate a stereo spread from a mono signal. The buffer holds ~1.6s of 24-bit 48kHz audio with variable speed sampling to extend the length of the buffer by downsampling. Grain iterators use floating point Hermite interpolation for rich sample playback at various speeds.
+A Granular Processor that uses up to 36 grains to generate a stereo spread from a mono signal. The buffer holds ~1.6s of 24-bit 48kHz audio with variable speed sampling to extend the length of the buffer by downsampling. Grain iterators use floating point Hermite interpolation for rich sample playback at various speeds. The `V/Oct 1-3` Controls enable polyphonic granulation (with `NumPly` > 1). The center frequency of the `V/Oct` Control is determined by the incoming signal at its natural playback speed.
 
 | Control Notes | T | R | |
 | - | - | - | - |
@@ -832,19 +832,22 @@ A Granular Processor that uses up to 35 grains to generate a stereo spread from 
 | D/W | R | A | The amount of incoming signal to mix into the stereo output with 0% of dry signal at position 0 |
 | Freeze | S | U | Switch to stop writing to the circular buffer |
 | Trigger | B | A | Trigger a grain. The total number of grains is limited to 40 and triggered grains are added to the Density setting when computing grain count |
+| Density | R | U | Number of grains to be spawned, limited to 48 grains. O grains (Off) effectively stops granular processing |
+| RevPrb | R | A | The probability of grain spawning with reverse playback. Increasing the value increases the likelihood of the grain playing in reverse |
 | Start | R | U | The starting point from which grains are spawned |
 | Size | R | U | Grain size where the maximum size is the entire buffer and the minimum is ~20ms |
 | Spray | R | U | The region, relative to the starting point, in which grain can spawn |
-| Density | R | U | Number of grains to be spawned, limited to 48 grains. O grains (Off) effectively stops granular processing |
 | Space | R | U | The amount of grain overlap, where increasing the Space decreases the overlap and a maximum value implies 0 overlap |
-| Spread | R | A | The position of spawned grains in the stereo field, where increasing the Spread created a broader stereo image |
-| V/Oct | I | U | Determines the speed of gain playback. After a grain is created it maintains its Speed setting for the duration of its playback |
 | Speed | R | A | The record speed, where a maximum value indicates a sample rate of 48kHz. Decreasing the Speed will slow the sample rate, which degradates sample quality while increasing the length of the sample buffer |
+| V/Oct 1-3 | I | U | Determines the speed of gain playback. After a grain is created it maintains its Speed setting for the duration of its playback. Grains are split between the three `V/Oct` settings using a modulo defined by `NumPly` |
+| Spread | R | A | The position of spawned grains in the stereo field, where increasing the Spread created a broader stereo image |
 | MagDif | R | A | The amount of grain magnitude variation. A maximum value implies a random magnitude from 0 - 100% of the original signal. After a grain is created it maintains its magnitude adjustment for the duration of its playback |
-| RevPrb | R | A | The probability of grain spawning with reverse playback. Increasing the value increases the likelihood of the grain playing in reverse |
+| Dry | R | A | Amount of the mono dry signal mixed into the stereo output |
+| Wet | R | A | Amount of the processed stereo wet signal mixed into the stereo output |
 | Attack | R | U | Length of the linear attack window relative to the Morph point |
 | Decay | R | U | Length of the linear decay window relative to the Morph point |
 | Morph | R | U | The center point of the Attack/Decay window enveloping each grain sample iteration |
+| Interp | R | U | Determines the interpolation method (None, Linear, Hermite). No (None) and Linear interpolation can be used to introduce more digital texture, especially with a slower `Speed` setting |
 
 | Output Notes | |
 | - | - |
