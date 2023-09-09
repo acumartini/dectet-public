@@ -826,6 +826,9 @@ A stereo multi-mode filter with 8 modes; MOOGY (Moog-inspired 4-pole ladder low-
 
 A Granular Processor that uses up to 36 grains to generate a stereo spread from a mono signal. The buffer holds ~1.6s of 24-bit 48kHz audio with variable speed sampling to extend the length of the buffer by downsampling. Grain iterators use floating point Hermite interpolation for rich sample playback at various speeds. The `V/Oct 1-3` Controls enable polyphonic granulation (with `NumPly` > 1). The center frequency of the `V/Oct` Control is determined by the incoming signal at its natural playback speed.
 
+Racks:
+- [Granular Processor](#granular-processor)
+
 | Control Notes | T | R | |
 | - | - | - | - |
 | In | I | A | Incoming signal |
@@ -853,9 +856,57 @@ A Granular Processor that uses up to 36 grains to generate a stereo spread from 
 | - | - |
 | Sig L-R | Stereo image of the granular iterators |
 
+```mermaid
+flowchart TD
+  subgraph GP
+    subgraph GP_IN[IN]
+      direction LR
+        GP_IN_In[In]
+        subgraph GP_IN_Grain[Grain]
+          direction LR
+            GP_IN_Freeze[Freeze]
+            GP_IN_Trigger[Trigger]
+            GP_IN_Density[Density]
+            GP_IN_RevPrb[RevPrb]
+            GP_IN_Start[Start]
+            GP_IN_Size[Size]
+            GP_IN_Spray[Spray]
+            GP_IN_Space[Space]
+            GP_IN_Speed[Speed]
+        end
+        subgraph GP_IN_Mix[Polyphony]
+          direction LR
+            GP_IN_VOct[V/Oct 1-3]
+            GP_IN_NumPly[NumPly]
+        end
+        subgraph GP_IN_Mix[Mix]
+          direction LR
+            GP_IN_Spread[Spread]
+            GP_IN_MagDif[MagDif]
+            GP_IN_Dry[Dry]
+            GP_IN_Wet[Wet]
+        end
+        subgraph GP_IN_Shape[Shape]
+          direction LR
+            GP_IN_Attack[Attack]
+            GP_IN_Decay[Decay]
+            GP_IN_Morph[Morph]
+            GP_IN_Interp[Interp]
+        end
+    end
+    subgraph GP_OUT[OUT]
+      direction LR
+        GP_OUT_Sig[Sig L/R]
+    end
+  end
+```
+
 ## IO: Input/Output
 
 The Input/Output module is present in every Rack and is the home for controlling/accessing all signals entering/exiting the DSP engine. There are level indicators on the Gain and Level Controls to provide visual feedback on signal level and clipping. Note that `JK` in the Control/Output names below is a `Hexnut` icon in the UI.
+
+Racks:
+- All
 
 | Control Notes | T | R | |
 | - | - | - | - |
@@ -870,9 +921,6 @@ The Input/Output module is present in every Rack and is the home for controlling
 | - | - |
 | I 1-6 (7-12) JK | Incoming signal tranformed to floating point and read for processing |
 | IE 7-12 JK | Incoming signal from the expander tranformed to floating point and read for processing |
-
-Racks:
-- All
 
 ```mermaid
 flowchart TD
