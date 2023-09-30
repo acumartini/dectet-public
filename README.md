@@ -33,6 +33,9 @@ The content of this manual is intended for informational use only, is subject to
   - [Display](#display)
     - [Module View](#module-view)
     - [Patchbay Interface](#patchbay-interface)
+      - [Patchbay Operation](#patchbay-operation)
+        - [Navigate and Patch](#navigate-and-patch)
+        - [Patch Filter/Follow](#patch-filterfollow)
     - [Navigation Bar](#navigation-bar)
       - [CPU Indicator](#cpu-indicator)
       - [Settings](#settings)
@@ -73,19 +76,14 @@ The content of this manual is intended for informational use only, is subject to
   - [NN: Deep Neural Network](#nn-deep-neural-network)
   - [NZ: Noise Generator / Sample and Hold / Random Looper / Slew Rate Limiter](#nz-noise-generator--sample-and-hold--random-looper--slew-rate-limiter)
   - [OS: Oscillator](#os-oscillator)
-  - [QT: Binary Quantizer](#qt-binary-quantizer)
-  - [RC: CV Recorder](#rc-cv-recorder)
   - [SA: Spectral Analysis](#sa-spectral-analysis)
   - [SQ: Binary Step Sequencer](#sq-binary-step-sequencer)
   - [UA: USB Audio Interface](#ua-usb-audio-interface)
-  - [VA: Voltage-Controlled Amplifier](#va-voltage-controlled-amplifier)
   - [XY: Custom Wavetable OSC / 3D Touch Looper](#xy-custom-wavetable-osc--3d-touch-looper)
 - [RACKS](#racks)
   - [Audio Interface](#audio-interface)
   - [Cartesian Sequencer](#cartesian-sequencer)
     - [Cartesian Sequencer - Controller Interface](#cartesian-sequencer---controller-interface)
-  - [Control Voltage Recorder](#control-voltage-recorder)
-    - [Control Voltage Recorder - Controller Interface](#control-voltage-recorder---controller-interface)
   - [Deep Neural Network](#deep-neural-network)
   - [Drone](#drone)
   - [Dual Cartesian Sequencer](#dual-cartesian-sequencer)
@@ -108,10 +106,6 @@ The content of this manual is intended for informational use only, is subject to
 - [FIRMWARE UPDATES](#firmware-updates)
 - [CALIBRATION](#calibration)
 - [TROUBLESHOOTING](#troubleshooting)
-- [APPENDIX](#appendix)
-  - [A - Patchbay Operation](#a---patchbay-operation)
-    - [Navigate and Patch](#navigate-and-patch)
-    - [Patch Filter/Follow](#patch-filterfollow)
 
 # WELCOME
 
@@ -255,9 +249,47 @@ The Module View is the main interface for access to Module Controls for all Modu
 
 The Patchbay interface includes two views, “Navigate and Patch” and “Patch Filter/Follow”, that enable quick patching and system patch filtering/overview respectively. The Back Button is used to navigate back to the Module View.
 
-The detailed operation of the Patchbay is covered in [Appendix A](#a---patchbay-operation).
+<!-- The detailed operation of the Patchbay is covered in [Appendix A](#a---patchbay-operation). -->
+
+#### Patchbay Operation
+
+Pressing the patch button of a Control enters the Patchbay view in "Navigate and Patch" mode with that Control as the active input ready for assignment.
 
 <img src="assets/user_interface.display.patchbay.navigate_and_patch.3.png" width="750" />
+
+##### Navigate and Patch
+
+The `NP` button is used to switch from the Patch Filter/Follow (PF) view to the Navigate and Patch (NP) view. If already in the NP view, the `NP` button will navigate to the active input/output’s corresponding patch point. The active control/output is indicated by an orange bar above the name and pressing the name of an input/output makes it active. If the active output has more than one control patched, then pressing `NP` multiple times will cycle through the output’s patch points.
+
+The NP view displays 10 inputs (green indicator bars and text) and 5 outputs (red indicator bars and text) at a time. Turning the Encoder will navigate through the last pressed module tabs. Pressing the turning the Encoder and pressing the HW Buttons navigates through the last pressed module input/outputs and the pages.
+
+Input/Outputs that are patched have solid colored buttons below them (green and red respectively). When an input/output is active and patched the button is colored orange, and corresponding patch points are also orange when visible.
+
+<img src="assets/user_interface.display.patchbay.navigate_and_patch.1.png" width="750" />
+<img src="assets/user_interface.display.patchbay.navigate_and_patch.2.png" width="750" />
+
+##### Patch Filter/Follow
+
+The `PF` button is used to switch from the Navigate and Patch (NP) view to the Patch Filter/Follow (PF) view. The PF view displays up to 5 patches at a time with the outputs on the left (red indicator, bar, text, and button) and inputs on the right (green indicator, bar, and text).
+
+Turning the Encoder will navigate through the last pressed module tabs (when enabled). Pressing the turning the Encoder and pressing the HW Buttons navigates through the patches.
+
+There are 4 filter modes for this view and you can cycle through them by pressing the `PF` button repeatedly.
+
+1. Only Active (orange) - This view is where you land when navigating to the PF view from the NP view with an active and patched input/output (you **cannot** cycle to this view). In this mode, only patches that include the active input or output are visible. An active input will display a single patch, while an active output could have any number of patch points up to the maximum limit (250).
+2. Filter All (gray) - Patches are filtered by both the selected input and output modules.
+3. Only Inputs (green) - Patches are only filtered by the selected input module and the output modules tab is disabled (gray). This will display the patches for all of the outputs sending signals to the selected input.
+4. Only Outputs (red) - Patches are only filtered by the selected output module and the input modules tab is disabled (grey). This will display the patches that have inputs receiving signals from the selected modules' outputs.
+
+The left/right arrows between the outputs/inputs are used to follow the patch to the output/input module respectively. When following left, the patch's output module for that path becomes the selected input in `All Inputs` mode. When following right the patch's input module becomes the selected output in `All Outputs` mode. When the target module for a follow action has no patches for the target mode the arrow is disabled (grey), which prevents landing on a PF filter view with no patch points.
+
+The output/input buttons are used to navigate back to the NP view with that output/input as active.
+
+<img src="assets/user_interface.display.patchbay.patch_filter_follow.1.png" width="750" />
+
+| Notes |
+| - |
+| The output/input buttons are both orange for patches that include an active output/input selected from the `NP` view and the indicator bar is orange for output/input for all patches that contain an active output/input respectively |
 
 ### Navigation Bar
 
@@ -938,6 +970,18 @@ flowchart TD
         IO_OUT_I[I 1-6]
     end
   end
+subgraph EXT_IN[EXT IN]
+    direction LR
+      EXT_In_Jack((Jack 1/2))
+  end
+  subgraph EXT_OUT[EXT OUT]
+    direction LR
+      EXT_OUT_Jack((Jack 1/2))
+  end
+EXT_OUT_Jack-->IO_IN
+IO_OUT-->EXT_IN
+style EXT_In_Jack fill:#000
+style EXT_OUT_Jack fill:#fff
 ```
 
 ## LO: Low-Frequency Oscillator
@@ -1290,43 +1334,6 @@ flowchart TD
   end
 ```
 
-## QT: Binary Quantizer
-
-A 5-channel Binary Quantizer. The quantizer uses a root note and 12-bit number to determine the scale, where all scales are possible within the 12-bit binary range (with some repeated scales). Quantized signals are based on V/Octave standards (C4=0V).
-
-| Control Notes | T | R | |
-| - | - | - | - |
-| In 1-10 | I | A | Incoming signal for quantization |
-| BinScal | R | U | A 12-bit number used to determine the 12-note scale for quantization. Notes are quantized based on V/Octave (C4=0V) |
-| Root | R | U | Root note for quantization |
-| | | | |
-| | | | |
-
-| Output Notes | |
-| - | - |
-| V/Oct 1-10 | V/Octave (C4=0V) |
-| Gate 1-10 | Gate output on note change |
-
-## RC: CV Recorder
-
-A tape-style CV Recorder with 5 recording buffers. Each record buffer holds ~4s of 24-bit 1kHz CV, and buffer iterators use floating point Hermite interpolation to reproduce signals smoothly at various speeds. Reducing the speed increases record times significantly. The read and write heads are synchronized to enable the real-time performance of CV signals using the 5-plane/10-pad Controller Interface. CV is always recording except while Loop is enabled, and loops are bound by the Start and Stop positions.
-
-| Control Notes | T | R | |
-| - | - | - | - |
-| In 1-5 | I | U | Incoming CV. Sampled at Update rate (~1kHz) |
-| Loop 1-5 | S | U | Enable channel playback looping bounded by the Start and Stop |
-| Clear 1-10 | B | U | Clears the channel record buffer between the Stop and Start positions |
-| Sync 1-5 | B | U | Sets the playhead to the Start position (Stop if in reverse) |
-| Start 1-5 | R | U | The start position for the playback loop. If Start is less than Stop, playback is in reverse |
-| Stop 1-5 | R | U | The stop position for the playback loop. If Stop is greater than Sart, playback is in reverse |
-| Scan 1-5 | R | U | Playhead offset within the Start/Stop range of the playback loop. Can be used to scan sequentially or jump to and position within the loop |
-| Hold 1-5 | S | U | Pauses playback while enabled. Scanning through the recording will still playback |
-| Speed 1-5 | R | U | Speed for recording/playback heads to move through the buffer. Slower speeds essentially downsample the incoming CV while recording, but Hermite interpolation helps to keep playback signals smooth |
-
-| Output Notes | |
-| - | - |
-| CV 1-5 | CV signal playback |
-
 ## SA: Spectral Analysis
 
 The Spectral Analysis module performs windowed 4096-point FFT analysis on an incoming signal to generate up to 10 voices of Frequency and Magnitude data. The precision of the FFT can be increased at the cost of the speed of Output updates. At the fastest setting updates occur ~10ms, and at the most precise setting updates occur ~40ms. Signal levels going into the module must be strong to ensure a good FFT analysis result. We have found that at least a 1.5Vpp signal after applying IO Module Gain is a minimum to achieve a stable `V/Oct` output.
@@ -1452,7 +1459,7 @@ flowchart TD
 
 ## UA: USB Audio Interface
 
-A 6-channel In/Out USB Audio interface operating at 16-bit 48kHz. Channels 1/2 show up as Frost Left/Front Right on the PC because of the legacy Dolby USB channel configuration required for Windows machines to recognize the device as a valid Class I Type USB audio interface without the need for a custom device driver. The gain of USB inputs can be controlled by the USB host. Note that `JK` in the Control/Output names below is a `Hexnut` icon in the UI.
+A 6-channel In/Out USB Audio interface operating at 16-bit 48kHz. Channels 1/2 show up as `Front Left/Front Right` on the PC because of the legacy Dolby USB channel configuration required for Windows machines to recognize the device as a valid Class I Type USB audio interface without the need for a custom device driver. The gain of USB inputs can be controlled by the USB host, which also sets the `Lev` Controls in the UI. Note that `JK` in the Control/Output names below is a `Hexnut` icon in the UI.
 
 IMPORTANT: The computer **must** be plugged into the USB-C device port when the device starts (or restarts) for Racks using this module, otherwise, the device will fail to boot and will reboot to the default Rack. Also, disconnecting and reconnecting to the USB device on the computer can cause the device to crash. Once recognized by your computer, it is recommended to set the input/output routing and leave them set for the duration of a session.
 
@@ -1465,18 +1472,32 @@ IMPORTANT: The computer **must** be plugged into the USB-C device port when the 
 | - | - |
 | I 1-6 JK | Incoming signal tranformed to floating point and read for processing |
 
-## VA: Voltage-Controlled Amplifier
-
-A 10-channel linear VCA. There is a very small amount of slew rate limiting applied to CV deltas to soften the pops associated with abrupt signal magnitude changes.
-
-| Control Notes | T | R | |
-| - | - | - | - |
-| In 1-10 | I | A | Incoming signal |
-| CV 1-10 | R | A | Control voltage |
-
-| Output Notes | |
-| - | - |
-| Sig 1-10 | Voltage controlled signal |
+```mermaid
+flowchart TD
+  subgraph UA
+    subgraph UA_IN[IN]
+      direction LR
+        UA_IN_O[O 1-6 JK]
+        UA_IN_Lev[Lev 1-6]
+    end
+    subgraph UA_OUT[OUT]
+      direction LR
+        UA_OUT_I[I 1-6 JK]
+    end
+  end
+  subgraph COMP_IN[COMP IN]
+    direction LR
+      COMP_In_Jack((Jack 1/2))
+  end
+  subgraph COMP_OUT[COMP OUT]
+    direction LR
+      COMP_OUT_Jack((Jack 1/2))
+  end
+COMP_OUT_Jack-->UA_IN
+UA_OUT-->COMP_IN
+style COMP_In_Jack fill:#000
+style COMP_OUT_Jack fill:#fff
+```
 
 ## XY: Custom Wavetable OSC / 3D Touch Looper
 
@@ -1519,15 +1540,13 @@ The current [release](../dectet.release.yml) of the dectet firmware has the foll
 - SYNTH
   - [Drone](#drone)
   - [MIDI Synthesizer](#midi-synthesizer)
-  - [XYZ Drone](#xyz-drone)
-  - [XYZ MIDI Synthesizer](#xyz-midi-synthesizer)
   - [Spectral Resynthesizer](#spectral-resynthesizer)
+  - [XYZ MIDI Synthesizer](#xyz-midi-synthesizer)
 - SEQ
   - [Cartesian Sequencer](#cartesian-sequencer)
   - [Dual Cartesian Sequencer](#dual-cartesian-sequencer)
   - [Step Sequencer](#step-sequencer)
   - [Dual Step Sequencer](#dual-step-sequencer)
-  - [Control Voltage Recorder](#control-voltage-recorder)
 - FX
   - [Filtered Delay](#filtered-delay)
   - [Filtered FDN](#filtered-fdn)
@@ -1540,24 +1559,69 @@ The current [release](../dectet.release.yml) of the dectet firmware has the foll
 
 ## Audio Interface
 
-The Audio Interface Rack combines the UA Module with CK, FL (full mode), MM, and MX (full mode) to create a fully featured USB Audio Interface for PC virtual CV/modular integration or multi-tracking.
+The Audio Interface Rack combines the UA Module with CK, FL (full mode), MM, and MX (full mode) to create a fully featured USB Audio Interface for PC virtual CV/modular integration or multi-tracking. The CK module allows the dectet to operate as the master clock, while the MS, EQ, and FL modules provide tools to shape incoming/outgoing signals.
 
-**IMPORTANT**: The computer **must** be plugged into the device port when the device starts (or restarts) this Rack, otherwise, the device will restart to the default Rack.
+Quick Start:
+- **IMPORTANT**: The computer **must** be plugged into the device port when the device starts (or restarts) this Rack, otherwise, the device will restart to the default Rack.
+- Open your computer audio settings and select the `dectet` for input, output, or both. This will route audio to and from your computer through the dectet usb audio interface.
+- If using a DAW, choose the dectet as the audio interface in the audio settings.
 
 ```mermaid
-flowchart TD
-  IO-->FL
-  UA-->FL
-  UA-->IO-->UA
-  CK
-  MM
-  MX
-  MC
+flowchart LR
+  subgraph IO[<a href='https://github.com/acumartini/dectet-public/tree/main#io-inputoutput'>IO</a>]
+    subgraph IO_IN[IN]
+      direction LR
+        IO_IN_O[O 1-8]
+    end
+    subgraph IO_OUT[OUT]
+      direction LR
+        IO_OUT_I[I 1-6]
+    end
+  end
+  subgraph FL[<a href='https://github.com/acumartini/dectet-public/tree/main#fl-envelope-follower'>FL</a>]
+    subgraph FL_IN[IN]
+      direction LR
+        FL_IN_In1[In 1-6]
+        FL_IN_In2[In 7-10]
+    end
+  end
+  subgraph UA[<a href='https://github.com/acumartini/dectet-public/tree/main#usb-audio'>UA</a>]
+    subgraph UA_IN[IN]
+      direction LR
+        UA_IN_O[O 1-6]
+    end
+    subgraph UA_OUT[OUT]
+      direction LR
+        UA_OUT_I[I 1-6]
+    end
+  end
+  subgraph EXT_IN[EXT IN]
+    direction LR
+      EXT_In_Jack((Jack 1-6))
+  end
+  subgraph EXT_OUT[EXT OUT]
+    direction LR
+      EXT_OUT_Jack((Jack 1-6))
+  end
+  subgraph COMP_IN[COMP IN]
+    direction LR
+      COMP_OUT_Jack((Channel 1-6))
+  end
+  subgraph COMP_OUT[COMP OUT]
+    direction LR
+      COMP_In_Jack((Channel 1-6))
+  end
+EXT_In_Jack-->IO_OUT_I-->FL_IN_In1
+COMP_In_Jack-->UA_OUT_I-->FL_IN_In2
+IO_OUT_I-->UA_IN_O
+IO_IN_O-->UA_OUT_I
+IO-->EXT_OUT_Jack
+UA-->COMP_OUT_Jack
+style EXT_In_Jack fill:#000
+style EXT_OUT_Jack fill:#fff
+style COMP_In_Jack fill:#000
+style COMP_OUT_Jack fill:#fff
 ```
-
-| Patch Notes |
-| - |
-| [CK](#ck---clock) can be used to sync with an external virtual modular environment |
 
 ## Cartesian Sequencer
 
@@ -1678,33 +1742,6 @@ style EXT_OUT_Jack fill:#fff
 The Cartesian Sequencer Rack includes a playable controller interface with 5 groups of 10 pads used to control the [CQ](#cq---cartesian-sequencer) Module. Each group is mapped to the XY coordinates of a Z plane and the current Z plane is selected by pressing the 1-5 buttons on the bar above the pads. Pressing a pad triggers the Hold and Set Controls and freezes playback at the touched step. When released, sequence playback resumes starting at the touched step. Turning the encoder sets the Mag Control for the corresponding XY coordinate. The magnitude setting is reflected in the intensity of the yellow coloring of the pads when pressed, when they become the active step in the sequence, or when they are the active Controller pad. Pressing and turning the encoder will adjust the pitch of the active Controller pad’s corresponding Pitch Control and pressing and turning the encoder will set its sensitivity. The Pitch Controls for the pads you manipulate from the Controller Interface must be unpatched for this to work properly.
 
 <img src="assets/modules.cr.controller_interface.1.png" width="750" />
-
-## Control Voltage Recorder
-
-The Control Voltage Recorder rack includes a CV Recorder (RC) module with its 5 channels normalized to 5 depth Outputs of the CR module. The Cartesian Sequencer-based controller interface provides a playable interface for each of the 5 channels. The MD module is included to enable MIDI input sequencing. The CK/DV modules can be used to sequence the CR module, and the EV module provides a mechanism to transform looped gated by sequence into envelope CV. The Matrix Mixer module (MM) allows for the creative combination of looping CVs.
-
-```mermaid
-flowchart TD
-  IO-->FL
-  CR-->RC-->IO
-  MD
-  CK
-  DV
-  EV
-  MM
-  MC
-```
-
-| Patch Notes |
-| - |
-| CR Z V/Oct Outputs are normalized to the RC Inputs `In 1-5` |
-| RC module Outputs `CV 1-5` are patched to IO’s `O 1-5 JK` Controls |
-
-### Control Voltage Recorder - Controller Interface
-
-The Control Voltage Recorder Rack includes a playable controller interface with 5 groups of 10 pads used to control the [CQ](#cq---cartesian-sequencer) Module. Each group is mapped to the XY coordinates of a Z plane and the current Z plane is selected by pressing the 1-5 buttons on the bar above the pads. Pressing a pad triggers the Hold and Set Controls and freezes playback at the touched step. When released, sequence playback resumes starting at the touched step. Turning the encoder sets the Mag Control for the corresponding XY coordinate. The magnitude setting is reflected in the intensity of the yellow coloring of the pads when pressed, when they become the active step in the sequence, or when they are the active Controller pad. Pressing and turning the encoder will adjust the pitch of the active Controller pad’s corresponding Pitch Control and pressing and turning the encoder will set its sensitivity. The Pitch Controls for the pads you manipulate from the Controller Interface must be unpatched for this to work properly.
-
-<img src="assets/modules.rc.controller_interface.1.png" width="750" />
 
 ## Deep Neural Network
 
@@ -2379,7 +2416,7 @@ Output Gain Calibration:
 
 TODO - Flush this out
 
-# APPENDIX
+<!-- # APPENDIX
 
 ## A - Patchbay Operation
 
@@ -2419,7 +2456,7 @@ The output/input buttons are used to navigate back to the NP view with that outp
 
 | Notes |
 | - |
-| The output/input buttons are both orange for patches that include an active output/input selected from the `NP` view and the indicator bar is orange for output/input for all patches that contain an active output/input respectively |
+| The output/input buttons are both orange for patches that include an active output/input selected from the `NP` view and the indicator bar is orange for output/input for all patches that contain an active output/input respectively | -->
 
 <!--
 | Notes |
