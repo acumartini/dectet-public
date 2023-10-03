@@ -62,7 +62,6 @@ The content of this manual is intended for informational use only, is subject to
   - [EQ: Parametric Band-pass Equalizer](#eq-parametric-band-pass-equalizer)
   - [FL: Envelope Follower](#fl-envelope-follower)
     - [Envelope Follower Full Mode](#envelope-follower-full-mode)
-  - [FN: Function Generator](#fn-function-generator)
   - [FT: Multi-mode Filter](#ft-multi-mode-filter)
   - [GP: Granular Processor](#gp-granular-processor)
   - [IO: Input/Output](#io-inputoutput)
@@ -428,6 +427,32 @@ The Control/Output Notes tables below abbreviate the control type and sample rat
 
 The order of Controls/Outputs in UI is preference/performance focused. The order of the Controls/Outputs in the tables below is documentation focused and does not necessarily reflect their order in the UI.
 
+Modules:
+- `AT`: Attenuate -- 10-channel attenuverter with offset
+- `CQ`: Cartesian Sequencer -- create non-linear sequences within a 3-dimensional plane
+- `CK`: Clock -- tappable bpm-based clock generator
+- `CV`: Convolution Filter -- load impulse response WAV files from the SD card to convolve signals
+- `DL`: Delay -- tape-style delay with two delay lines and five read heads
+- `DV`: Euclidean Clock Divider -- 5-channel clock multiplier and Euclidean rhythm generato
+- `EV`: Envelope Generator / VCA -- 10-channel ADSR Envelope Generator with audio inputs and a built-in VCA
+- `EQ`: Parametric Band-pass Equalizer -- parametric stereo Band-pass Equalizer with 8 bands and individual controls for each channel
+- `FL`: Envelope Follower -- 2-channel with attack/release shaping and threshold-controlled peak detection (full-mode has 10-channels)
+- `FT`: Multi-mode Filter -- Moog-inspired 4-pole ladder low-pass, resonant high-pass, low shelf, high shelf, bandwidth-limited notch/band-pass/peak-equalizing, and an all-pass filter
+- `GP`: Granular Processor -- up to 34 grains and 3-polyphony generates a stereo spread from a mono signal
+- `LO`: Low-Frequency Oscillator -- 5-channel LFO with 4 simultaneous wave outputs (sine, triangle, saw, and square)
+- `MC`: Macro Controller -- 10 rotary Controls with Min-Max/Max-Min range mapped outputs, 5 buttons/switches, and 10 presets
+- `MD`: MIDI Controller -- MIDI to CV converter with up to 10 voices of polyphonic V/Octave, Magnitude, Gate, and Aftertouch signals
+- `MM`: Matrix Mixer -- dual matrix mixer with two 5x5 mixing matrices
+- `MS`: Mid-side Processor -- split a stereo signal into mid/side components and recombine them after processing
+- `MX`: Mixer -- 10-channel Mixer with panning, gain control, mutes, and stereo linking or crossfade control (full-mode has 3 stereo sends)
+- `NN`: Deep Neural Network -- audio rate (24-bit 48kHz) training/prediction for 5 inputs/outputs
+- `NZ`: Noise Generator / Sample and Hold / Random Looper / Slew Rate Limiter -- 10-channel Noise Generator utility module with loopable S&H and slew rate limiting
+- `OS`: Oscillator -- 10 voices with 4 blendaed waveforms and through-0 Phase, FM, and AM Control
+- `SA`: Spectral Analysis -- windowed 4096-point FFT analysis generates 10 voices of Frequency and Magnitude data with variable latency based on precision
+- `SQ`: Binary Step Sequencer -- linear sequencer with 50 individually assignable probablistic steps and 5 independent sequence pointers
+- `UA`: USB Audio Interface -- 6-channel (In/Out) USB Audio interface operating at 16-bit 48kHz
+- `XY`: Custom Wavetable OSC / 3D Touch Looper -- 5 Custom Wavetables (XY coordinates + Z for magnitude) with loopable modulation (think 3D Kaos pad)
+
 ## AT: Attenuate
 
 The Attenuate module is a 10-channel attenuverter with offset. As an attenuverter, this module can control the amplitude of a signal and reverse its polarity. By applying an offset, you can place the signal precisely where you want it. With no input patched, the offset Control applies a constant DC signal to the associated Output (1-10). There is a very small amount of slew rate limiting applied to attenuation deltas to soften the pops associated with abrupt signal magnitude changes.
@@ -765,7 +790,7 @@ A parametric stereo Band-pass Equalizer with 8 bands and individual controls for
 
 ## FL: Envelope Follower
 
-A 2-channel envelope follower to enable loose synchronization via threshold-controlled peak detection envelopes with gate outputs.
+A 2/10-channel envelope follower with attack/release shaping and threshold-controlled peak detection.
 
 Racks:
 - [Audio Interface](#audio-interface)
@@ -780,7 +805,6 @@ Racks:
 - [Granular Processor](#granular-processor)
 - [MIDI Synthesizer](#midi-synthesizer)
 - [Mixer Macro Control](#mixer-macro-control)
-- [XYZ Drone](#xyz-drone)
 - [XYZ MIDI Synthesizer](#xyz-midi-synthesizer)
 
 | Control Notes | T | R | |
@@ -818,26 +842,6 @@ This module also has a “full” mode with 10 channels, which is used for the [
 
 - [Parametric Follower](#parametric-follower)
 
-## FN: Function Generator
-
-A 5-channel Function Generator with shapeable exponential rise and fall. Cycling the function at an audio rate can turn the functions into oscillators, but there are limitations to tuning granularity. If the `In` Control is patched the module becomes a VCA with the function serving as the amplitude of the envelope.
-
-| Control Notes | T | R | |
-| - | - | - | - |
-| In 1-5 | I | A | Incoming stereo signal. If patched, the signal is multiplied by the function value to generate the channel Output |
-| Trig 1-5 | B | A | Triggers the function to start 1 rise and fall cycle. If cycling, restarts the function from the start |
-| Cycle 1-5 | S | A | Switches function cyclings such that the function triggers again at the end of fall |
-| Hold 1-5 | S | A | Holds the function at its current value |
-| Rise 1-5 | R | A | Rise time with a maximum of ~8 minutes |
-| Fall 1-5 | R | A | Fall time with a maximum of ~8 minutes |
-| RCrv 1-5 | R | U | The shape of the rise function where 1V is linear, < 1V is logarithmic, and > 1V is exponential |
-| FCrv 1-5 | R | U | The shape of the fall function where 1V is linear, < 1V is logarithmic, and > 1V is exponential |
-
-| Output Notes | |
-| - | - |
-| RiseS 1-5 | Rise start gate |
-| FallS 1-5 | Fall start gate |
-| Func 1-5 | Function. Multiplied by the In Control signal when patched |
 
 ## FT: Multi-mode Filter
 
@@ -856,7 +860,7 @@ A stereo multi-mode filter with 8 modes; MOOGY (Moog-inspired 4-pole ladder low-
 
 ## GP: Granular Processor
 
-A Granular Processor that uses up to 36 grains to generate a stereo spread from a mono signal. The buffer holds ~1.6s of 24-bit 48kHz audio with variable speed sampling to extend the length of the buffer by downsampling. Grain iterators use floating point Hermite interpolation for rich sample playback at various speeds. The `V/Oct 1-3` Controls enable polyphonic granulation (with `NumPly` > 1). The center frequency of the `V/Oct` Control is determined by the incoming signal at its natural playback speed.
+A Granular Processor that uses up to 34 grains to generate a stereo spread from a mono signal. The buffer holds ~1.6s of 24-bit 48kHz audio with variable speed sampling to extend the length of the buffer by downsampling. Grain iterators use floating point Hermite interpolation for rich sample playback at various speeds. The `V/Oct 1-3` Controls enable polyphonic granulation (with `NumPly` > 1). The center frequency of the `V/Oct` Control is determined by the incoming signal at its natural playback speed.
 
 The stereo output is a mix of the grain randomly panned throughout the stereo field. The dynamics of the stereo mix are controlled by `MagDif` and the `Spread` Control determines how wide the stereo field is.
 
@@ -992,7 +996,6 @@ Racks:
 - [Drone](#drone)
 - [Mixer Macro Control](#mixer-macro-control)
 - [Parametric Follower](#parametric-follower)
-- [XYZ Drone](#xyz-drone)
 - [XYZ MIDI Synthesizer](#xyz-midi-synthesizer)
 
 | Control Notes | T | R | |
@@ -1093,6 +1096,10 @@ The MIDI Controller module is a MIDI to CV converter with up to 10 voices of pol
 ## MM: Matrix Mixer
 
 A dual matrix mixer consisting of two 5x5 mixing matrices. The mixers can be used individually or combined as a 5x5 stereo matrix mixer. While the stereo use case does not support panning, the individual control of left (R) and right (C) channels does allow for a non-traditional approach to stereo field combination.
+
+Racks:
+- [Audio Interface](#audio-interface)
+- [Parametric Follower](#parametric-follower)
 
 | Control Notes | T | R | |
 | - | - | - | - |
@@ -1503,6 +1510,10 @@ style COMP_OUT_Jack fill:#fff
 
 This module includes 5 Custom Wavetables that are manipulated using 3D controller interface pads. The wavetables have all the patch points to act as complex OSC/LFOs. In addition, XYZ controller interface input is recorded and loopable to act as an intuitive modulation source. Both record and loop can be enabled simultaneously to create dynamically changing waveforms.
 
+Racks:
+- [XYZ MIDI Synthesizer](#xyz-midi-synthesizer)
+- [Mixer Macro Control](#mixer-macro-control)
+
 | Control Notes | T | R | |
 | - | - | - | - |
 | Freq 1-5 | R | U | The center point for V/Octave control. Defaults to C4 |
@@ -1530,6 +1541,55 @@ This module includes 5 Custom Wavetables that are manipulated using 3D controlle
 | X 1-5 | Touch and Loop X |
 | Y 1-5 | Touch and Loop Y |
 | Z 1-5 | Modulate and Loop Z |
+
+```mermaid
+flowchart TD
+  subgraph XY
+    subgraph XY_IN[IN]
+      direction LR
+        subgraph XY_IN_Tune[Tune]
+          direction LR
+            XY_IN_Freq[Freq 1-5]
+            XY_IN_Voct[V/Oct 1-5]
+        end
+        subgraph XY_IN_Modulation[Modulation]
+          direction LR
+            XY_IN_FM[FM 1-5]
+            XY_IN_FMD[FM D 1-5]
+            XY_IN_AM[AM 1-5]
+            XY_IN_AMP[AM % 1-5]
+        end
+        subgraph XY_IN_Alignment[Alignment]
+          direction LR
+            XY_IN_Phaz[Phaz 1-5]
+            XY_IN_Sync[Sync 1-5]
+            XY_IN_SyncTrg[SyncTrg]
+        end
+        subgraph XY_IN_Wave[Wavetable]
+          direction LR
+            XY_IN_Reset[Reset 1-5]
+            XY_IN_Lup[Lup 1-5]
+            XY_IN_Rec[Rec 1-5]
+            XY_IN_X[X 1-5]
+            XY_IN_Y[Y 1-5]
+            XY_IN_Z[Z 1-5]
+        end
+        XY_IN_Mag[Mag 1-5]
+        subgraph XY_IN_AuxMix[External]
+          direction LR
+            XY_IN_AuxIn[AuxIn 1-5]
+            XY_IN_AuxLev[AuxLv 1-5]
+        end
+    end
+    subgraph XY_OUT[OUT]
+      direction LR
+        XY_OUT_Wave[Wave 1-5]
+        XY_OUT_X[X 1-5]
+        XY_OUT_Y[Y 1-5]
+        XY_OUT_Z[Z 1-5]
+    end
+  end
+```
 
 # RACKS
 
@@ -1563,7 +1623,7 @@ The Audio Interface Rack combines the UA Module with CK, FL (full mode), MM, and
 
 Quick Start:
 - **IMPORTANT**: The computer **must** be plugged into the device port when the device starts (or restarts) this Rack, otherwise, the device will restart to the default Rack.
-- Open your computer audio settings and select the `dectet` for input, output, or both. This will route audio to and from your computer through the dectet usb audio interface.
+- Open your computer audio settings and select the `dectet` for input, output, or both. This will route audio to and from your computer through the dectet audio interface.
 - If using a DAW, choose the dectet as the audio interface in the audio settings.
 
 ```mermaid
@@ -2149,15 +2209,54 @@ flowchart TD
 
 The Mixer/Macro Control rack is a set of utilities designed to serve a dual purpose. First is that of a 10-channel mixer (with mutes) accompanied by 3 true-stereo sends, and second is that of a macro controller. When paired with the XYZ controller interface, the MC module becomes an interactive hub for CV distribution, recall, and looping. Using the [IO Expander](#eurorack-io-expander) module enables the IO capabilities of these modules.
 
+Quick Start:
+- For simple 6-channel stereo mixing, patch 6 external signal into the jacks. Stack stereo signals and select `Link` in the MX Module where appropriate.
+- If using sends, leave at least one stereo pair of input jacks available for the send returns and patch those jacks to the MX `Send *` return inputs as appropriate. Also, patch the stereo send Outputs of the MX Module to the output jacks via the IO Module as needed.
+- The remaining output jacks can be patched to the XY or MC module(s) to take advantage of recallable macro control.
+
 ```mermaid
-flowchart TD
-  IO-->FL
-  IO-->MX-->IO
-  XY
-  NZ
-  LO
-  MC1
-  MC2
+flowchart LR
+  subgraph IO[<a href='https://github.com/acumartini/dectet-public/tree/main#io-inputoutput'>IO</a>]
+    subgraph IO_IN[IN]
+      direction LR
+        IO_IN_O[O 1-2]
+    end
+    subgraph IO_OUT[OUT]
+      direction LR
+        IO_OUT_I[I 1-6]
+    end
+  end
+  subgraph FL[<a href='https://github.com/acumartini/dectet-public/tree/main#fl-envelope-follower'>FL</a>]
+    subgraph FL_IN[IN]
+      direction LR
+        FL_IN_In1[In 1-6]
+    end
+  end
+  subgraph MX[<a href='https://github.com/acumartini/dectet-public/tree/main#mx-mixer'>MX</a>]
+    subgraph MX_IN[IN]
+      direction LR
+        MX_IN_In[In 1-6]
+    end
+    subgraph MX_OUT[OUT]
+      direction LR
+        MX_OUT_Mix[Mix L-R]
+    end
+  end
+  subgraph EXT_IN[EXT IN]
+    direction LR
+      EXT_In_Jack((Jack 1-6))
+  end
+  subgraph EXT_OUT[EXT OUT]
+    direction LR
+      EXT_OUT_Jack((Jack 1-2))
+  end
+EXT_In_Jack-->IO_OUT
+IO_OUT_I-->FL_IN_In1
+IO_OUT_I-->MX_IN_In
+MX_OUT_Mix-->IO_IN_O
+IO_IN-->EXT_OUT_Jack
+style EXT_In_Jack fill:#000
+style EXT_OUT_Jack fill:#fff
 ```
 
 | Patch Notes |
