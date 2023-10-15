@@ -12,7 +12,7 @@ The content of this manual is intended for informational use only, is subject to
 
 # Table of Contents
 
-- [WELCOME](#welcome)
+- [dectet](#dectet)
   - [Specification](#specification)
   - [Documentation Overview](#documentation-overview)
 - [INSTALLATION](#installation)
@@ -106,9 +106,9 @@ The content of this manual is intended for informational use only, is subject to
 - [CALIBRATION](#calibration)
 - [TROUBLESHOOTING](#troubleshooting)
 
-# WELCOME
+# dectet
 
-Welcome to the Martini Modular dectet! The dectet is a digital synth/utility macro module featuring an intuitive user interface and a touchscreen display, giving you access to a variety of virtual modular environments. Modules within the environments expose all of their controls as patch points enabling a high level of customization, and stored presets enable repeatability. The display doubles as a playable instrument for both internal synthesis and external control.  While shipped as a slim desktop unit, the dectet also operates as a 15Hp Euorack module.
+The dectet is a digital synth/utility macro module featuring an intuitive user interface and a touchscreen display, giving you access to a variety of virtual modular environments. Modules within the environments expose all of their controls as patch points enabling a high level of customization, and stored presets enable repeatability.
 
 ## Specification
 
@@ -427,31 +427,31 @@ The Control/Output Notes tables below abbreviate the control type and sample rat
 
 The order of Controls/Outputs in UI is preference/performance focused. The order of the Controls/Outputs in the tables below is documentation focused and does not necessarily reflect their order in the UI.
 
-Modules:
-- `AT`: Attenuate -- 10-channel attenuverter with offset
-- `CQ`: Cartesian Sequencer -- create non-linear sequences within a 3-dimensional plane
-- `CK`: Clock -- tappable bpm-based clock generator
-- `CV`: Convolution Filter -- load impulse response WAV files from the SD card to convolve signals
-- `DL`: Delay -- tape-style delay with two delay lines and five read heads
-- `DV`: Euclidean Clock Divider -- 5-channel clock multiplier and Euclidean rhythm generato
-- `EV`: Envelope Generator / VCA -- 10-channel ADSR Envelope Generator with audio inputs and a built-in VCA
-- `EQ`: Parametric Band-pass Equalizer -- parametric stereo Band-pass Equalizer with 8 bands and individual controls for each channel
-- `FL`: Envelope Follower -- 2-channel with attack/release shaping and threshold-controlled peak detection (full-mode has 10-channels)
-- `FT`: Multi-mode Filter -- Moog-inspired 4-pole ladder low-pass, resonant high-pass, low shelf, high shelf, bandwidth-limited notch/band-pass/peak-equalizing, and an all-pass filter
-- `GP`: Granular Processor -- up to 34 grains and 3-polyphony generates a stereo spread from a mono signal
-- `LO`: Low-Frequency Oscillator -- 5-channel LFO with 4 simultaneous wave outputs (sine, triangle, saw, and square)
-- `MC`: Macro Controller -- 10 rotary Controls with Min-Max/Max-Min range mapped outputs, 5 buttons/switches, and 10 presets
-- `MD`: MIDI Controller -- MIDI to CV converter with up to 10 voices of polyphonic V/Octave, Magnitude, Gate, and Aftertouch signals
-- `MM`: Matrix Mixer -- dual matrix mixer with two 5x5 mixing matrices
-- `MS`: Mid-side Processor -- split a stereo signal into mid/side components and recombine them after processing
-- `MX`: Mixer -- 10-channel Mixer with panning, gain control, mutes, and stereo linking or crossfade control (full-mode has 3 stereo sends)
-- `NN`: Deep Neural Network -- audio rate (24-bit 48kHz) training/prediction for 5 inputs/outputs
-- `NZ`: Noise Generator / Sample and Hold / Random Looper / Slew Rate Limiter -- 10-channel Noise Generator utility module with loopable S&H and slew rate limiting
-- `OS`: Oscillator -- 10 voices with 4 blendaed waveforms and through-0 Phase, FM, and AM Control
-- `SA`: Spectral Analysis -- windowed 4096-point FFT analysis generates 10 voices of Frequency and Magnitude data with variable latency based on precision
-- `SQ`: Binary Step Sequencer -- linear sequencer with 50 individually assignable probablistic steps and 5 independent sequence pointers
-- `UA`: USB Audio Interface -- 6-channel (In/Out) USB Audio interface operating at 16-bit 48kHz
-- `XY`: Custom Wavetable OSC / 3D Touch Looper -- 5 Custom Wavetables (XY coordinates + Z for magnitude) with loopable modulation (think 3D Kaos pad)
+- [AT](#at-attenuate): Attenuate -- 10-channel attenuverter with offset
+- [CQ](#cq-cartesian-sequencer): Cartesian Sequencer -- create non-linear sequences within a 3-dimensional plane
+- [CK](#ck-clock): Clock -- tappable bpm-based clock generator
+- [CV](): Convolution Filter -- load impulse response WAV files from the SD card to perform convolution in the frequency domain
+- [DL](#dl-delay): Delay -- tape-style delay with two delay lines and five read heads
+- [DV](#dv-euclidean-clock-divider): Euclidean Clock Divider -- 5-channel clock multiplier and Euclidean rhythm generato
+- [EV](#ev-envelope-generator--vca): Envelope Generator / VCA -- 10-channel ADSR Envelope Generator with audio inputs and a built-in VCA
+- [EQ](#eq-parametric-band-pass-equalizer): Parametric Band-pass Equalizer -- parametric stereo Band-pass Equalizer with 8 bands and individual controls for each channel
+- [FD](#fd-filtered-delay-network): Filtered Delay Network (FDN) -- create custom nearfield reflections with a 2-channel and configurable 10x10 feedback matrix
+- [FL](#fl-envelope-follower): Envelope Follower -- 2-channel with attack/release shaping and threshold-controlled peak detection (full-mode has 10-channels)
+- [FT](#ft-multi-mode-filter): Multi-mode Filter -- Moog-inspired 4-pole ladder low-pass, resonant high-pass, low shelf, high shelf, bandwidth-limited notch/band-pass/peak-equalizing, and an all-pass filter
+- [GP](#gp-granular-processor): Granular Processor -- up to 34 grains and 3-polyphony generates a stereo spread from a mono signal
+- [LO](#lo-low-frequency-oscillator): Low-Frequency Oscillator -- 5-channel LFO with 4 simultaneous wave outputs (sine, triangle, saw, and square)
+- [MC](#mc-macro-controller): Macro Controller -- 10 rotary Controls with Min-Max/Max-Min range mapped outputs, 5 buttons/switches, and 10 presets
+- [MD](#md-midi-controller): MIDI Controller -- MIDI to CV converter with up to 10 voices of polyphonic V/Octave, Magnitude, Gate, and Aftertouch signals
+- [MM](#mm-matrix-mixer): Matrix Mixer -- dual matrix mixer with two 5x5 mixing matrices
+- [MS](#ms-mid-side-processor): Mid-side Processor -- split a stereo signal into mid/side components and recombine them after processing
+- [MX](#mx-mixer): Mixer -- 10-channel Mixer with panning, gain control, mutes, and stereo linking or crossfade control (full-mode has 3 stereo sends)
+- [NN](#nn-deep-neural-network): Deep Neural Network -- audio rate (24-bit 48kHz) training/prediction for 5 inputs/outputs
+- [NZ](#nz-noise-generator--sample-and-hold--random-looper--slew-rate-limiter): Noise Generator / Sample and Hold / Random Looper / Slew Rate Limiter -- 10-channel Noise Generator utility module with loopable S&H and slew rate limiting
+- [OS](#os-oscillator): Oscillator -- 10 voices with 4 blendaed waveforms and through-0 Phase, FM, and AM Control
+- [SA](#sa-spectral-analysis): Spectral Analysis -- windowed 4096-point FFT analysis generates 10 voices of Frequency and Magnitude data with variable latency based on precision
+- [SQ](#sq-binary-step-sequencer): Binary Step Sequencer -- linear sequencer with 50 individually assignable probablistic steps and 5 independent sequence pointers
+- [UA](#ua-usb-audio-interface): USB Audio Interface -- 6-channel (In/Out) USB Audio interface operating at 16-bit 48kHz
+- [XY](#xy-custom-wavetable-osc--3d-touch-looper): Custom Wavetable OSC / 3D Touch Looper -- 5 Custom Wavetables (XY coordinates + Z for magnitude) with loopable modulation (think 3D Kaos pad)
 
 ## AT: Attenuate
 
@@ -1595,27 +1595,28 @@ flowchart TD
 
 Racks are a collection of modules with a normalized patch. Each rack is designed for a specific purpose and the modules within a rack reflect its overall sound design goals. However, some modules are included in a Rack simply to provide supporting functionality or modulation. All Racks include the IO module as a core requirement for the analog interface. Also, the [FL](#fl---envelope-follower) and [MC](#mc---macro-controller) modules are included in all of the Racks (except Drone where FL is missing due to CPU constraints) as core utilities. Flowcharts for each Rack are included to help visualize the normalized patch.
 
-The current [release](../dectet.release.yml) of the dectet firmware has the following Rack organization:
+The current release of the dectet firmware has the following Rack organization:
 
 - SYNTH
-  - [Drone](#drone)
-  - [MIDI Synthesizer](#midi-synthesizer)
-  - [Spectral Resynthesizer](#spectral-resynthesizer)
-  - [XYZ MIDI Synthesizer](#xyz-midi-synthesizer)
+  - [Drone](#drone) - 10-voices with a focus on modulation opportunities
+  - [MIDI Synthesizer](#midi-synthesizer) - classic 10-voice MIDI synth with a multi-mode filter
+  - [Spectral Resynthesizer](#spectral-resynthesizer) - recreated an incoming mono signal in stereo using a 10-voice complex OSC
+  - [XYZ MIDI Synthesizer](#xyz-midi-synthesizer) - 5 custom wavetables with a MIDI synth normalization
 - SEQ
-  - [Cartesian Sequencer](#cartesian-sequencer)
-  - [Dual Cartesian Sequencer](#dual-cartesian-sequencer)
-  - [Step Sequencer](#step-sequencer)
-  - [Dual Step Sequencer](#dual-step-sequencer)
+  - [Cartesian Sequencer](#cartesian-sequencer) - 3D sequencing driving a 10-voice polyphonic synth engine
+  - [Dual Cartesian Sequencer](#dual-cartesian-sequencer) - 2 sequencers for used for external control
+  - [Step Sequencer](#step-sequencer) - linear sequencer driving a 10-voice polyphonic synth engine
+  - [Dual Step Sequencer](#dual-step-sequencer) - 2 sequencers for used for external control
 - FX
-  - [Filtered Delay](#filtered-delay)
-  - [Filtered FDN](#filtered-fdn)
-  - [Granular Processor](#granular-processor)
+  - [Filtered Delay](#filtered-delay) - 8-band stereo parametric EQ into a tape-style delay into a multi-mode filter 
+  - [Filtered FDN](#filtered-fdn) - 8-band stereo parametric EQ into a feedback delay network into a multi-mode filter 
+  - [Granular Processor](#granular-processor) - 8-band mono parametric EQ in a granular processor capable of 3-polyphony
+  - [Convolution Filter]() - loads customizable impulse reponses to perform convolution
 - UTIL
-  - [Audio Interface](#audio-interface)
-  - [Deep Neural Network](#deep-neural-network)
-  - [Mixer Macro Control](#mixer-macro-control)
-  - [Parametric Follower](#parametric-follower)
+  - [Audio Interface](#audio-interface) - 6-channel USB audio interface with mixing utilities
+  - [Deep Neural Network](#deep-neural-network) - audio rate learning/prediction for 5 incoming/outgoing signals with a 5-channel LFO
+  - [Mixer Macro Control](#mixer-macro-control) - 10-channel mixer with 3 stereo sends and multiple utilities for repeatable external control
+  - [Parametric Follower](#parametric-follower) - 8-band stereo parametric EQ into 10 evelope followers (and a mixing matrix) to produce CV for external control
 
 ## Audio Interface
 
