@@ -1003,6 +1003,7 @@ Racks:
 | Freq 1-5 | R | U | Frequency of the LFO |
 | Clock 1-5 | I | A | External clock input to set the frequency. If the Clock control is patched and the Freq control is being modulated/adjusted at the same time, then the results are non-deterministic |
 | Phaz 1-5 | R | A | Phase of the waveform |
+| PW 1-10 | R | A | Pulse width control to set the duty cycle of the square wave (ranges from 10-90%). |
 | Attn 1-5 | R | A | Attenuverter constant |
 | Offst 1-5 | R | A | A DC offset to be applied to the attenuated signal |
 | Sync 1-5 | S | U | Indicates which waves will be synchronized when `SyncTrg` is pressed |
@@ -1036,6 +1037,7 @@ flowchart TD
             LO_IN_Sync[Sync 1-5]
             LO_IN_SyncTrg[SyncTrg]
         end
+        LO_IN_PW[PW 1-5]
     end
     subgraph LO_OUT[OUT]
       direction LR
@@ -1284,6 +1286,7 @@ Racks:
 | V/Oct 1-10 | I | A | Incoming V/Octave |
 | Mag 1-10 | R | A | The magnitude of output signal, which acts as a builtin VCA |
 | Wave 1-10 | R | U | Blends waveforms. At 0 the voice is a pure sine, and is a pure square at the maximum value. Adjusting the Control blends waveforms together two at a time in the following order: sine/triangle, triangle/saw, saw/square |
+| PW 1-10 | R | A | Pulse width control to set the duty cycle of the square wave (ranges from 10-90%). |
 | Phaz 1-10 | R | A | Waveform phase |
 | FM D 1-10 | R | A | Distance from the carrier frequency that FM can vary where 0 implies no FM. High deviation will allow modulation through-0 |
 | AM % 1-10 | R | A | Amount of AM applied where 0 implies no AM |
@@ -1312,6 +1315,7 @@ flowchart TD
         subgraph OS_IN_Shape[Shape]
           direction LR
             OS_IN_Wave[Wave 1-10]
+            OS_IN_PW[PW 1-10]
             OS_IN_BLEP[BLEP]
         end
         subgraph OS_IN_Modulation[Modulation]
