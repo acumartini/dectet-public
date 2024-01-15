@@ -57,6 +57,7 @@ The content of this manual is intended for informational use only, is subject to
   - [CQ: Cartesian Sequencer](#cq-cartesian-sequencer)
   - [CK: Clock](#ck-clock)
   - [DL: Delay](#dl-delay)
+  - [DQ: Drum Sequencer](#dq-drum-sequencer)
   - [DV: Euclidean Clock Divider](#dv-euclidean-clock-divider)
   - [EV: Envelope Generator / VCA](#ev-envelope-generator--vca)
   - [EQ: Parametric Band-pass Equalizer](#eq-parametric-band-pass-equalizer)
@@ -657,6 +658,40 @@ The Delay module is a tape-style delay with two delay lines and five read heads 
 | DL2R1-5 | Read head signals for delay line 2 |
 | DL1 | Summed output delay line 1 |
 | DL2 | Summed output delay line 2 |
+
+## DQ: Drum Sequencer
+
+The Drum Sequencer module contains five 50-step sequences that share a step trigger so that they proceed through their sequences together. Every step has its own 50-step subsequence with a dedicated subsequence step trigger per sequence. This means that subsequences can be moving at different rates for each sequence while the primary sequences all proceed in lock-step. Each step and each subsequence step has a signal, maginitude, and probability value. Because of the very large number of variables the module in unable to expose all of them via modulatable Controls. Instead, a the controller interface must be used to set individual step parameters. There are also several auxiliary step Controls (`Pause`, `Set`, `Reset`, and `Reverse`) to add interest and enable repeatable patterns. Steps can be made probabilistic (introduces a chance to trigger or not trigger where lower probability means less chance to trigger) by decreasing the `Prob` Control. Each step has a dedicated magnitude. Both step probabilities and magnitudes can be randomized using the `RndP/M` Controls. Finally, there is a quantizer built into this module to facilitate melodic sequence generation. The quantizer is binary and uses a root note and 12-bit number to determine the scale, where all scales are possible within the 12-bit binary range. Quantized signals are based on V/Octave standards (C4=0V). Gating a `RndN *` Control will quantize all 50 steps and their subsequences, for a given sequence, to notes.
+
+The outputs are designed to control 5 individual drum voices. Primary and subsuence steps share the outputs. The primary sequence takes precedence such that when the next primary sequence step is reached, subsequence progress is halted until the next subsequence trigger is recieved.
+
+| Control Notes | T | R | |
+| - | - | - | - |
+| Step | B | A | Trigger a step forward/backward depending on the Reverse Control. Shared by all sequences |
+| SbStp 1-5 | B | A | Trigger a step forward of the current subsequence |
+| Len | R | U | Total length (in Steps) of the primary sequence. Shared by all sequences |
+| Pause | B | U | Momentarily stop Step increments. Shared by all sequences |
+| Set | B | U | Set the current step to the starting step. Shared by all sequences |
+| Reset | B | U | Return the sequence to the starting step. Shared by all sequences |
+| Reverse | S | U | Switch to increment steps in reverse. Shared by all sequences |
+| PulseW | R | U | Sets the length of Gate signals Outputs. Shared by all sequences |
+| BinScal | R | U | A number between 2048 and 4095 that is used to determine the 12-note scale for quantization. Notes are quantized based on V/Octave (C4=0V). Shared by all sequences |
+| Root | R | U | Root note for quantization. Shared by all sequences |
+| Spread | R | U | Controls how far away from the root, in notes, that random notes are selected for quantization. Shared by all sequences |
+| RandN 1-5 | B | U | Triggers random quantization of all steps and subsequence steps based on the BinScal, Root, and Spread Controls |
+| Range 1-5 | R | U | Determines the range for randomized above and below the center Control value (CntrM/CntrP) |
+| CntrM 1-5 | R | U | The center point for magnitude randomization |
+| RndM 1-5 | B | U | Triggers randomization of the all step and subsequence step magnitudes within the Range with the target center point set by CntrM |
+| CntrP 1-5 | R | U | The center point for probility randomization |
+| RndP 1-5 | B | U | Triggers randomization of the all step and subsequence step probabilities within the Range with the target center point set by CntrM |
+
+| Output Notes | |
+| - | - |
+| D1-5 G | Sequence/Subsequence pointer step gate |
+| D1-5 Mag | Sequence/Subsequence pointer step magnitude |
+| D1-5 V/O | Sequence/Subsequence pointer step V/Octave (C4=0V) |
+| D1-5 StartG | Primary sequence pointer start gate triggered when the starting step of sequence is reached |
+
 
 ## DV: Euclidean Clock Divider
 
@@ -1364,10 +1399,10 @@ The Spectral Analysis module performs windowed 4096-point FFT analysis on an inc
 | Mag 1-10 | Magnitude representing the signal stregnth at the frequency peak |
 
 ## SQ: Binary Step Sequencer
-
 This Step Sequencer can operate as a traditional linear sequencer with 50 individually assignable steps. Additionally, a 32-bit binary pattern (`BinPtrn`) can be overlaid on top of the sequence to add fills and accents. There are also several auxiliary step Controls (`Pause`, `Set`, `Reset`, and `Reverse`) to add interest and enable repeatable patterns. Steps can be made probabilistic (introduces a chance to trigger or not trigger where lower probability means less chance to trigger) by decreasing the `Prob` Control, and adjusting `Stride` can create unexpected patterns due to step aliasing. Each step has a dedicated magnitude. Both step probabilities and magnitudes can be randomized using the `Rnd P/M` Controls. Finally, there is a quantizer built into this module to facilitate melodic sequence generation. The quantizer is binary and uses a root note and 12-bit number to determine the scale, where all scales are possible within the 12-bit binary range. Quantized signals are based on V/Octave standards (C4=0V). Gating the `Rnd N` Control will quantize all 50 step `Sig` Control to notes. Poly-rhythms and polyphony are enabled by the `Depth` Control, which sets the number of concurrent step pointers (maximum of 5). Each step point has a `Stride` and `Offset` control allowing them to move independently over different sections of the sequence and at different rates within a shared loop `Length`. The `NumPly` Control limits the number of polyphonic notes available for sequencing.
 
-The outputs are designed to control both the internal 10-voice OSC and external systems. The 10 `V/Oct`, `Mag`, and `Gate` Outputs are mapped (round-robin) to the 50 steps concerning the `NumPly` polyphony setting (output_index = x % NumPly). Depth pointers are mapped to outputs relative to the first depth pointer output index (depth_d_output_index = (x + d) % NumPly). The `D1-5 V/O`, `D1-5 Mag`, and `D1-5 G` Outputs track steps as they are triggered by each sequencer pointer such that only sequence pointers less than or equal to the `Depth` setting produce output. Finally, `D1-5 SG` is a sequence pointer start gate that is triggered when the starting step is reached. Starting step state is maintained for each sequence pointer.
+
+The outputs are designed to control both the internal 10-voice OSC and external systems. The 10 `V/Oct`, `Mag`, and `Gate` Outputs are mapped (by step index) to the 50 steps based on the `NumPly` polyphony setting (output_index = x % NumPly). Depth pointers are mapped to outputs relative to the first depth pointer output index (depth_d_output_index = (x + d) % NumPly). The `D1-5 V/O`, `D1-5 Mag`, and `D1-5 G` Outputs track steps as they are triggered by each sequencer pointer such that only sequence pointers less than or equal to the `Depth` setting produce output. Finally, `D1-5 SG` is a sequence pointer start gate that is triggered when the starting step is reached. Starting step state is maintained for each sequence pointer.
 
 Racks:
 - [Step Sequencer](#step-sequencer)
@@ -1392,7 +1427,7 @@ Racks:
 | ProbRng | R | U | The amount of probability variation used for randomization. A maximum value implies a random probability from 0 - 100% |
 | Stride 1-5 | R | U | Step increment amount for each sequence pointer. When < 1.0 steps can be repeated for multiple Step triggers, values > 1.0 can potentially skip active Steps |
 | Offset 1-5 | R | U | Step pointer offset within the sequence. Where an offset of 0 implies a step pionter start position at step 1 |
-| Rnd N | B | U | Triggers random quantization of all 50 step based on the Bin Scale, Rnd Root, and Spread Controls |
+| Rnd N | B | U | Triggers random quantization of all 50 step based on the BinScal, Root, and Spread Controls |
 | Rnd M | B | U | Triggers randomization of the all Mag Controls within a range determined by MagRng |
 | Rnd P | B | U | Triggers randomization of the all Prob Controls within a range determined by MagRnd |
 | Depth | R | U | Sets the number of sequence pointers, which enables poly-rhythms and polyphony. Depth limit is 5 and sequence pointers wrap around when length and offset exceed the sequencer length limit (50) |
@@ -1407,7 +1442,7 @@ Racks:
 | V/Oct 1-10 | Step V/Octave (C4=0V) |
 | Mag 1-10 | Step Magnitude |
 | Gate 1-10 | Step Gate |
-| D1-5 V/O | Sequence pointer step V/Octave (C4=0V)  |
+| D1-5 V/O | Sequence pointer step V/Octave (C4=0V) |
 | D1-5 Mag | Sequence pointer step magnitude |
 | D1-5 G | Sequence pointer step gate |
 | D1-5 SG | Sequence pointer start gate triggered when the starting step is reached. Starting step state is maintained for each sequence pointer |
